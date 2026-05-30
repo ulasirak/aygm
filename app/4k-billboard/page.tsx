@@ -47,43 +47,67 @@ function splitRoute(pts: { x: number; y: number }[], pct: number) {
   return { done: buildPath(done), remaining: rem.length > 1 ? buildPath(rem) : "" };
 }
 
-// Tek bir buğday başağı SVG'si — cx/cy merkez, h yükseklik
-function WheatStalk({ cx, cy, h, angle = 0, opacity = 0.07 }: {
+// Gerçekçi buğday başağı — bıyıklı (awn), doğal sap eğrisi
+function WheatStalk({ cx, cy, h, angle = 0, opacity = 0.08 }: {
   cx: number; cy: number; h: number; angle?: number; opacity?: number;
 }) {
-  const grainH = h * 0.45;
-  const grainCount = 7;
-  const spacing = grainH / grainCount;
-  const grainW = h * 0.09;
-  const grainL = h * 0.16;
+  const sw = h * 0.022;          // stroke genişliği
+  const gW = h * 0.072;          // dane genişliği
+  const gL = h * 0.14;           // dane uzunluğu
+  const awnL = h * 0.28;         // bıyık uzunluğu
+  const earStart = h * 0.48;     // başağın başladığı yükseklik
+  const grainCount = 8;
+  const spacing = earStart / grainCount;
 
   return (
-    <g transform={`translate(${cx},${cy}) rotate(${angle})`} opacity={opacity} fill="none" stroke="#166534" strokeLinecap="round">
-      {/* Gövde */}
-      <line x1={0} y1={0} x2={0} y2={-h} strokeWidth={h * 0.025} />
-      {/* Yaprak — sol */}
-      <path d={`M 0 ${-h * 0.3} Q ${-h * 0.22} ${-h * 0.22} ${-h * 0.12} ${-h * 0.18}`} strokeWidth={h * 0.018} />
-      {/* Yaprak — sağ */}
-      <path d={`M 0 ${-h * 0.52} Q ${h * 0.22} ${-h * 0.44} ${h * 0.14} ${-h * 0.38}`} strokeWidth={h * 0.018} />
-      {/* Daneler */}
+    <g transform={`translate(${cx},${cy}) rotate(${angle})`} opacity={opacity}
+       fill="none" stroke="#14532d" strokeLinecap="round" strokeLinejoin="round">
+
+      {/* Ana sap — hafif S eğrisi */}
+      <path
+        d={`M 0 0 C ${h*0.04} ${-h*0.25} ${-h*0.03} ${-h*0.55} 0 ${-h}`}
+        strokeWidth={sw * 1.1}
+      />
+
+      {/* Yaprak 1 — sağa */}
+      <path
+        d={`M 0 ${-h*0.28} C ${h*0.18} ${-h*0.22} ${h*0.26} ${-h*0.16} ${h*0.18} ${-h*0.10}`}
+        strokeWidth={sw * 0.85}
+      />
+      {/* Yaprak 2 — sola */}
+      <path
+        d={`M 0 ${-h*0.48} C ${-h*0.20} ${-h*0.42} ${-h*0.28} ${-h*0.36} ${-h*0.20} ${-h*0.30}`}
+        strokeWidth={sw * 0.85}
+      />
+
+      {/* Daneler + bıyıklar */}
       {Array.from({ length: grainCount }).map((_, i) => {
-        const y = -h + i * spacing + spacing * 0.5;
+        const yBase = -h + i * spacing + spacing * 0.4;
         const side = i % 2 === 0 ? 1 : -1;
-        const tilt = side * 18;
+        const tilt = side * 22;
+        const dCx = side * gW * 0.55;
+        const awnTilt = side * 28;
+
         return (
-          <ellipse
-            key={i}
-            cx={side * grainW * 0.6}
-            cy={y}
-            rx={grainW}
-            ry={grainL}
-            transform={`rotate(${tilt}, ${side * grainW * 0.6}, ${y})`}
-            strokeWidth={h * 0.016}
-          />
+          <g key={i} transform={`rotate(${tilt}, ${dCx}, ${yBase})`}>
+            {/* Dane gövdesi */}
+            <ellipse cx={dCx} cy={yBase} rx={gW} ry={gL} strokeWidth={sw * 0.9} />
+            {/* Bıyık (awn) */}
+            <line
+              x1={dCx + Math.sin((awnTilt * Math.PI) / 180) * gL * 0.4}
+              y1={yBase - gL}
+              x2={dCx + Math.sin((awnTilt * Math.PI) / 180) * awnL}
+              y2={yBase - gL - awnL * Math.cos((awnTilt * Math.PI) / 180)}
+              strokeWidth={sw * 0.45}
+            />
+          </g>
         );
       })}
+
       {/* Tepe danesi */}
-      <ellipse cx={0} cy={-h} rx={grainW * 0.7} ry={grainL * 0.7} strokeWidth={h * 0.018} />
+      <ellipse cx={0} cy={-h} rx={gW * 0.65} ry={gL * 0.75} strokeWidth={sw} />
+      {/* Tepe bıyığı */}
+      <line x1={0} y1={-h - gL * 0.75} x2={0} y2={-h - gL * 0.75 - awnL * 0.9} strokeWidth={sw * 0.4} />
     </g>
   );
 }
@@ -165,16 +189,23 @@ export default function BillboardPage() {
         {/* ── Buğday başakları arka plan ── */}
         <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}
           viewBox="0 0 1620 1970" preserveAspectRatio="xMidYMid slice">
-          <WheatStalk cx={180}  cy={1820} h={560} angle={-8}  opacity={0.055} />
-          <WheatStalk cx={380}  cy={1920} h={700} angle={5}   opacity={0.045} />
-          <WheatStalk cx={580}  cy={1860} h={480} angle={-3}  opacity={0.06}  />
-          <WheatStalk cx={800}  cy={1950} h={620} angle={8}   opacity={0.04}  />
-          <WheatStalk cx={1020} cy={1880} h={540} angle={-6}  opacity={0.05}  />
-          <WheatStalk cx={1240} cy={1930} h={590} angle={4}   opacity={0.045} />
-          <WheatStalk cx={1460} cy={1870} h={460} angle={-10} opacity={0.055} />
-          <WheatStalk cx={90}   cy={1700} h={380} angle={12}  opacity={0.03}  />
-          <WheatStalk cx={700}  cy={1750} h={420} angle={-5}  opacity={0.035} />
-          <WheatStalk cx={1350} cy={1760} h={400} angle={7}   opacity={0.03}  />
+          {/* Ön sıra — büyük başaklar */}
+          <WheatStalk cx={110}  cy={1970} h={680} angle={-6}  opacity={0.09} />
+          <WheatStalk cx={310}  cy={1970} h={750} angle={4}   opacity={0.08} />
+          <WheatStalk cx={510}  cy={1970} h={620} angle={-2}  opacity={0.10} />
+          <WheatStalk cx={710}  cy={1970} h={700} angle={7}   opacity={0.08} />
+          <WheatStalk cx={910}  cy={1970} h={660} angle={-5}  opacity={0.09} />
+          <WheatStalk cx={1110} cy={1970} h={720} angle={3}   opacity={0.08} />
+          <WheatStalk cx={1310} cy={1970} h={640} angle={-8}  opacity={0.09} />
+          <WheatStalk cx={1510} cy={1970} h={690} angle={5}   opacity={0.08} />
+          {/* Arka sıra — küçük, hafif */}
+          <WheatStalk cx={210}  cy={1970} h={500} angle={10}  opacity={0.05} />
+          <WheatStalk cx={420}  cy={1970} h={460} angle={-12} opacity={0.045} />
+          <WheatStalk cx={620}  cy={1970} h={520} angle={6}   opacity={0.05} />
+          <WheatStalk cx={820}  cy={1970} h={480} angle={-4}  opacity={0.045} />
+          <WheatStalk cx={1020} cy={1970} h={510} angle={9}   opacity={0.05} />
+          <WheatStalk cx={1220} cy={1970} h={490} angle={-7}  opacity={0.045} />
+          <WheatStalk cx={1420} cy={1970} h={530} angle={2}   opacity={0.05} />
         </svg>
 
         {/* Etiket */}
@@ -248,20 +279,6 @@ export default function BillboardPage() {
           </div>
         </div>
 
-        {/* Progress bar */}
-        <div style={{ marginTop: "auto", animation: "fadeIn 0.6s ease 0.7s both", position: "relative" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16 }}>
-            <span style={{ fontSize: 34, color: "#6b7280" }}>İnşaat İlerlemesi</span>
-            <span style={{ fontSize: 34, color: "#1a5c2e", fontWeight: 700 }}>Devam Ediyor</span>
-          </div>
-          <div style={{ height: 20, background: "#dcfce7", borderRadius: 10, overflow: "hidden" }}>
-            <div style={{
-              height: "100%", background: "#1a5c2e", borderRadius: 10,
-              animation: "barGrow 1.8s ease 0.8s both",
-              width: `${PROGRESS}%`,
-            }} />
-          </div>
-        </div>
       </div>
 
       {/* ══ SAĞ PANEL — Harita ══════════════════════════════════════════════════ */}
@@ -387,21 +404,13 @@ export default function BillboardPage() {
           aygm.uab.gov.tr
         </div>
 
-        {/* Sağ: progress + saat */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 10 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
-            <span style={{ fontSize: 30, color: "rgba(255,255,255,0.5)" }}>İnşaat Devam Ediyor</span>
-            <div style={{ width: 300, height: 12, background: "rgba(255,255,255,0.15)", borderRadius: 6, overflow: "hidden" }}>
-              <div style={{ width: `${PROGRESS}%`, height: "100%", background: "#86efac", borderRadius: 6 }} />
-            </div>
-          </div>
-          <div style={{
-            fontSize: 64, fontWeight: 900, color: "#ffffff",
-            fontVariantNumeric: "tabular-nums", lineHeight: 1,
-            letterSpacing: "0.04em",
-          }}>
-            {clock}
-          </div>
+        {/* Sağ: saat */}
+        <div style={{
+          fontSize: 72, fontWeight: 900, color: "#ffffff",
+          fontVariantNumeric: "tabular-nums", lineHeight: 1,
+          letterSpacing: "0.04em",
+        }}>
+          {clock}
         </div>
 
       </div>
