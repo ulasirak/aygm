@@ -8,9 +8,12 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["react-icons/fa"],
   },
   images: {
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment",
     remotePatterns: [
       { protocol: "https", hostname: "**.aygm.gov.tr" },
       { protocol: "https", hostname: "**.uab.gov.tr" },
+      { protocol: "https", hostname: "aygm.vercel.app" },
     ],
   },
 };
