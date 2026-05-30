@@ -217,7 +217,7 @@ export default function ProjePage() {
                       sistem ağına sahip şehri Konya olacak.&rdquo;
                     </p>
                     <footer className="text-sm font-semibold" style={{ color: "var(--gray-600)" }}>
-                      — Ulaştırma ve Altyapı Bakanı <strong style={{ color: "var(--forest)" }}>Abdülkadir Uraloğlu</strong>,
+                      — Türkiye Cumhuriyeti Ulaştırma ve Altyapı Bakanı Sayın <strong style={{ color: "var(--forest)" }}>ABDÜLKADİR URALOĞLU</strong>,
                       Temel Atma Töreni, 7 Temmuz 2025
                     </footer>
                   </blockquote>
