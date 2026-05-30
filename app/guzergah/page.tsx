@@ -157,29 +157,6 @@ export default function GuzergahPage() {
           </div>
         </div>
 
-        {/* Route overview */}
-        <div className="section-padding" style={{ background: "var(--gray-50)" }}>
-          <div className="container-aygm">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
-              ].map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-xl p-4 text-center"
-                  style={{ background: "white", border: "1px solid var(--gray-100)" }}
-                >
-                  <div
-                    className="text-2xl font-black mb-1"
-                    style={{ fontFamily: "var(--font-heading)", color: "var(--forest)" }}
-                  >
-                    {item.value}
-                  </div>
-                  <div className="text-xs" style={{ color: "var(--gray-400)" }}>{item.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
 
         {/* Route path */}
         <div className="py-12" style={{ background: "white" }}>
