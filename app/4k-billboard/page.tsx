@@ -55,9 +55,13 @@ export default function BillboardPage() {
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    const tick = () => setClock(new Date().toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" }));
+    const tick = () => setClock(new Date().toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit", second: "2-digit" }));
     tick();
     const clockId = setInterval(tick, 1000);
+
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw-billboard.js").catch(() => {});
+    }
 
     let cur = 0;
     const step = PROGRESS / 90;
