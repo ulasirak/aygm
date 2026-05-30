@@ -6,17 +6,19 @@ const PROGRESS = 42;
 
 import { useEffect, useState } from "react";
 
+// Koordinatlar OSM verilerine göre Konya gerçek haritasından türetilmiştir.
+// Güzergah doğudan (Yeni Sanayi) batıya (Stadyum) gitmektedir.
 const STATIONS = [
-  { id: 0, name: "Yeni Sanayi",    x: 160,  y: 820  },
-  { id: 1, name: "ASLİDAŞ",        x: 390,  y: 660  },
-  { id: 2, name: "TÜYAP",          x: 640,  y: 510  },
-  { id: 3, name: "Banliyö",        x: 910,  y: 390,  transfer: true },
-  { id: 4, name: "Çimento",        x: 1200, y: 300  },
-  { id: 5, name: "Novaland",       x: 1490, y: 248  },
-  { id: 6, name: "Otogar",         x: 1770, y: 232  },
-  { id: 7, name: "Ecdad Bahçesi",  x: 2040, y: 244  },
-  { id: 8, name: "Real",           x: 2300, y: 275  },
-  { id: 9, name: "Konya Stadyumu", x: 2550, y: 330  },
+  { id: 0, name: "Yeni Sanayi",    x: 190,  y: 400 },
+  { id: 1, name: "ASLİDAŞ",        x: 440,  y: 340 },
+  { id: 2, name: "TÜYAP",          x: 720,  y: 540, transfer: false },
+  { id: 3, name: "Banliyö",        x: 1010, y: 370, transfer: true  },
+  { id: 4, name: "Çimento",        x: 1270, y: 265 },
+  { id: 5, name: "Novaland",       x: 1540, y: 330 },
+  { id: 6, name: "Otogar",         x: 1800, y: 245 },
+  { id: 7, name: "Ecdad Bahçesi",  x: 2060, y: 360 },
+  { id: 8, name: "Real",           x: 2300, y: 395 },
+  { id: 9, name: "Konya Stadyumu", x: 2550, y: 415 },
 ];
 
 function buildPath(pts: { x: number; y: number }[]) {
@@ -142,7 +144,7 @@ export default function BillboardPage() {
 
         {/* Etiket */}
         <div style={{
-          fontSize: 26, fontWeight: 600, letterSpacing: "0.25em",
+          fontSize: 34, fontWeight: 700, letterSpacing: "0.25em",
           color: "#1a5c2e", textTransform: "uppercase", marginBottom: 32,
           animation: "fadeIn 0.6s ease 0.1s both",
         }}>
@@ -151,13 +153,13 @@ export default function BillboardPage() {
 
         {/* Başlık */}
         <div style={{ animation: "fadeIn 0.6s ease 0.2s both" }}>
-          <div style={{ fontSize: 148, fontWeight: 900, lineHeight: 0.9, color: "#111827", letterSpacing: "-0.03em" }}>
+          <div style={{ fontSize: 168, fontWeight: 900, lineHeight: 0.88, color: "#111827", letterSpacing: "-0.03em" }}>
             KONYA
           </div>
-          <div style={{ fontSize: 148, fontWeight: 900, lineHeight: 0.9, color: "#111827", letterSpacing: "-0.03em" }}>
+          <div style={{ fontSize: 168, fontWeight: 900, lineHeight: 0.88, color: "#111827", letterSpacing: "-0.03em" }}>
             TRAMVAY
           </div>
-          <div style={{ fontSize: 84, fontWeight: 900, color: "#1a5c2e", letterSpacing: "0.02em", marginTop: 8 }}>
+          <div style={{ fontSize: 96, fontWeight: 900, color: "#1a5c2e", letterSpacing: "0.02em", marginTop: 10 }}>
             2. ETAP
           </div>
         </div>
@@ -180,19 +182,19 @@ export default function BillboardPage() {
               transform="rotate(-90 340 340)"
               style={{ transition: "stroke-dashoffset 0.025s linear" }}
             />
-            <text x="340" y="300" textAnchor="middle"
-              fill="#111827" fontSize="148" fontWeight="900"
+            <text x="340" y="310" textAnchor="middle"
+              fill="#111827" fontSize="160" fontWeight="900"
               fontFamily="IBM Plex Sans, Arial">
               {count}
             </text>
-            <text x="340" y="400" textAnchor="middle"
-              fill="#111827" fontSize="64" fontWeight="700"
+            <text x="340" y="415" textAnchor="middle"
+              fill="#111827" fontSize="72" fontWeight="700"
               fontFamily="IBM Plex Sans, Arial">
               %
             </text>
-            <text x="340" y="470" textAnchor="middle"
-              fill="#6b7280" fontSize="32" fontWeight="400"
-              fontFamily="IBM Plex Sans, Arial" letterSpacing="3">
+            <text x="340" y="488" textAnchor="middle"
+              fill="#1a5c2e" fontSize="36" fontWeight="600"
+              fontFamily="IBM Plex Sans, Arial" letterSpacing="4">
               TAMAMLANDI
             </text>
           </svg>
@@ -210,8 +212,8 @@ export default function BillboardPage() {
                 paddingBottom: 24,
                 borderBottom: i < 3 ? "1px solid #dcfce7" : "none",
               }}>
-                <span style={{ fontSize: 64, fontWeight: 900, color: "#111827", lineHeight: 1 }}>{val}</span>
-                <span style={{ fontSize: 28, color: "#9ca3af", fontWeight: 400 }}>{lbl}</span>
+                <span style={{ fontSize: 76, fontWeight: 900, color: "#111827", lineHeight: 1 }}>{val}</span>
+                <span style={{ fontSize: 34, color: "#6b7280", fontWeight: 500 }}>{lbl}</span>
               </div>
             ))}
           </div>
@@ -220,8 +222,8 @@ export default function BillboardPage() {
         {/* Progress bar */}
         <div style={{ marginTop: "auto", animation: "fadeIn 0.6s ease 0.7s both" }}>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 14 }}>
-            <span style={{ fontSize: 24, color: "#6b7280" }}>İnşaat İlerlemesi</span>
-            <span style={{ fontSize: 24, color: "#1a5c2e", fontWeight: 700 }}>Devam Ediyor</span>
+            <span style={{ fontSize: 30, color: "#6b7280" }}>İnşaat İlerlemesi</span>
+            <span style={{ fontSize: 30, color: "#1a5c2e", fontWeight: 700 }}>Devam Ediyor</span>
           </div>
           <div style={{ height: 16, background: "#dcfce7", borderRadius: 8, overflow: "hidden" }}>
             <div style={{
@@ -243,8 +245,8 @@ export default function BillboardPage() {
       }}>
 
         <div style={{
-          fontSize: 30, fontWeight: 600, letterSpacing: "0.18em",
-          color: "#9ca3af", textTransform: "uppercase", marginBottom: 20,
+          fontSize: 36, fontWeight: 700, letterSpacing: "0.18em",
+          color: "#6b7280", textTransform: "uppercase", marginBottom: 24,
         }}>
           Güzergah Haritası · 10 İstasyon
         </div>
@@ -297,10 +299,10 @@ export default function BillboardPage() {
                     <circle cx={s.x} cy={s.y} r={12} fill="#f0fdf4" />
                   )}
                   {/* İsim */}
-                  <text x={s.x} y={s.y - 48}
+                  <text x={s.x} y={s.y - 56}
                     textAnchor="middle"
                     fill={isDone ? "#111827" : "#9ca3af"}
-                    fontSize={isDone ? 30 : 24}
+                    fontSize={isDone ? 38 : 30}
                     fontWeight={isDone ? 700 : 400}
                     fontFamily="IBM Plex Sans, Arial">
                     {s.name}
@@ -331,8 +333,8 @@ export default function BillboardPage() {
             { label: "Hat Güzergahı",     val: "Karatay — Selçuklu"          },
           ].map(({ label, val }) => (
             <div key={label}>
-              <div style={{ fontSize: 22, color: "#9ca3af", marginBottom: 6 }}>{label}</div>
-              <div style={{ fontSize: 30, fontWeight: 700, color: "#374151" }}>{val}</div>
+              <div style={{ fontSize: 26, color: "#9ca3af", marginBottom: 8 }}>{label}</div>
+              <div style={{ fontSize: 36, fontWeight: 700, color: "#1f2937" }}>{val}</div>
             </div>
           ))}
         </div>
