@@ -5,6 +5,7 @@ const PROGRESS = 42;
 // ──────────────────────────────────────────────────────────────────────────────
 
 import { useEffect, useState } from "react";
+import { QRCodeSVG } from "qrcode.react";
 
 const STATIONS = [
   { id: 0, name: "Yeni Sanayi",    x: 190,  y: 420 },
@@ -358,20 +359,28 @@ export default function BillboardPage() {
           </svg>
         </div>
 
-        {/* Alt bilgi — Yüklenici kaldırıldı, 2 sütun */}
+        {/* Alt bilgi — 2 sütun + QR */}
         <div style={{
-          display: "grid", gridTemplateColumns: "1fr 1fr",
+          display: "flex", alignItems: "center",
           gap: 60, paddingTop: 40, borderTop: "1.5px solid #bbf7d0",
         }}>
-          {[
-            { label: "Temel Atma",    val: "7 Temmuz 2025"   },
-            { label: "Hat Güzergahı", val: "Karatay — Selçuklu" },
-          ].map(({ label, val }) => (
-            <div key={label}>
-              <div style={{ fontSize: 30, color: "#9ca3af", marginBottom: 10 }}>{label}</div>
-              <div style={{ fontSize: 44, fontWeight: 700, color: "#1f2937" }}>{val}</div>
-            </div>
-          ))}
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 30, color: "#9ca3af", marginBottom: 10 }}>Temel Atma</div>
+            <div style={{ fontSize: 44, fontWeight: 700, color: "#1f2937" }}>7 Temmuz 2025</div>
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 30, color: "#9ca3af", marginBottom: 10 }}>Hat Güzergahı</div>
+            <div style={{ fontSize: 44, fontWeight: 700, color: "#1f2937" }}>Karatay — Selçuklu</div>
+          </div>
+          {/* QR 2 — Bu site */}
+          <div style={{
+            background: "#ffffff", padding: 10, borderRadius: 8,
+            display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
+            flexShrink: 0,
+          }}>
+            <QRCodeSVG value="https://aygm.vercel.app" size={130} fgColor="#14532d" bgColor="#ffffff" level="M" />
+            <span style={{ fontSize: 17, color: "#14532d", fontWeight: 600, letterSpacing: "0.05em" }}>Proje Sitesi</span>
+          </div>
         </div>
       </div>
 
@@ -383,7 +392,7 @@ export default function BillboardPage() {
         padding: "0 110px",
       }}>
 
-        {/* Sol: Logo + bakanlık */}
+        {/* Sol: Logo + bakanlık + QR */}
         <div style={{ display: "flex", alignItems: "center", gap: 36 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/aygm-amblem.svg" alt="AYGM"
@@ -396,6 +405,15 @@ export default function BillboardPage() {
             <div style={{ fontSize: 38, fontWeight: 800, color: "#ffffff", marginTop: 4 }}>
               Altyapı Yatırımları Genel Müdürlüğü
             </div>
+          </div>
+          {/* QR 1 — AYGM sitesi */}
+          <div style={{
+            background: "#ffffff", padding: 10, borderRadius: 8,
+            display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
+            marginLeft: 12,
+          }}>
+            <QRCodeSVG value="https://www.aygm.gov.tr" size={130} fgColor="#14532d" bgColor="#ffffff" level="M" />
+            <span style={{ fontSize: 17, color: "#14532d", fontWeight: 600, letterSpacing: "0.05em" }}>aygm.gov.tr</span>
           </div>
         </div>
 
