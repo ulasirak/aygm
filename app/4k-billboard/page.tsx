@@ -277,7 +277,7 @@ export default function BillboardPage() {
           fontSize: 40, fontWeight: 700, letterSpacing: "0.16em",
           color: "#6b7280", textTransform: "uppercase", marginBottom: 28,
         }}>
-          Güzergah Haritası · 10 İstasyon
+          Konya Stadyum – Şehir Hastanesi Tramvay Hattı
         </div>
 
         {/* SVG Harita */}
