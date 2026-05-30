@@ -162,10 +162,6 @@ export default function GuzergahPage() {
           <div className="container-aygm">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { label: "Toplam Uzunluk", value: "10 km" },
-                { label: "İstasyon Sayısı", value: "10" },
-                { label: "Geçilen İlçe", value: "2" },
-                { label: "Köprülü Kavşak", value: "2 (yeni)" },
               ].map((item) => (
                 <div
                   key={item.label}
