@@ -60,6 +60,8 @@ export default function Footer() {
                 <div style={{ fontSize: "0.58rem", color: "var(--mint)", opacity: 0.6, letterSpacing: "0.15em", textTransform: "uppercase", marginTop: "0.15rem" }}>
                   AYGM — Ulaştırma ve Altyapı Bakanlığı
                 </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/aygm-amblem.svg" alt="AYGM" style={{ height: 28, marginTop: "0.5rem", opacity: 0.5, filter: "brightness(0) invert(1)" }} />
               </div>
             </Link>
 
