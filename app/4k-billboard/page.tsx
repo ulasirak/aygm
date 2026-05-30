@@ -292,8 +292,8 @@ export default function BillboardPage() {
       }}>
 
         <div style={{
-          fontSize: 40, fontWeight: 700, letterSpacing: "0.16em",
-          color: "#6b7280", textTransform: "uppercase", marginBottom: 28,
+          fontSize: 58, fontWeight: 800, letterSpacing: "0.08em",
+          color: "#1a5c2e", textTransform: "uppercase", marginBottom: 36,
         }}>
           Konya Stadyum – Şehir Hastanesi Tramvay Hattı
         </div>
