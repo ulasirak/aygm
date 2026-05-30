@@ -159,6 +159,11 @@ export default function Footer() {
                   {label}
                 </Link>
               ))}
+              <Link href="/4k-billboard"
+                style={{ fontSize: "0.6rem", color: "rgba(255,255,255,0.12)", textDecoration: "none", letterSpacing: "0.05em", transition: "color 0.2s" }}
+                className="hover:text-white/30">
+                4K
+              </Link>
             </div>
           </div>
         </div>
