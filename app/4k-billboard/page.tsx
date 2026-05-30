@@ -79,7 +79,7 @@ export default function BillboardPage() {
     <div style={{
       width: "3840px",
       height: "2160px",
-      background: "#ffffff",
+      background: "#f0fdf4",
       overflow: "hidden",
       position: "relative",
       fontFamily: "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
@@ -137,7 +137,7 @@ export default function BillboardPage() {
         top: 120, left: 0, width: 1560, bottom: 130,
         display: "flex", flexDirection: "column",
         padding: "90px 110px 70px 110px",
-        borderRight: "1px solid #e5e7eb",
+        borderRight: "1px solid #bbf7d0",
       }}>
 
         {/* Etiket */}
@@ -173,7 +173,7 @@ export default function BillboardPage() {
 
           {/* Daire */}
           <svg width="680" height="680" viewBox="0 0 680 680" style={{ flexShrink: 0 }}>
-            <circle cx="340" cy="340" r={r} fill="none" stroke="#f3f4f6" strokeWidth="22" />
+            <circle cx="340" cy="340" r={r} fill="none" stroke="#dcfce7" strokeWidth="22" />
             <circle cx="340" cy="340" r={r} fill="none"
               stroke="#1a5c2e" strokeWidth="22" strokeLinecap="round"
               strokeDasharray={circ} strokeDashoffset={arcOffset}
@@ -208,7 +208,7 @@ export default function BillboardPage() {
               <div key={lbl} style={{
                 display: "flex", alignItems: "baseline", gap: 18,
                 paddingBottom: 24,
-                borderBottom: i < 3 ? "1px solid #f3f4f6" : "none",
+                borderBottom: i < 3 ? "1px solid #dcfce7" : "none",
               }}>
                 <span style={{ fontSize: 64, fontWeight: 900, color: "#111827", lineHeight: 1 }}>{val}</span>
                 <span style={{ fontSize: 28, color: "#9ca3af", fontWeight: 400 }}>{lbl}</span>
@@ -223,7 +223,7 @@ export default function BillboardPage() {
             <span style={{ fontSize: 24, color: "#6b7280" }}>İnşaat İlerlemesi</span>
             <span style={{ fontSize: 24, color: "#1a5c2e", fontWeight: 700 }}>Devam Ediyor</span>
           </div>
-          <div style={{ height: 16, background: "#f3f4f6", borderRadius: 8, overflow: "hidden" }}>
+          <div style={{ height: 16, background: "#dcfce7", borderRadius: 8, overflow: "hidden" }}>
             <div style={{
               height: "100%", background: "#1a5c2e", borderRadius: 8,
               animation: "barGrow 1.8s ease 0.8s both",
@@ -239,7 +239,7 @@ export default function BillboardPage() {
         top: 120, left: 1560, right: 0, bottom: 130,
         display: "flex", flexDirection: "column",
         padding: "60px 80px 40px 80px",
-        background: "#f9fafb",
+        background: "#ecfdf5",
       }}>
 
         <div style={{
@@ -287,14 +287,14 @@ export default function BillboardPage() {
                   {/* Nokta */}
                   <circle cx={s.x} cy={s.y}
                     r={isDone ? 28 : 16}
-                    fill={isDone ? "#1a5c2e" : "#ffffff"}
-                    stroke={isDone ? "#1a5c2e" : "#d1d5db"}
+                    fill={isDone ? "#1a5c2e" : "#f0fdf4"}
+                    stroke={isDone ? "#1a5c2e" : "#86efac"}
                     strokeWidth={isDone ? 0 : 3}
                     style={isActive ? { animation: "stationPop 1.6s ease-in-out infinite" } : undefined}
                   />
                   {/* Aktif iç nokta */}
                   {isActive && (
-                    <circle cx={s.x} cy={s.y} r={12} fill="#ffffff" />
+                    <circle cx={s.x} cy={s.y} r={12} fill="#f0fdf4" />
                   )}
                   {/* İsim */}
                   <text x={s.x} y={s.y - 48}
@@ -323,7 +323,7 @@ export default function BillboardPage() {
         {/* Sözleşme bilgisi */}
         <div style={{
           display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
-          gap: 40, paddingTop: 32, borderTop: "1px solid #e5e7eb",
+          gap: 40, paddingTop: 32, borderTop: "1px solid #bbf7d0",
         }}>
           {[
             { label: "Yüklenici",         val: "Uğursal Elektrik + ONH İnşaat" },
