@@ -17,7 +17,7 @@ const plexSans = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://konyatramvay.aygm.gov.tr"),
+  metadataBase: new URL("https://aygm.vercel.app"),
   title: {
     default: "Konya Tramvay 2. Etap | AYGM — T.C. Ulaştırma ve Altyapı Bakanlığı",
     template: "%s | Konya Tramvay — AYGM",
