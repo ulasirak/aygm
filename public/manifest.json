@@ -1,0 +1,13 @@
+{
+  "name": "Konya Tramvay 2. Etap — Billboard",
+  "short_name": "Tramvay 4K",
+  "description": "AYGM Konya Stadyum–Şehir Hastanesi Tramvay Hattı 2. Etap billboard ekranı",
+  "start_url": "/4k-billboard",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#f0fdf4",
+  "theme_color": "#1a5c2e",
+  "icons": [
+    { "src": "/aygm-amblem.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
