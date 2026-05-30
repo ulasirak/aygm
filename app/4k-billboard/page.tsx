@@ -231,10 +231,28 @@ export default function BillboardPage() {
           </div>
         </div>
 
+        {/* Slogan */}
+        <div style={{
+          animation: "fadeIn 0.7s ease 0.3s both", position: "relative",
+          marginTop: 32, marginBottom: 8,
+          paddingLeft: 24,
+          borderLeft: "5px solid #1a5c2e",
+        }}>
+          <div style={{ fontSize: 42, fontWeight: 300, color: "#374151", lineHeight: 1.55, letterSpacing: "0.01em" }}>
+            Hayatınızı hızlandırıyor,
+          </div>
+          <div style={{ fontSize: 42, fontWeight: 300, color: "#374151", lineHeight: 1.55 }}>
+            sevdiklerinize <span style={{ fontWeight: 700, color: "#1a5c2e" }}>yaklaştırıyoruz.</span>
+          </div>
+          <div style={{ fontSize: 38, fontWeight: 400, color: "#6b7280", lineHeight: 1.6, marginTop: 8, fontStyle: "italic" }}>
+            Sizinle Konya'nın her anını önemsiyoruz.
+          </div>
+        </div>
+
         {/* Ayırıcı */}
         <div style={{
           width: 140, height: 5, background: "#1a5c2e", borderRadius: 3,
-          margin: "50px 0", animation: "fadeIn 0.6s ease 0.35s both", position: "relative",
+          margin: "40px 0", animation: "fadeIn 0.6s ease 0.35s both", position: "relative",
         }} />
 
         {/* Gauge + istatistikler */}
