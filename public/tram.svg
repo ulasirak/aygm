@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 230" fill="none">
+  <!-- Elektrik hattı -->
+  <line x1="0" y1="8" x2="520" y2="8" stroke="white" stroke-width="1.5" stroke-opacity="0.35" stroke-dasharray="10,5"/>
+  <!-- Pantograf -->
+  <rect x="175" y="18" width="2.5" height="34" fill="white" fill-opacity="0.55"/>
+  <rect x="305" y="18" width="2.5" height="34" fill="white" fill-opacity="0.55"/>
+  <path d="M138 8 L175 26 L305 26 L342 8" stroke="white" stroke-width="2" stroke-opacity="0.55" fill="none" stroke-linecap="round"/>
+  <path d="M150 8 L175 18 L305 18 L340 8" stroke="white" stroke-width="1.5" stroke-opacity="0.35" fill="none" stroke-linecap="round"/>
+
+  <!-- Çatı -->
+  <rect x="18" y="50" width="468" height="14" rx="3" fill="white" fill-opacity="0.7"/>
+
+  <!-- Gövde -->
+  <path d="M8 64 Q4 64 4 72 L4 188 Q4 200 12 200 L18 200 L18 64 Z" fill="white" fill-opacity="0.88"/>
+  <rect x="18" y="64" width="476" height="136" rx="6" fill="white" fill-opacity="0.88"/>
+
+  <!-- Pencere arkası şerit -->
+  <rect x="24" y="72" width="456" height="68" rx="4" fill="white" fill-opacity="0.1"/>
+
+  <!-- Ön sürücü camı -->
+  <path d="M8 76 L18 72 L18 134 L8 138 Q4 138 4 132 L4 82 Q4 76 8 76Z" fill="white" fill-opacity="0.28"/>
+  <line x1="13" y1="72" x2="13" y2="138" stroke="white" stroke-width="0.8" stroke-opacity="0.4"/>
+
+  <!-- Yolcu pencereleri -->
+  <rect x="28" y="76" width="50" height="60" rx="3" fill="white" fill-opacity="0.22"/>
+  <rect x="86" y="76" width="50" height="60" rx="3" fill="white" fill-opacity="0.22"/>
+  <rect x="144" y="76" width="50" height="60" rx="3" fill="white" fill-opacity="0.22"/>
+  <rect x="202" y="76" width="50" height="60" rx="3" fill="white" fill-opacity="0.22"/>
+  <rect x="260" y="76" width="50" height="60" rx="3" fill="white" fill-opacity="0.22"/>
+  <rect x="318" y="76" width="50" height="60" rx="3" fill="white" fill-opacity="0.22"/>
+  <rect x="376" y="76" width="50" height="60" rx="3" fill="white" fill-opacity="0.22"/>
+  <rect x="434" y="76" width="52" height="60" rx="3" fill="white" fill-opacity="0.22"/>
+
+  <!-- Kapılar -->
+  <rect x="144" y="144" width="16" height="56" rx="2" fill="white" fill-opacity="0.12"/>
+  <rect x="162" y="144" width="16" height="56" rx="2" fill="white" fill-opacity="0.12"/>
+  <line x1="153" y1="144" x2="153" y2="200" stroke="white" stroke-width="0.8" stroke-opacity="0.35"/>
+  <rect x="300" y="144" width="16" height="56" rx="2" fill="white" fill-opacity="0.12"/>
+  <rect x="318" y="144" width="16" height="56" rx="2" fill="white" fill-opacity="0.12"/>
+  <line x1="309" y1="144" x2="309" y2="200" stroke="white" stroke-width="0.8" stroke-opacity="0.35"/>
+
+  <!-- Alt bant -->
+  <rect x="4" y="192" width="490" height="8" rx="2" fill="white" fill-opacity="0.45"/>
+
+  <!-- Far -->
+  <ellipse cx="5" cy="108" rx="4" ry="7" fill="white" fill-opacity="0.9"/>
+  <ellipse cx="5" cy="122" rx="3" ry="5" fill="white" fill-opacity="0.7"/>
+
+  <!-- Bogiler + Tekerlekler -->
+  <rect x="28" y="198" width="78" height="10" rx="3" fill="white" fill-opacity="0.5"/>
+  <circle cx="48" cy="208" r="10" fill="white" fill-opacity="0.65"/>
+  <circle cx="48" cy="208" r="4.5" fill="white" fill-opacity="0.35"/>
+  <circle cx="86" cy="208" r="10" fill="white" fill-opacity="0.65"/>
+  <circle cx="86" cy="208" r="4.5" fill="white" fill-opacity="0.35"/>
+
+  <rect x="210" y="198" width="78" height="10" rx="3" fill="white" fill-opacity="0.5"/>
+  <circle cx="230" cy="208" r="10" fill="white" fill-opacity="0.65"/>
+  <circle cx="230" cy="208" r="4.5" fill="white" fill-opacity="0.35"/>
+  <circle cx="268" cy="208" r="10" fill="white" fill-opacity="0.65"/>
+  <circle cx="268" cy="208" r="4.5" fill="white" fill-opacity="0.35"/>
+
+  <rect x="392" y="198" width="78" height="10" rx="3" fill="white" fill-opacity="0.5"/>
+  <circle cx="412" cy="208" r="10" fill="white" fill-opacity="0.65"/>
+  <circle cx="412" cy="208" r="4.5" fill="white" fill-opacity="0.35"/>
+  <circle cx="450" cy="208" r="10" fill="white" fill-opacity="0.65"/>
+  <circle cx="450" cy="208" r="4.5" fill="white" fill-opacity="0.35"/>
+
+  <!-- Raylar -->
+  <line x1="0" y1="218" x2="520" y2="218" stroke="white" stroke-width="3" stroke-opacity="0.55"/>
+  <line x1="0" y1="226" x2="520" y2="226" stroke="white" stroke-width="3" stroke-opacity="0.55"/>
+  <!-- Traversler -->
+  <line x1="40" y1="216" x2="40" y2="228" stroke="white" stroke-width="2" stroke-opacity="0.25"/>
+  <line x1="100" y1="216" x2="100" y2="228" stroke="white" stroke-width="2" stroke-opacity="0.25"/>
+  <line x1="160" y1="216" x2="160" y2="228" stroke="white" stroke-width="2" stroke-opacity="0.25"/>
+  <line x1="220" y1="216" x2="220" y2="228" stroke="white" stroke-width="2" stroke-opacity="0.25"/>
+  <line x1="280" y1="216" x2="280" y2="228" stroke="white" stroke-width="2" stroke-opacity="0.25"/>
+  <line x1="340" y1="216" x2="340" y2="228" stroke="white" stroke-width="2" stroke-opacity="0.25"/>
+  <line x1="400" y1="216" x2="400" y2="228" stroke="white" stroke-width="2" stroke-opacity="0.25"/>
+  <line x1="460" y1="216" x2="460" y2="228" stroke="white" stroke-width="2" stroke-opacity="0.25"/>
+</svg>
