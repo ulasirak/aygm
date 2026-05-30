@@ -7,44 +7,26 @@ const PROGRESS = 42; // İnşaat ilerleme yüzdesi (0–100)
 import { useEffect, useState, useRef } from "react";
 
 const STATIONS = [
-  { id: 0, name: "Yeni Sanayi",   x: 180,  y: 760 },
-  { id: 1, name: "ASLİDAŞ",       x: 380,  y: 620 },
-  { id: 2, name: "TÜYAP",         x: 600,  y: 490 },
-  { id: 3, name: "Banliyö",       x: 840,  y: 370, transfer: true },
-  { id: 4, name: "Çimento",       x: 1100, y: 280 },
-  { id: 5, name: "Novaland",      x: 1380, y: 230 },
-  { id: 6, name: "Otogar",        x: 1650, y: 215 },
-  { id: 7, name: "Ecdad Bahçesi", x: 1920, y: 225 },
-  { id: 8, name: "Real",          x: 2200, y: 255 },
-  { id: 9, name: "Konya Stadyumu",x: 2480, y: 310 },
+  { id: 0, name: "Yeni Sanayi",    x: 200,  y: 880  },
+  { id: 1, name: "ASLİDAŞ",        x: 420,  y: 730  },
+  { id: 2, name: "TÜYAP",          x: 660,  y: 590  },
+  { id: 3, name: "Banliyö",        x: 920,  y: 470, transfer: true },
+  { id: 4, name: "Çimento",        x: 1200, y: 380  },
+  { id: 5, name: "Novaland",       x: 1490, y: 320  },
+  { id: 6, name: "Otogar",         x: 1760, y: 300  },
+  { id: 7, name: "Ecdad Bahçesi",  x: 2030, y: 310  },
+  { id: 8, name: "Real",           x: 2290, y: 340  },
+  { id: 9, name: "Konya Stadyumu", x: 2540, y: 400  },
 ];
-
-const STATS = [
-  { value: "10",     unit: "km",         label: "Hat Uzunluğu",    color: "#00ff88" },
-  { value: "10",     unit: "istasyon",   label: "Aktarma Noktası", color: "#38bdf8" },
-  { value: "60.000", unit: "yolcu/gün",  label: "Kapasite",        color: "#f59e0b" },
-  { value: "2027",   unit: "",           label: "Hedef Yıl",       color: "#ff6b6b" },
-];
-
-const TIMELINE = [
-  { date: "Mayıs 2025",    title: "İhale Tamamlandı",     desc: "9,059 Milyar TL — Uğursal + ONH OG",   done: true  },
-  { date: "Temmuz 2025",   title: "Temel Atma Töreni",    desc: "Bakan Abdülkadir Uraloğlu",             done: true  },
-  { date: "2025–2026",     title: "İnşaat Devam Ediyor",  desc: `İlerleme: %${PROGRESS}`,               done: false, active: true },
-  { date: "2027",          title: "Teslim & Açılış",      desc: "Konya Stadyum – Şehir Hastanesi",      done: false },
-];
-
-const SCENE_DURATION = 8000; // ms per scene
-const TOTAL_SCENES = 4;
 
 function buildPath(pts: { x: number; y: number }[]) {
   return pts.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
 }
 
-function getSegments(pts: { x: number; y: number }[], pct: number) {
+function splitSegments(pts: { x: number; y: number }[], pct: number) {
   let total = 0;
   for (let i = 1; i < pts.length; i++) {
-    const dx = pts[i].x - pts[i - 1].x;
-    const dy = pts[i].y - pts[i - 1].y;
+    const dx = pts[i].x - pts[i - 1].x, dy = pts[i].y - pts[i - 1].y;
     total += Math.sqrt(dx * dx + dy * dy);
   }
   const target = total * (pct / 100);
@@ -52,426 +34,115 @@ function getSegments(pts: { x: number; y: number }[], pct: number) {
   const done: { x: number; y: number }[] = [pts[0]];
   const rem: { x: number; y: number }[] = [];
   for (let i = 1; i < pts.length; i++) {
-    const dx = pts[i].x - pts[i - 1].x;
-    const dy = pts[i].y - pts[i - 1].y;
+    const dx = pts[i].x - pts[i - 1].x, dy = pts[i].y - pts[i - 1].y;
     const seg = Math.sqrt(dx * dx + dy * dy);
-    if (covered + seg <= target) {
-      covered += seg;
-      done.push(pts[i]);
-    } else {
+    if (covered + seg <= target) { covered += seg; done.push(pts[i]); }
+    else {
       const t = (target - covered) / seg;
       const mid = { x: pts[i - 1].x + dx * t, y: pts[i - 1].y + dy * t };
-      done.push(mid);
-      rem.push(mid, ...pts.slice(i));
-      break;
+      done.push(mid); rem.push(mid, ...pts.slice(i)); break;
     }
   }
   return { done: buildPath(done), remaining: rem.length > 1 ? buildPath(rem) : "" };
 }
 
-// ── Scene 1: Hero ─────────────────────────────────────────────────────────────
-function SceneHero({ visible }: { visible: boolean }) {
+export default function BillboardPage() {
   const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!visible) { setCount(0); return; }
-    const step = PROGRESS / 60;
-    let cur = 0;
-    const id = setInterval(() => {
-      cur = Math.min(cur + step, PROGRESS);
-      setCount(Math.floor(cur));
-      if (cur >= PROGRESS) clearInterval(id);
-    }, 30);
-    return () => clearInterval(id);
-  }, [visible]);
-
-  const r = 380, circ = 2 * Math.PI * r;
-  const offset = circ - (circ * count) / 100;
-
-  return (
-    <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", gap: 200 }}>
-      {/* Circular gauge */}
-      <div style={{ position: "relative", width: 900, height: 900, flexShrink: 0 }}>
-        <svg width="900" height="900" viewBox="0 0 900 900">
-          <defs>
-            <filter id="h-glow"><feGaussianBlur stdDeviation="12" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          </defs>
-          {/* Track */}
-          <circle cx="450" cy="450" r={r} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="28" />
-          {/* Progress arc */}
-          <circle cx="450" cy="450" r={r} fill="none"
-            stroke="url(#arcGrad)" strokeWidth="28"
-            strokeLinecap="round"
-            strokeDasharray={circ}
-            strokeDashoffset={offset}
-            transform="rotate(-90 450 450)"
-            filter="url(#h-glow)"
-            style={{ transition: "stroke-dashoffset 0.05s linear" }}
-          />
-          <defs>
-            <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#006633" />
-              <stop offset="100%" stopColor="#00ff88" />
-            </linearGradient>
-          </defs>
-          {/* Center text */}
-          <text x="450" y="400" textAnchor="middle" fill="#00ff88" fontSize="180" fontWeight="900" fontFamily="IBM Plex Sans,Arial">
-            {count}
-          </text>
-          <text x="450" y="510" textAnchor="middle" fill="#00ff88" fontSize="80" fontWeight="700" fontFamily="IBM Plex Sans,Arial">
-            %
-          </text>
-          <text x="450" y="590" textAnchor="middle" fill="rgba(255,255,255,0.4)" fontSize="40" fontWeight="400" fontFamily="IBM Plex Sans,Arial">
-            TAMAMLANDI
-          </text>
-        </svg>
-      </div>
-
-      {/* Text panel */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
-        <div style={{ fontSize: 40, fontWeight: 700, letterSpacing: "0.3em", color: "#00ff88", opacity: 0.7, textTransform: "uppercase" }}>
-          T.C. Ulaştırma ve Altyapı Bakanlığı
-        </div>
-        <div style={{ fontSize: 160, fontWeight: 900, lineHeight: 0.9, color: "#fff", letterSpacing: "-0.02em" }}>KONYA</div>
-        <div style={{ fontSize: 160, fontWeight: 900, lineHeight: 0.9, color: "#fff", letterSpacing: "-0.02em" }}>TRAMVAY</div>
-        <div style={{ fontSize: 96, fontWeight: 800, color: "#00ff88", textShadow: "0 0 60px rgba(0,255,136,0.5)" }}>2. ETAP</div>
-        <div style={{ width: 800, height: 3, background: "linear-gradient(90deg,#00ff88,transparent)", marginTop: 16 }} />
-        <div style={{ fontSize: 36, color: "rgba(255,255,255,0.4)", lineHeight: 1.8 }}>
-          Sözleşme: 9.059.553.000 TL<br />
-          Güzergah: Yeni Sanayi → Konya Stadyumu<br />
-          Temel Atma: 7 Temmuz 2025
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ── Scene 2: Route Map ────────────────────────────────────────────────────────
-function SceneRoute({ visible }: { visible: boolean }) {
-  const { done, remaining } = getSegments(STATIONS, PROGRESS);
+  const [clock, setClock] = useState("");
+  const [statsVisible, setStatsVisible] = useState(false);
+  const { done, remaining } = splitSegments(STATIONS, PROGRESS);
   const completedIdx = Math.floor((PROGRESS / 100) * (STATIONS.length - 1));
 
-  return (
-    <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "80px 160px" }}>
-      <div style={{ fontSize: 42, fontWeight: 700, letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textTransform: "uppercase", marginBottom: 40 }}>
-        Güzergah Haritası · 10 İstasyon · 10 km
-      </div>
-
-      <svg viewBox="0 0 2680 900" width="3400" height="1000" style={{ overflow: "visible", maxWidth: "100%" }}>
-        <defs>
-          <filter id="r-glow"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          <filter id="r-glow-soft"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          <linearGradient id="doneGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#006633"/>
-            <stop offset="100%" stopColor="#00ff88"/>
-          </linearGradient>
-        </defs>
-
-        {/* Shadow glow trail */}
-        <path d={buildPath(STATIONS)} fill="none" stroke="rgba(0,255,136,0.06)" strokeWidth="28" strokeLinecap="round"/>
-        {/* Remaining — dashed dim */}
-        {remaining && <path d={remaining} fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="8" strokeDasharray="36 24" strokeLinecap="round"/>}
-        {/* Done — bright */}
-        <path d={done} fill="none" stroke="url(#doneGrad)" strokeWidth="12" strokeLinecap="round" filter="url(#r-glow)"
-          style={{ animation: visible ? "routeDraw 2s ease-out forwards" : "none" }}/>
-        {/* Traveling light */}
-        <path d={done} fill="none" stroke="rgba(255,255,255,0.9)" strokeWidth="4" strokeLinecap="round"
-          strokeDasharray="160 3000" style={{ animation: "lightRun 2.5s linear infinite" }}/>
-
-        {/* Stations */}
-        {STATIONS.map((s, i) => {
-          const isDone = i <= completedIdx;
-          const isActive = i === completedIdx;
-          return (
-            <g key={s.id}>
-              {isActive && <circle cx={s.x} cy={s.y} r={52} fill="none" stroke="rgba(0,255,136,0.25)" strokeWidth="2"
-                style={{ animation: "pulseRing 1.8s ease-out infinite" }}/>}
-              <circle cx={s.x} cy={s.y} r={isDone ? 28 : 16}
-                fill={isDone ? "#00ff88" : "rgba(255,255,255,0.1)"}
-                stroke={isDone ? "rgba(0,255,136,0.6)" : "rgba(255,255,255,0.2)"}
-                strokeWidth={isDone ? 4 : 2}
-                filter={isDone ? "url(#r-glow-soft)" : undefined}/>
-              {s.transfer && <circle cx={s.x} cy={s.y} r={44} fill="none" stroke="#f59e0b" strokeWidth={3} strokeDasharray="10 6" filter="url(#r-glow-soft)"/>}
-              <text x={s.x} y={s.y - 50} textAnchor="middle"
-                fill={isDone ? "#fff" : "rgba(255,255,255,0.3)"}
-                fontSize={isDone ? 28 : 22} fontWeight={isDone ? 700 : 400} fontFamily="IBM Plex Sans,Arial"
-                filter={isDone ? "url(#r-glow-soft)" : undefined}>
-                {s.name}
-              </text>
-              {s.transfer && (
-                <text x={s.x} y={s.y + 70} textAnchor="middle" fill="#f59e0b" fontSize="18" fontFamily="IBM Plex Sans,Arial">
-                  KONYARAY aktarma
-                </text>
-              )}
-            </g>
-          );
-        })}
-      </svg>
-
-      {/* Legend */}
-      <div style={{ display: "flex", gap: 80, marginTop: 40 }}>
-        {[
-          { color: "#00ff88", label: "Tamamlanan Bölüm" },
-          { color: "rgba(255,255,255,0.3)", label: "Devam Eden Bölüm", dashed: true },
-          { color: "#f59e0b", label: "Aktarma İstasyonu" },
-        ].map(({ color, label, dashed }) => (
-          <div key={label} style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <div style={{ width: 60, height: 4, background: color, borderRadius: 2, borderTop: dashed ? `4px dashed ${color}` : undefined, background: dashed ? "transparent" : color }} />
-            <span style={{ fontSize: 28, color: "rgba(255,255,255,0.5)" }}>{label}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// ── Scene 3: Statistics ───────────────────────────────────────────────────────
-function SceneStats({ visible }: { visible: boolean }) {
-  const [revealed, setRevealed] = useState([false, false, false, false]);
-  useEffect(() => {
-    if (!visible) { setRevealed([false, false, false, false]); return; }
-    STATS.forEach((_, i) => {
-      setTimeout(() => setRevealed(prev => { const n = [...prev]; n[i] = true; return n; }), i * 400);
-    });
-  }, [visible]);
-
-  return (
-    <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 80, padding: "80px 200px" }}>
-      <div style={{ fontSize: 50, fontWeight: 700, letterSpacing: "0.2em", color: "rgba(255,255,255,0.25)", textTransform: "uppercase" }}>
-        Proje İstatistikleri
-      </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 60, width: "100%" }}>
-        {STATS.map((s, i) => (
-          <div key={s.label} style={{
-            background: revealed[i] ? `rgba(${s.color === "#00ff88" ? "0,255,136" : s.color === "#38bdf8" ? "56,189,248" : s.color === "#f59e0b" ? "245,158,11" : "255,107,107"},0.06)` : "transparent",
-            border: `2px solid ${revealed[i] ? s.color : "rgba(255,255,255,0.06)"}`,
-            borderRadius: 32,
-            padding: "70px 40px",
-            textAlign: "center",
-            transition: "all 0.6s cubic-bezier(0.34,1.56,0.64,1)",
-            transform: revealed[i] ? "translateY(0) scale(1)" : "translateY(40px) scale(0.92)",
-            opacity: revealed[i] ? 1 : 0,
-            boxShadow: revealed[i] ? `0 0 80px ${s.color}22` : "none",
-          }}>
-            <div style={{ fontSize: 130, fontWeight: 900, lineHeight: 1, color: s.color, textShadow: `0 0 60px ${s.color}66` }}>
-              {s.value}
-            </div>
-            {s.unit && <div style={{ fontSize: 40, fontWeight: 600, color: "rgba(255,255,255,0.5)", marginTop: 8 }}>{s.unit}</div>}
-            <div style={{ fontSize: 34, fontWeight: 400, color: "rgba(255,255,255,0.3)", marginTop: 24, letterSpacing: "0.05em" }}>
-              {s.label}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Progress bar row */}
-      <div style={{ width: "100%", background: "rgba(255,255,255,0.05)", borderRadius: 20, height: 32, overflow: "hidden" }}>
-        <div style={{
-          height: "100%", width: visible ? `${PROGRESS}%` : "0%",
-          background: "linear-gradient(90deg,#006633,#00ff88)",
-          borderRadius: 20,
-          boxShadow: "0 0 40px rgba(0,255,136,0.5)",
-          transition: "width 2s ease 0.5s",
-          position: "relative",
-        }}>
-          <div style={{ position: "absolute", right: 16, top: "50%", transform: "translateY(-50%)", fontSize: 20, fontWeight: 700, color: "#000" }}>
-            %{PROGRESS}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ── Scene 4: Timeline ─────────────────────────────────────────────────────────
-function SceneTimeline({ visible }: { visible: boolean }) {
-  const [revealed, setRevealed] = useState([false, false, false, false]);
-  useEffect(() => {
-    if (!visible) { setRevealed([false, false, false, false]); return; }
-    TIMELINE.forEach((_, i) => {
-      setTimeout(() => setRevealed(prev => { const n = [...prev]; n[i] = true; return n; }), i * 500 + 200);
-    });
-  }, [visible]);
-
-  return (
-    <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "80px 250px", gap: 60 }}>
-      <div style={{ fontSize: 50, fontWeight: 700, letterSpacing: "0.2em", color: "rgba(255,255,255,0.25)", textTransform: "uppercase" }}>
-        Proje Zaman Çizelgesi
-      </div>
-
-      {/* Horizontal timeline */}
-      <div style={{ width: "100%", position: "relative" }}>
-        {/* Connecting line */}
-        <div style={{ position: "absolute", top: 44, left: "12.5%", right: "12.5%", height: 4, background: "rgba(255,255,255,0.08)", zIndex: 0 }}>
-          <div style={{ height: "100%", width: `${(2 / 3) * 100}%`, background: "linear-gradient(90deg,#006633,#00ff88)", boxShadow: "0 0 20px rgba(0,255,136,0.4)", transition: "width 1s ease 1s" }} />
-        </div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 40, position: "relative", zIndex: 1 }}>
-          {TIMELINE.map((t, i) => (
-            <div key={t.title} style={{
-              display: "flex", flexDirection: "column", alignItems: "center", gap: 28,
-              opacity: revealed[i] ? 1 : 0,
-              transform: revealed[i] ? "translateY(0)" : "translateY(30px)",
-              transition: "all 0.7s ease",
-            }}>
-              {/* Node */}
-              <div style={{
-                width: 88, height: 88, borderRadius: "50%",
-                background: t.done ? "#00ff88" : t.active ? "transparent" : "rgba(255,255,255,0.06)",
-                border: t.active ? "4px solid #00ff88" : t.done ? "none" : "4px solid rgba(255,255,255,0.15)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                boxShadow: t.done ? "0 0 40px rgba(0,255,136,0.5)" : t.active ? "0 0 40px rgba(0,255,136,0.3)" : "none",
-                animation: t.active ? "pulseRing 2s ease-in-out infinite" : "none",
-              }}>
-                {t.done
-                  ? <svg width="40" height="40" viewBox="0 0 40 40"><polyline points="8,20 16,28 32,12" fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                  : t.active
-                    ? <div style={{ width: 28, height: 28, borderRadius: "50%", background: "#00ff88" }} />
-                    : <div style={{ width: 20, height: 20, borderRadius: "50%", background: "rgba(255,255,255,0.2)" }} />
-                }
-              </div>
-
-              {/* Content */}
-              <div style={{ textAlign: "center" }}>
-                <div style={{ fontSize: 28, fontWeight: 700, color: t.done ? "#00ff88" : t.active ? "#fff" : "rgba(255,255,255,0.3)", marginBottom: 10 }}>
-                  {t.date}
-                </div>
-                <div style={{ fontSize: 36, fontWeight: 800, color: t.done || t.active ? "#fff" : "rgba(255,255,255,0.25)", marginBottom: 12 }}>
-                  {t.title}
-                </div>
-                <div style={{ fontSize: 26, color: "rgba(255,255,255,0.35)", lineHeight: 1.5 }}>
-                  {t.desc}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Bottom info */}
-      <div style={{ display: "flex", gap: 80, marginTop: 40 }}>
-        {[
-          { label: "Başlangıç", val: "Yeni Sanayi / Aslım Cad." },
-          { label: "Bitiş",     val: "Konya Stadyumu" },
-          { label: "Güzergah",  val: "Karatay + Selçuklu İlçeleri" },
-        ].map(({ label, val }) => (
-          <div key={label} style={{ textAlign: "center" }}>
-            <div style={{ fontSize: 28, color: "rgba(255,255,255,0.3)", marginBottom: 8 }}>{label}</div>
-            <div style={{ fontSize: 36, fontWeight: 700, color: "#fff" }}>{val}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// ── Main Component ─────────────────────────────────────────────────────────────
-export default function BillboardPage() {
-  const [scene, setScene] = useState(0);
-  const [transitioning, setTransitioning] = useState(false);
-  const [sceneProgress, setSceneProgress] = useState(0);
-  const [clock, setClock] = useState("");
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const progressRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  // Clock
-  useEffect(() => {
-    const tick = () => setClock(new Date().toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" }));
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  // Scene cycling
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    // Clock
+    const tickClock = () => setClock(new Date().toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit", second: "2-digit" }));
+    tickClock();
+    const clockId = setInterval(tickClock, 1000);
+    // Counter
+    const step = PROGRESS / 80;
+    let cur = 0;
+    const countId = setInterval(() => {
+      cur = Math.min(cur + step, PROGRESS);
+      setCount(Math.floor(cur));
+      if (cur >= PROGRESS) clearInterval(countId);
+    }, 25);
+    // Stats reveal
+    const statsId = setTimeout(() => setStatsVisible(true), 600);
+    return () => { clearInterval(clockId); clearInterval(countId); clearTimeout(statsId); document.body.style.overflow = ""; };
+  }, []);
 
-    const startScene = () => {
-      setSceneProgress(0);
-      let prog = 0;
-      progressRef.current = setInterval(() => {
-        prog += 100 / (SCENE_DURATION / 50);
-        setSceneProgress(Math.min(prog, 100));
-      }, 50);
-
-      timerRef.current = setTimeout(() => {
-        clearInterval(progressRef.current!);
-        setTransitioning(true);
-        setTimeout(() => {
-          setScene(s => (s + 1) % TOTAL_SCENES);
-          setTransitioning(false);
-        }, 600);
-      }, SCENE_DURATION);
-    };
-
-    startScene();
-    return () => {
-      clearTimeout(timerRef.current!);
-      clearInterval(progressRef.current!);
-      document.body.style.overflow = "";
-    };
-  }, [scene]);
-
-  const sceneLabels = ["Genel Bakış", "Güzergah Haritası", "İstatistikler", "Zaman Çizelgesi"];
+  const r = 300, circ = 2 * Math.PI * r;
+  const arcOffset = circ - (circ * count) / 100;
 
   return (
     <div style={{
       width: "3840px", height: "2160px",
-      background: "#000",
-      overflow: "hidden",
-      position: "relative",
+      background: "linear-gradient(160deg, #020f05 0%, #000 50%, #020a0f 100%)",
+      overflow: "hidden", position: "relative",
       fontFamily: "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
       userSelect: "none",
     }}>
 
       {/* ── Keyframes ── */}
       <style>{`
-        @keyframes lightRun {
-          0%   { stroke-dashoffset: 2000; opacity: 1; }
-          80%  { opacity: 0.8; }
+        @keyframes lightFlow {
+          0%   { stroke-dashoffset: 2400; opacity: 1; }
+          85%  { opacity: 0.7; }
           100% { stroke-dashoffset: -400; opacity: 0; }
         }
+        @keyframes scanLine {
+          0%   { top: -6px; }
+          100% { top: 2166px; }
+        }
+        @keyframes pulseDot {
+          0%,100% { transform: scale(1); opacity: 1; }
+          50%     { transform: scale(1.4); opacity: 0.6; }
+        }
         @keyframes pulseRing {
-          0%   { r: 44; opacity: 0.8; }
-          70%  { r: 62; opacity: 0; }
-          100% { r: 44; opacity: 0; }
+          0%   { r: 46; opacity: 0.5; }
+          100% { r: 72; opacity: 0; }
         }
-        @keyframes scanline {
-          0%   { transform: translateY(-100%); }
-          100% { transform: translateY(2160px); }
+        @keyframes glowBreath {
+          0%,100% { filter: drop-shadow(0 0 20px rgba(74,222,128,0.4)); }
+          50%     { filter: drop-shadow(0 0 50px rgba(74,222,128,0.8)); }
         }
-        @keyframes glowPulse {
-          0%,100% { opacity: 0.7; }
-          50%     { opacity: 1; }
-        }
-        @keyframes fadeSlideIn {
-          from { opacity: 0; transform: translateY(30px); }
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(28px); }
           to   { opacity: 1; transform: translateY(0); }
         }
-        @keyframes particleDrift {
-          0%   { transform: translateY(0) translateX(0); opacity: 0; }
-          10%  { opacity: 0.6; }
-          90%  { opacity: 0.2; }
-          100% { transform: translateY(-300px) translateX(60px); opacity: 0; }
+        @keyframes shimmer {
+          0%   { background-position: -1000px 0; }
+          100% { background-position: 1000px 0; }
         }
-        @keyframes gridPulse {
-          0%,100% { opacity: 0.03; }
-          50%     { opacity: 0.055; }
-        }
-        @keyframes timerFill {
-          from { width: 0%; }
-          to   { width: 100%; }
+        @keyframes gridFade {
+          0%,100% { opacity: 0.025; }
+          50%     { opacity: 0.045; }
         }
         @keyframes routeDraw {
-          from { stroke-dashoffset: 4000; stroke-dasharray: 4000; }
-          to   { stroke-dashoffset: 0; stroke-dasharray: 4000; }
+          from { stroke-dasharray: 4000 4000; stroke-dashoffset: 4000; }
+          to   { stroke-dasharray: 4000 4000; stroke-dashoffset: 0; }
+        }
+        @keyframes barFill {
+          from { width: 0%; }
+          to   { width: ${PROGRESS}%; }
+        }
+        @keyframes numberPop {
+          0%   { transform: scale(0.7); opacity: 0; }
+          60%  { transform: scale(1.06); opacity: 1; }
+          100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes borderGlow {
+          0%,100% { border-color: rgba(74,222,128,0.2); box-shadow: 0 0 40px rgba(74,222,128,0.05); }
+          50%     { border-color: rgba(74,222,128,0.45); box-shadow: 0 0 80px rgba(74,222,128,0.12); }
         }
       `}</style>
 
-      {/* ── Background: Grid ── */}
-      <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", animation: "gridPulse 4s ease-in-out infinite", pointerEvents: "none" }}>
+      {/* ── Background grid ── */}
+      <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", animation: "gridFade 5s ease-in-out infinite", pointerEvents: "none" }}>
         <defs>
-          <pattern id="grid" width="160" height="160" patternUnits="userSpaceOnUse">
-            <path d="M 160 0 L 0 0 0 160" fill="none" stroke="#00ff88" strokeWidth="0.8" />
+          <pattern id="grid" width="120" height="120" patternUnits="userSpaceOnUse">
+            <path d="M 120 0 L 0 0 0 120" fill="none" stroke="#4ade80" strokeWidth="0.6"/>
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#grid)" />
@@ -479,110 +150,362 @@ export default function BillboardPage() {
 
       {/* ── Scan line ── */}
       <div style={{
-        position: "absolute", left: 0, right: 0, height: "6px",
-        background: "linear-gradient(180deg, transparent, rgba(0,255,136,0.12), transparent)",
-        animation: "scanline 6s linear infinite",
-        pointerEvents: "none", zIndex: 20,
+        position: "absolute", left: 0, right: 0, height: 6,
+        background: "linear-gradient(180deg, transparent, rgba(74,222,128,0.08), transparent)",
+        animation: "scanLine 7s linear infinite",
+        pointerEvents: "none", zIndex: 5,
       }} />
 
-      {/* ── CRT overlay ── */}
+      {/* ── CRT scanlines ── */}
       <div style={{
-        position: "absolute", inset: 0, pointerEvents: "none", zIndex: 15,
-        background: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.06) 3px, rgba(0,0,0,0.06) 4px)",
+        position: "absolute", inset: 0, pointerEvents: "none", zIndex: 4,
+        background: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.05) 3px, rgba(0,0,0,0.05) 4px)",
       }} />
 
-      {/* ── TOP BAR ── */}
+      {/* ── Vertical divider ── */}
       <div style={{
-        position: "absolute", top: 0, left: 0, right: 0, height: 130,
-        background: "rgba(0,0,0,0.7)",
-        borderBottom: "2px solid rgba(0,255,136,0.15)",
+        position: "absolute", left: 1680, top: 140, bottom: 120, width: 2,
+        background: "linear-gradient(180deg, transparent, rgba(74,222,128,0.2) 20%, rgba(74,222,128,0.2) 80%, transparent)",
+        zIndex: 10,
+      }} />
+
+      {/* ════════════════════════════════════════════════
+          TOP BAR
+      ════════════════════════════════════════════════ */}
+      <div style={{
+        position: "absolute", top: 0, left: 0, right: 0, height: 140,
+        background: "rgba(0,0,0,0.6)",
+        borderBottom: "1.5px solid rgba(74,222,128,0.12)",
         display: "flex", alignItems: "center", justifyContent: "space-between",
-        padding: "0 100px", zIndex: 30,
+        padding: "0 100px", zIndex: 20,
       }}>
-        {/* Left: AYGM brand */}
-        <div style={{ display: "flex", alignItems: "center", gap: 40 }}>
+        {/* Logo + title */}
+        <div style={{ display: "flex", alignItems: "center", gap: 36 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/aygm-amblem.svg" alt="AYGM" style={{ height: 72, filter: "brightness(0) invert(1)", opacity: 0.85 }} />
-          <div style={{ width: 2, height: 60, background: "rgba(255,255,255,0.1)" }} />
-          <div>
-            <div style={{ fontSize: 20, fontWeight: 600, letterSpacing: "0.2em", color: "rgba(255,255,255,0.4)", textTransform: "uppercase" }}>
-              T.C. Ulaştırma ve Altyapı Bakanlığı
-            </div>
-            <div style={{ fontSize: 28, fontWeight: 800, color: "#fff", letterSpacing: "0.05em" }}>
-              Altyapı Yatırımları Genel Müdürlüğü
-            </div>
-          </div>
+          <img src="/aygm-logo.svg" alt="AYGM" style={{ height: 64, opacity: 0.9 }} />
         </div>
 
-        {/* Center: Scene indicator */}
-        <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
-          {sceneLabels.map((label, i) => (
-            <div key={label} style={{
-              padding: "10px 28px", borderRadius: 40,
-              background: scene === i ? "rgba(0,255,136,0.12)" : "transparent",
-              border: `1.5px solid ${scene === i ? "#00ff88" : "rgba(255,255,255,0.1)"}`,
-              fontSize: 22, fontWeight: scene === i ? 700 : 400,
-              color: scene === i ? "#00ff88" : "rgba(255,255,255,0.3)",
-              transition: "all 0.4s ease",
-            }}>{label}</div>
-          ))}
+        {/* Center title chip */}
+        <div style={{
+          padding: "14px 60px", borderRadius: 60,
+          border: "1.5px solid rgba(74,222,128,0.25)",
+          background: "rgba(74,222,128,0.06)",
+          fontSize: 30, fontWeight: 700, letterSpacing: "0.15em",
+          color: "rgba(255,255,255,0.7)", textTransform: "uppercase",
+        }}>
+          Konya Stadyum – Şehir Hastanesi Tramvay Hattı 2. Etap
         </div>
 
-        {/* Right: Clock + date */}
+        {/* Clock */}
         <div style={{ textAlign: "right" }}>
-          <div style={{ fontSize: 56, fontWeight: 900, color: "#00ff88", lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
+          <div style={{ fontSize: 52, fontWeight: 900, color: "#4ade80", lineHeight: 1, fontVariantNumeric: "tabular-nums", textShadow: "0 0 40px rgba(74,222,128,0.4)" }}>
             {clock}
           </div>
-          <div style={{ fontSize: 22, color: "rgba(255,255,255,0.3)", marginTop: 4 }}>
+          <div style={{ fontSize: 22, color: "rgba(255,255,255,0.3)", marginTop: 6 }}>
             {new Date().toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" })}
           </div>
         </div>
       </div>
 
-      {/* ── MAIN SCENE AREA ── */}
+      {/* ════════════════════════════════════════════════
+          LEFT PANEL — Proje Kimliği + İlerleme
+      ════════════════════════════════════════════════ */}
       <div style={{
-        position: "absolute", top: 130, left: 0, right: 0, bottom: 120,
-        opacity: transitioning ? 0 : 1,
-        transform: transitioning ? "translateY(20px)" : "translateY(0)",
-        transition: "opacity 0.5s ease, transform 0.5s ease",
+        position: "absolute", top: 140, left: 0, width: 1680, bottom: 120,
+        display: "flex", flexDirection: "column", justifyContent: "center",
+        padding: "60px 120px 60px 120px", gap: 0,
       }}>
-        {scene === 0 && <SceneHero    visible={!transitioning && scene === 0} />}
-        {scene === 1 && <SceneRoute   visible={!transitioning && scene === 1} />}
-        {scene === 2 && <SceneStats   visible={!transitioning && scene === 2} />}
-        {scene === 3 && <SceneTimeline visible={!transitioning && scene === 3} />}
+
+        {/* Üst etiket */}
+        <div style={{ fontSize: 28, fontWeight: 600, letterSpacing: "0.35em", color: "#4ade80", textTransform: "uppercase", opacity: 0.7, marginBottom: 28,
+          animation: "fadeUp 0.8s ease 0.1s both" }}>
+          T.C. Ulaştırma ve Altyapı Bakanlığı — AYGM
+        </div>
+
+        {/* Ana başlık */}
+        <div style={{ fontSize: 170, fontWeight: 900, lineHeight: 0.88, color: "#ffffff", letterSpacing: "-0.02em",
+          textShadow: "0 0 120px rgba(255,255,255,0.08)", animation: "fadeUp 0.8s ease 0.2s both" }}>
+          KONYA
+        </div>
+        <div style={{ fontSize: 170, fontWeight: 900, lineHeight: 0.88, color: "#ffffff", letterSpacing: "-0.02em",
+          animation: "fadeUp 0.8s ease 0.3s both" }}>
+          TRAMVAY
+        </div>
+        <div style={{ fontSize: 96, fontWeight: 900, color: "#4ade80", letterSpacing: "0.04em", marginTop: 12,
+          textShadow: "0 0 60px rgba(74,222,128,0.5)", animation: "fadeUp 0.8s ease 0.4s both" }}>
+          2. ETAP
+        </div>
+
+        {/* Ayırıcı */}
+        <div style={{ width: "100%", height: 2, background: "linear-gradient(90deg, #4ade80 0%, rgba(74,222,128,0.2) 60%, transparent 100%)", margin: "44px 0", animation: "fadeUp 0.8s ease 0.5s both" }} />
+
+        {/* Progress gauge + ring */}
+        <div style={{ display: "flex", alignItems: "center", gap: 70, animation: "fadeUp 0.8s ease 0.6s both" }}>
+
+          {/* Dairesel gösterge */}
+          <div style={{ position: "relative", width: 740, height: 740, flexShrink: 0 }}>
+            <svg width="740" height="740" viewBox="0 0 740 740">
+              <defs>
+                <filter id="arcGlow"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <linearGradient id="arcGr" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#166534"/>
+                  <stop offset="100%" stopColor="#4ade80"/>
+                </linearGradient>
+              </defs>
+              {/* Track */}
+              <circle cx="370" cy="370" r={r} fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="24"/>
+              {/* Arc */}
+              <circle cx="370" cy="370" r={r} fill="none"
+                stroke="url(#arcGr)" strokeWidth="24" strokeLinecap="round"
+                strokeDasharray={circ} strokeDashoffset={arcOffset}
+                transform="rotate(-90 370 370)"
+                filter="url(#arcGlow)"
+                style={{ transition: "stroke-dashoffset 0.03s linear", animation: "glowBreath 3s ease-in-out infinite" }}
+              />
+              {/* Yüzde */}
+              <text x="370" y="330" textAnchor="middle" fill="#4ade80" fontSize="160" fontWeight="900" fontFamily="IBM Plex Sans,Arial"
+                style={{ textShadow: "0 0 80px #4ade80" }}>{count}</text>
+              <text x="370" y="420" textAnchor="middle" fill="#4ade80" fontSize="64" fontWeight="700" fontFamily="IBM Plex Sans,Arial">%</text>
+              <text x="370" y="490" textAnchor="middle" fill="rgba(255,255,255,0.35)" fontSize="34" fontFamily="IBM Plex Sans,Arial" letterSpacing="4">TAMAMLANDI</text>
+            </svg>
+          </div>
+
+          {/* Sağ: stats grid */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 36, flex: 1 }}>
+            {[
+              { val: "10 km",    lbl: "Hat Uzunluğu",       delay: "0.7s" },
+              { val: "10",       lbl: "İstasyon",            delay: "0.85s" },
+              { val: "60.000",   lbl: "Yolcu / Gün",         delay: "1s" },
+              { val: "2027",     lbl: "Hedef Teslim Yılı",   delay: "1.15s" },
+            ].map(({ val, lbl, delay }) => (
+              <div key={lbl} style={{
+                display: "flex", alignItems: "center", gap: 28,
+                padding: "28px 40px", borderRadius: 20,
+                border: "1.5px solid rgba(74,222,128,0.12)",
+                background: "rgba(74,222,128,0.03)",
+                animation: `fadeUp 0.6s ease ${delay} both, borderGlow 4s ease-in-out infinite`,
+                opacity: statsVisible ? 1 : 0,
+              }}>
+                <div style={{ width: 6, height: 60, borderRadius: 3, background: "linear-gradient(180deg,#4ade80,#166534)", flexShrink: 0 }} />
+                <div style={{ fontSize: 64, fontWeight: 900, color: "#fff", lineHeight: 1, minWidth: 220 }}>{val}</div>
+                <div style={{ fontSize: 30, color: "rgba(255,255,255,0.4)", fontWeight: 400 }}>{lbl}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Linear progress bar */}
+        <div style={{ marginTop: 50, animation: "fadeUp 0.6s ease 1.3s both", opacity: statsVisible ? 1 : 0 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16 }}>
+            <span style={{ fontSize: 26, color: "rgba(255,255,255,0.4)" }}>İnşaat İlerlemesi</span>
+            <span style={{ fontSize: 26, color: "#4ade80", fontWeight: 700 }}>%{PROGRESS} Tamamlandı</span>
+          </div>
+          <div style={{ height: 20, background: "rgba(255,255,255,0.05)", borderRadius: 10, overflow: "hidden" }}>
+            <div style={{
+              height: "100%", borderRadius: 10,
+              background: "linear-gradient(90deg, #166534, #4ade80)",
+              boxShadow: "0 0 30px rgba(74,222,128,0.5)",
+              animation: "barFill 2s ease 0.8s both",
+              width: `${PROGRESS}%`,
+            }} />
+          </div>
+        </div>
+
       </div>
 
-      {/* ── BOTTOM BAR ── */}
+      {/* ════════════════════════════════════════════════
+          RIGHT PANEL — Güzergah Haritası
+      ════════════════════════════════════════════════ */}
+      <div style={{
+        position: "absolute", top: 140, left: 1682, right: 0, bottom: 120,
+        display: "flex", flexDirection: "column", padding: "50px 80px 50px 80px",
+      }}>
+
+        {/* Başlık */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
+          <div style={{ fontSize: 34, fontWeight: 700, letterSpacing: "0.15em", color: "rgba(255,255,255,0.25)", textTransform: "uppercase" }}>
+            Güzergah Haritası
+          </div>
+          <div style={{ display: "flex", gap: 40, alignItems: "center" }}>
+            {[
+              { color: "#4ade80", label: "Tamamlanan" },
+              { color: "rgba(255,255,255,0.2)", label: "Devam Eden", dashed: true },
+              { color: "#fbbf24", label: "Aktarma" },
+            ].map(({ color, label, dashed }) => (
+              <div key={label} style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <div style={{
+                  width: 40, height: 4, borderRadius: 2,
+                  background: dashed ? "transparent" : color,
+                  border: dashed ? `3px dashed ${color}` : "none",
+                }} />
+                <span style={{ fontSize: 22, color: "rgba(255,255,255,0.4)" }}>{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* SVG Harita */}
+        <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <svg viewBox="0 0 2760 1000" style={{ width: "100%", height: "100%", overflow: "visible" }}>
+            <defs>
+              <filter id="m-glow">
+                <feGaussianBlur stdDeviation="8" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="m-soft">
+                <feGaussianBlur stdDeviation="4" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <linearGradient id="mapGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#166534"/>
+                <stop offset="100%" stopColor="#4ade80"/>
+              </linearGradient>
+            </defs>
+
+            {/* Arka plan glow iz */}
+            <path d={buildPath(STATIONS)} fill="none" stroke="rgba(74,222,128,0.06)" strokeWidth="32" strokeLinecap="round" strokeLinejoin="round"/>
+
+            {/* Kalan bölüm — kesik beyaz */}
+            {remaining && (
+              <path d={remaining} fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="7"
+                strokeDasharray="40 28" strokeLinecap="round" strokeLinejoin="round"/>
+            )}
+
+            {/* Tamamlanan — parlak gradient */}
+            <path d={done} fill="none" stroke="url(#mapGrad)" strokeWidth="14" strokeLinecap="round" strokeLinejoin="round"
+              filter="url(#m-glow)"
+              style={{ animation: "routeDraw 2.5s ease-out 0.3s both, glowBreath 3s ease-in-out infinite" }}
+            />
+
+            {/* Işık topu animasyonu */}
+            <path d={done} fill="none" stroke="rgba(255,255,255,0.95)" strokeWidth="5" strokeLinecap="round"
+              strokeDasharray="180 3000"
+              style={{ animation: "lightFlow 3s linear infinite" }}
+            />
+
+            {/* İstasyon noktaları */}
+            {STATIONS.map((s, i) => {
+              const isDone = i <= completedIdx;
+              const isActive = i === completedIdx;
+              return (
+                <g key={s.id}>
+                  {/* Pulse ring for active */}
+                  {isActive && (
+                    <circle cx={s.x} cy={s.y} r={46} fill="none" stroke="rgba(74,222,128,0.4)" strokeWidth="2"
+                      style={{ animation: "pulseRing 2s ease-out infinite" }}/>
+                  )}
+                  {/* Transfer halka */}
+                  {s.transfer && (
+                    <circle cx={s.x} cy={s.y} r={50} fill="none" stroke="#fbbf24" strokeWidth="3"
+                      strokeDasharray="12 7" filter="url(#m-soft)"/>
+                  )}
+                  {/* Dış halka */}
+                  <circle cx={s.x} cy={s.y} r={isDone ? 32 : 18}
+                    fill={isDone ? "#4ade80" : "rgba(255,255,255,0.1)"}
+                    stroke={isDone ? "rgba(74,222,128,0.5)" : "rgba(255,255,255,0.2)"}
+                    strokeWidth={isDone ? 4 : 2}
+                    filter={isDone ? "url(#m-soft)" : undefined}
+                    style={isActive ? { animation: "pulseDot 1.5s ease-in-out infinite" } : undefined}
+                  />
+
+                  {/* İstasyon adı */}
+                  <text
+                    x={s.x} y={s.y - 54}
+                    textAnchor="middle"
+                    fill={isDone ? "#ffffff" : "rgba(255,255,255,0.3)"}
+                    fontSize={isDone ? 32 : 26}
+                    fontWeight={isDone ? 700 : 400}
+                    fontFamily="IBM Plex Sans, Arial"
+                    filter={isDone ? "url(#m-soft)" : undefined}
+                  >
+                    {s.name}
+                  </text>
+
+                  {/* Transfer etiketi */}
+                  {s.transfer && (
+                    <text x={s.x} y={s.y + 72} textAnchor="middle"
+                      fill="#fbbf24" fontSize="22" fontFamily="IBM Plex Sans, Arial">
+                      KONYARAY aktarma
+                    </text>
+                  )}
+
+                  {/* Son / başlangıç etiketleri */}
+                  {i === 0 && (
+                    <text x={s.x} y={s.y + 72} textAnchor="middle" fill="rgba(74,222,128,0.7)" fontSize="26" fontWeight="700" fontFamily="IBM Plex Sans, Arial">
+                      BAŞLANGIÇ
+                    </text>
+                  )}
+                  {i === STATIONS.length - 1 && (
+                    <text x={s.x} y={s.y + 72} textAnchor="middle" fill="rgba(255,255,255,0.4)" fontSize="26" fontWeight="700" fontFamily="IBM Plex Sans, Arial">
+                      HEDEf
+                    </text>
+                  )}
+                </g>
+              );
+            })}
+          </svg>
+        </div>
+
+        {/* Sözleşme bilgisi */}
+        <div style={{
+          display: "flex", justifyContent: "space-between", alignItems: "flex-end",
+          padding: "24px 0 0", borderTop: "1px solid rgba(255,255,255,0.06)", marginTop: 12,
+        }}>
+          {[
+            { label: "Sözleşme Bedeli", val: "9.059.553.000 TL" },
+            { label: "Yüklenici",        val: "Uğursal Elektrik + ONH İnşaat OG" },
+            { label: "Temel Atma",       val: "7 Temmuz 2025" },
+          ].map(({ label, val }) => (
+            <div key={label}>
+              <div style={{ fontSize: 22, color: "rgba(255,255,255,0.25)", marginBottom: 6 }}>{label}</div>
+              <div style={{ fontSize: 32, fontWeight: 700, color: "rgba(255,255,255,0.65)" }}>{val}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ════════════════════════════════════════════════
+          BOTTOM BAR — Bakanlık şeridi
+      ════════════════════════════════════════════════ */}
       <div style={{
         position: "absolute", bottom: 0, left: 0, right: 0, height: 120,
-        background: "rgba(0,0,0,0.75)",
-        borderTop: "2px solid rgba(0,255,136,0.12)",
+        background: "linear-gradient(90deg, #052e16 0%, #0a3d1c 40%, #052e16 100%)",
+        borderTop: "2px solid rgba(74,222,128,0.2)",
         display: "flex", alignItems: "center", justifyContent: "space-between",
-        padding: "0 100px", zIndex: 30,
+        padding: "0 100px", zIndex: 20,
       }}>
-        <span style={{ fontSize: 28, color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em" }}>
-          aygm.uab.gov.tr
-        </span>
-
-        {/* Progress pill */}
-        <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-          <div style={{ fontSize: 32, fontWeight: 700, color: "#00ff88" }}>İnşaat İlerlemesi</div>
-          <div style={{ width: 500, height: 20, background: "rgba(255,255,255,0.08)", borderRadius: 10, overflow: "hidden" }}>
-            <div style={{ width: `${PROGRESS}%`, height: "100%", background: "linear-gradient(90deg,#006633,#00ff88)", borderRadius: 10, boxShadow: "0 0 20px rgba(0,255,136,0.4)" }} />
+        {/* Sol: TC amblemi + bakanlık */}
+        <div style={{ display: "flex", alignItems: "center", gap: 36 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/aygm-amblem.svg" alt="AYGM" style={{ height: 68, filter: "brightness(0) invert(1)", opacity: 0.85 }} />
+          <div style={{ width: 2, height: 56, background: "rgba(255,255,255,0.15)" }} />
+          <div>
+            <div style={{ fontSize: 20, color: "rgba(255,255,255,0.45)", letterSpacing: "0.2em", textTransform: "uppercase" }}>
+              T.C. Ulaştırma ve Altyapı Bakanlığı
+            </div>
+            <div style={{ fontSize: 30, fontWeight: 800, color: "#ffffff", letterSpacing: "0.05em" }}>
+              Altyapı Yatırımları Genel Müdürlüğü
+            </div>
           </div>
-          <div style={{ fontSize: 36, fontWeight: 900, color: "#00ff88" }}>%{PROGRESS}</div>
         </div>
 
-        {/* Scene timer */}
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <span style={{ fontSize: 24, color: "rgba(255,255,255,0.2)" }}>Konya Stadyum — Şehir Hastanesi Tramvay Hattı 2. Etap</span>
+        {/* Orta: website */}
+        <div style={{ fontSize: 32, color: "rgba(255,255,255,0.4)", letterSpacing: "0.1em" }}>
+          aygm.uab.gov.tr
+        </div>
+
+        {/* Sağ: İlerleme özeti */}
+        <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
+          <span style={{ fontSize: 28, color: "rgba(255,255,255,0.4)" }}>Proje İlerlemesi</span>
+          <div style={{ width: 280, height: 12, background: "rgba(255,255,255,0.1)", borderRadius: 6, overflow: "hidden" }}>
+            <div style={{ width: `${PROGRESS}%`, height: "100%", background: "#4ade80", borderRadius: 6, boxShadow: "0 0 20px rgba(74,222,128,0.6)" }} />
+          </div>
+          <span style={{ fontSize: 40, fontWeight: 900, color: "#4ade80", textShadow: "0 0 30px rgba(74,222,128,0.5)" }}>
+            %{PROGRESS}
+          </span>
         </div>
       </div>
 
-      {/* Scene timer strip */}
-      <div style={{ position: "absolute", bottom: 120, left: 0, right: 0, height: 4, background: "rgba(255,255,255,0.05)", zIndex: 30 }}>
-        <div style={{ height: "100%", width: `${sceneProgress}%`, background: "#00ff88", boxShadow: "0 0 12px rgba(0,255,136,0.6)", transition: "width 0.05s linear" }} />
-      </div>
     </div>
   );
 }
