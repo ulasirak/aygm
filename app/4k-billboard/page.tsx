@@ -221,7 +221,7 @@ export default function BillboardPage() {
         <div style={{ marginTop: "auto", animation: "fadeIn 0.6s ease 0.7s both" }}>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 14 }}>
             <span style={{ fontSize: 24, color: "#6b7280" }}>İnşaat İlerlemesi</span>
-            <span style={{ fontSize: 24, color: "#1a5c2e", fontWeight: 700 }}>%{PROGRESS} Tamamlandı</span>
+            <span style={{ fontSize: 24, color: "#1a5c2e", fontWeight: 700 }}>Devam Ediyor</span>
           </div>
           <div style={{ height: 16, background: "#f3f4f6", borderRadius: 8, overflow: "hidden" }}>
             <div style={{
@@ -326,9 +326,9 @@ export default function BillboardPage() {
           gap: 40, paddingTop: 32, borderTop: "1px solid #e5e7eb",
         }}>
           {[
-            { label: "Sözleşme Bedeli",  val: "9.059.553.000 TL"             },
             { label: "Yüklenici",         val: "Uğursal Elektrik + ONH İnşaat" },
             { label: "Temel Atma",        val: "7 Temmuz 2025"               },
+            { label: "Hat Güzergahı",     val: "Karatay — Selçuklu"          },
           ].map(({ label, val }) => (
             <div key={label}>
               <div style={{ fontSize: 22, color: "#9ca3af", marginBottom: 6 }}>{label}</div>
@@ -367,8 +367,7 @@ export default function BillboardPage() {
           <div style={{ width: 320, height: 10, background: "rgba(255,255,255,0.15)", borderRadius: 5, overflow: "hidden" }}>
             <div style={{ width: `${PROGRESS}%`, height: "100%", background: "#ffffff", borderRadius: 5 }} />
           </div>
-          <span style={{ fontSize: 38, fontWeight: 900, color: "#ffffff" }}>%{PROGRESS}</span>
-          <span style={{ fontSize: 24, color: "rgba(255,255,255,0.5)" }}>tamamlandı</span>
+          <span style={{ fontSize: 30, color: "rgba(255,255,255,0.7)" }}>İnşaat Devam Ediyor</span>
         </div>
       </div>
 
