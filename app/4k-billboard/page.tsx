@@ -238,14 +238,14 @@ export default function BillboardPage() {
           paddingLeft: 24,
           borderLeft: "5px solid #1a5c2e",
         }}>
-          <div style={{ fontSize: 42, fontWeight: 300, color: "#374151", lineHeight: 1.55, letterSpacing: "0.01em" }}>
+          <div style={{ fontSize: 52, fontWeight: 300, color: "#374151", lineHeight: 1.55, letterSpacing: "0.01em" }}>
             Hayatınızı hızlandırıyor,
           </div>
-          <div style={{ fontSize: 42, fontWeight: 300, color: "#374151", lineHeight: 1.55 }}>
+          <div style={{ fontSize: 52, fontWeight: 300, color: "#374151", lineHeight: 1.55 }}>
             sevdiklerinize <span style={{ fontWeight: 700, color: "#1a5c2e" }}>yaklaştırıyoruz.</span>
           </div>
-          <div style={{ fontSize: 38, fontWeight: 400, color: "#6b7280", lineHeight: 1.6, marginTop: 8, fontStyle: "italic" }}>
-            Sizinle Konya'nın her anını önemsiyoruz.
+          <div style={{ fontSize: 46, fontWeight: 400, color: "#6b7280", lineHeight: 1.6, marginTop: 10, fontStyle: "italic" }}>
+            Sizinle Konyamızın her anını önemsiyoruz.
           </div>
         </div>
 
@@ -355,10 +355,10 @@ export default function BillboardPage() {
                   />
                   {isActive && <circle cx={s.x} cy={s.y} r={13} fill="#f0fdf4" />}
 
-                  <text x={s.x} y={s.y - 62}
+                  <text x={s.x} y={s.y - 66}
                     textAnchor="middle"
                     fill={isDone ? "#111827" : "#9ca3af"}
-                    fontSize={isDone ? 44 : 34}
+                    fontSize={isDone ? 54 : 42}
                     fontWeight={isDone ? 700 : 400}
                     fontFamily="IBM Plex Sans, Arial">
                     {s.name}
