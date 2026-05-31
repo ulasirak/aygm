@@ -20,7 +20,7 @@ const news = [
     date: "7 Temmuz 2025",
     title: "Temel Atma Töreni Gerçekleştirildi",
     summary:
-      "Bakan Uraloğlu başkanlığında temel atma töreniyle inşaat resmen başladı. 'Konya raylı ağını 134 km'ye yükseltmiş olacağız.'",
+      "Sayın Bakanımız Abdulkadir Uraloğlu başkanlığında temel atma töreniyle inşaat resmen başladı. 'Konya raylı ağını 134 km'ye yükseltmiş olacağız.'",
     readTime: "4 dk",
     href: "/haberler/temel-atma-toreni",
   },

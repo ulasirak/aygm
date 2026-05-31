@@ -18,12 +18,12 @@ export const allNews: NewsItem[] = [
     slug: "temel-atma-toreni",
     category: "Tören",
     date: "7 Temmuz 2025",
-    title: "2. Etap'ın Temeli Atıldı: Bakan Uraloğlu Konya'da",
+    title: "2. Etap'ın Temeli Atıldı: Sayın Bakanımız Abdulkadir Uraloğlu Konya'da",
     summary:
       "T.C. Ulaştırma ve Altyapı Bakanı Sayın Bakanımız Abdulkadir Uraloğlu'nun katılımıyla Konya'da gerçekleştirilen törende Stadyum–Şehir Hastanesi Tramvay Hattı 2. Etap inşaatı resmen başladı.",
     body: [
       "T.C. Ulaştırma ve Altyapı Bakanı Sayın Bakanımız Abdulkadir Uraloğlu, 7 Temmuz 2025 tarihinde Konya'ya gelerek Stadyum–Şehir Hastanesi Tramvay Hattı 2. Etap Projesi'nin temel atma törenine katıldı. Törende aynı zamanda Konya Büyükşehir Belediye Başkanı Uğur İbrahim Altay, Konya Valisi İbrahim Akın, AK Parti ve MHP milletvekilleri ile proje paydaşları yer aldı.",
-      "Törende konuşan Bakan Uraloğlu, projenin Konya'nın ulaşım vizyonundaki stratejik önemini vurguladı: 'Devam eden ve planlanan projelerle Konya'nın kentsel raylı sistem ağını 27,7 km'den 134 km'ye yükseltmiş olacağız. İstanbul'dan sonra Türkiye'nin en uzun raylı sistem ağına sahip şehri Konya olacak.'",
+      "Törende konuşan Sayın Bakanımız Abdulkadir Uraloğlu, projenin Konya'nın ulaşım vizyonundaki stratejik önemini vurguladı: 'Devam eden ve planlanan projelerle Konya'nın kentsel raylı sistem ağını 27,7 km'den 134 km'ye yükseltmiş olacağız. İstanbul'dan sonra Türkiye'nin en uzun raylı sistem ağına sahip şehri Konya olacak.'",
       "2. Etap kapsamında 10 km'lik yeni tramvay hattı, 10 yeni istasyon, 2 yeni köprülü kavşak, 2 revize köprülü kavşak ve 3 yaya üst geçidi inşa edilecek. Proje 9.059.553.000 TL sözleşme bedeli ile Uğursal Elektrik Elektronik İnşaat – ONH İnşaat ve Taahhüt A.Ş. Ortak Girişimi tarafından üstlenilmiştir.",
       "Hat tamamlandığında Şehir Hastanesi–Yeni Sanayi 1. Etap ile birleşerek toplam 21,2 km'lik bir güzergah oluşturacak ve Konya'nın raylı ulaşım ağında köklü bir dönüşümü simgeleyecek. Sistemin 2027 yılında hizmete girmesi planlanmaktadır.",
     ],
@@ -120,12 +120,12 @@ export const allNews: NewsItem[] = [
     slug: "bakan-vizyon-aciklamasi",
     category: "Vizyon",
     date: "2025",
-    title: "Bakan Uraloğlu: 'Konya'nın Raylı Ağı 134 km'ye Çıkacak'",
+    title: "Sayın Bakanımız Abdulkadir Uraloğlu: 'Konya'nın Raylı Ağı 134 km'ye Çıkacak'",
     summary:
       "T.C. Ulaştırma ve Altyapı Bakanı Sayın Bakanımız Abdulkadir Uraloğlu, Bakanlık ve Belediye projelerinin tamamlanmasıyla Konya'nın raylı sistem uzunluğunun 27,7 km'den 134 km'ye ulaşacağını açıkladı.",
     body: [
       "Ulaştırma ve Altyapı Bakanı Sayın Bakanımız Abdulkadir Uraloğlu, 7 Temmuz 2025'teki temel atma töreni başta olmak üzere çeşitli platformlarda Konya'nın büyük raylı sistem vizyonunu kamuoyuyla paylaştı.",
-      "Bakan Uraloğlu'nun açıkladığı verilere göre T.C. Ulaştırma ve Altyapı Bakanlığı, Konya'ya 58,1 km'lik yeni raylı sistem hattı ekleyecek. Bu kapsamda Selçuk Üniversitesi–Alaaddin hafif raylı sistem hattı (21 km), Necmettin Erbakan Üniversitesi–Alaaddin hattı (8 km), Fatih Caddesi–Ahmet Özcan tramvay hattı (19,4 km) ve Stadyum–Şehir Hastanesi 2. Etap (9,7 km) projeleri hayata geçirilecek.",
+      "Sayın Bakanımız Abdulkadir Uraloğlu'nun açıkladığı verilere göre T.C. Ulaştırma ve Altyapı Bakanlığı, Konya'ya 58,1 km'lik yeni raylı sistem hattı ekleyecek. Bu kapsamda Selçuk Üniversitesi–Alaaddin hafif raylı sistem hattı (21 km), Necmettin Erbakan Üniversitesi–Alaaddin hattı (8 km), Fatih Caddesi–Ahmet Özcan tramvay hattı (19,4 km) ve Stadyum–Şehir Hastanesi 2. Etap (9,7 km) projeleri hayata geçirilecek.",
       "Konya Büyükşehir Belediyesi'nin devam eden projeleriyle (1. Etap, KONYARAY Banliyö Hattı, Barış Caddesi hattı) birleşince toplam raylı sistem ağı 27,7 km'den 134 km'ye ulaşacak. Bu uzunlukla Konya, İstanbul'un ardından Türkiye'nin en uzun kent içi raylı sistem ağına sahip ikinci şehri olacak.",
       "Bakanlık verilerine göre 2002'den bu yana Konya'ya ulaşım ve altyapı alanında toplam 151 milyar TL'nin üzerinde yatırım yapılmıştır. Bölünmüş yol ağı 167 km'den 1.289 km'ye, asfalt yollar ise 97 km'den 1.300 km'ye çıkarılmıştır.",
     ],
