@@ -22,7 +22,7 @@ export const allNews: NewsItem[] = [
     summary:
       "T.C. Ulaştırma ve Altyapı Bakanı Sayın Bakanımız Abdulkadir Uraloğlu'nun katılımıyla Konya'da gerçekleştirilen törende Stadyum–Şehir Hastanesi Tramvay Hattı 2. Etap inşaatı resmen başladı.",
     body: [
-      "T.C. Ulaştırma ve Altyapı Bakanı Sayın Bakanımız Abdulkadir Uraloğlu, 7 Temmuz 2025 tarihinde Konya'ya gelerek Stadyum–Şehir Hastanesi Tramvay Hattı 2. Etap Projesi'nin temel atma törenine katıldı. Törende aynı zamanda Konya Büyükşehir Belediye Başkanı Uğur İbrahim Altay, Konya Valisi İbrahim Akın, AK Parti ve MHP milletvekilleri ile proje paydaşları yer aldı.",
+      "T.C. Ulaştırma ve Altyapı Bakanı Sayın Bakanımız Abdulkadir Uraloğlu, 7 Temmuz 2025 tarihinde Konya'ya gelerek Stadyum–Şehir Hastanesi Tramvay Hattı 2. Etap Projesi'nin temel atma törenine katıldı. Törende aynı zamanda Konya Büyükşehir Belediye Başkanı Sayın Uğur İbrahim Altay, Konya Valisi İbrahim Akın, AK Parti ve MHP milletvekilleri ile proje paydaşları yer aldı.",
       "Törende konuşan Sayın Bakanımız Abdulkadir Uraloğlu, projenin Konya'nın ulaşım vizyonundaki stratejik önemini vurguladı: 'Devam eden ve planlanan projelerle Konya'nın kentsel raylı sistem ağını 27,7 km'den 134 km'ye yükseltmiş olacağız. İstanbul'dan sonra Türkiye'nin en uzun raylı sistem ağına sahip şehri Konya olacak.'",
       "2. Etap kapsamında 10 km'lik yeni tramvay hattı, 10 yeni istasyon, 2 yeni köprülü kavşak, 2 revize köprülü kavşak ve 3 yaya üst geçidi inşa edilecek. Proje 9.059.553.000 TL sözleşme bedeli ile Uğursal Elektrik Elektronik İnşaat – ONH İnşaat ve Taahhüt A.Ş. Ortak Girişimi tarafından üstlenilmiştir.",
       "Hat tamamlandığında Şehir Hastanesi–Yeni Sanayi 1. Etap ile birleşerek toplam 21,2 km'lik bir güzergah oluşturacak ve Konya'nın raylı ulaşım ağında köklü bir dönüşümü simgeleyecek. Sistemin 2027 yılında hizmete girmesi planlanmaktadır.",
@@ -33,7 +33,7 @@ export const allNews: NewsItem[] = [
     sourceUrl: "https://www.konya.bel.tr/haber/stadyum-sehir-hastanesi-tramvay-hatti-2-etabinin-temeli-atildi",
     participants: [
       "Sayın Bakanımız Abdulkadir Uraloğlu",
-      "Büyükşehir Başkanı Uğur İbrahim Altay",
+      "Büyükşehir Belediye Başkanı Sayın Uğur İbrahim Altay",
       "Vali İbrahim Akın",
       "AK Parti ve MHP milletvekilleri",
     ],
@@ -74,11 +74,11 @@ export const allNews: NewsItem[] = [
     date: "Nisan 2025",
     title: "2. Etap AYGM'ye Devredildi: Proje Bakanlık Güvencesiyle Hızlanıyor",
     summary:
-      "Konya Büyükşehir Belediye Başkanı Uğur İbrahim Altay ile AYGM yetkilileri arasında imzalanan devir protokolüyle 2. Etap yapımı T.C. Ulaştırma ve Altyapı Bakanlığı bünyesine alındı.",
+      "Konya Büyükşehir Belediye Başkanı Sayın Uğur İbrahim Altay ile AYGM yetkilileri arasında imzalanan devir protokolüyle 2. Etap yapımı T.C. Ulaştırma ve Altyapı Bakanlığı bünyesine alındı.",
     body: [
       "Nisan 2025'te Konya Büyükşehir Belediyesi ile T.C. Ulaştırma ve Altyapı Bakanlığı Altyapı Yatırımları Genel Müdürlüğü (AYGM) arasında kritik bir devir protokolü imzalandı.",
       "Bu protokol kapsamında Stadyum–Şehir Hastanesi Tramvay Hattı 2. Etap'ın finansmanı, proje yönetimi ve inşaat süreci tamamen AYGM koordinasyonuna geçti. Söz konusu adım, projenin ulusal bütçe kaynaklarıyla daha hızlı hayata geçirilmesinin önünü açtı.",
-      "Belediye Başkanı Uğur İbrahim Altay, devir sonrasında şunları söyledi: 'Devlet güvencesiyle hayata geçirilecek bu proje, Konya'mızın ulaşım altyapısını çok daha güçlü kılacak. Bakanlığımızla iş birliği içinde Konya halkına en iyi hizmeti sunmaya devam edeceğiz.'",
+      "Belediye Başkanı Sayın Uğur İbrahim Altay, devir sonrasında şunları söyledi: 'Devlet güvencesiyle hayata geçirilecek bu proje, Konya'mızın ulaşım altyapısını çok daha güçlü kılacak. Bakanlığımızla iş birliği içinde Konya halkına en iyi hizmeti sunmaya devam edeceğiz.'",
       "AYGM'nin devreye girmesiyle birlikte ihale süreci hız kazandı. Devir protokolünün imzalanmasından yaklaşık iki ay sonra, 30 Mayıs 2025'te ihale başarıyla tamamlandı ve Temmuz 2025'te temel atma töreniyle inşaat resmen başladı.",
     ],
     readTime: "2 dk",
