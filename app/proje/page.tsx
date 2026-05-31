@@ -93,7 +93,7 @@ export default function ProjePage() {
                       Uğursal Elektrik Elektronik İnşaat – ONH İnşaat ve Taahhüt A.Ş. Ortak
                       Girişimi tarafından 9,06 milyar TL sözleşme bedeli ile üstlenilmiştir.
                       30 Mayıs 2025&apos;te sonuçlanan ihale sürecinin ardından 7 Temmuz 2025&apos;te
-                      Bakan Abdülkadir Uraloğlu başkanlığında temel atma töreni gerçekleştirilmiştir.
+                      Sayın Bakanımız Abdulkadir Uraloğlu başkanlığında temel atma töreni gerçekleştirilmiştir.
                     </p>
                     <p>
                       Hat tamamlandığında, mevcut 1. Etap (Şehir Hastanesi–Yeni Sanayi, 11,2 km)
@@ -136,7 +136,7 @@ export default function ProjePage() {
                     Entegrasyon & Konya Raylı Sistem Ağı
                   </h2>
                   <p className="text-base leading-relaxed mb-6" style={{ color: "var(--gray-600)" }}>
-                    Ulaştırma ve Altyapı Bakanı Abdülkadir Uraloğlu&apos;nun açıkladığı vizyona göre
+                    Ulaştırma ve Altyapı Bakanı Sayın Bakanımız Abdulkadir Uraloğlu&apos;nun açıkladığı vizyona göre
                     bu proje ve devam eden diğer çalışmalarla Konya&apos;nın raylı sistem ağı
                     27,7 km&apos;den <strong>134 km&apos;ye</strong> yükselerek İstanbul&apos;dan
                     sonra Türkiye&apos;nin en uzun raylı sistem ağına sahip şehri olacak.

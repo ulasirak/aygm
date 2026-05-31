@@ -107,7 +107,7 @@ export default function NewsSection() {
                   Temel Atma Töreni Gerçekleştirildi
                 </h3>
                 <p className="text-sm leading-relaxed flex-1" style={{ color: "var(--gray-600)" }}>
-                  Bakan Abdülkadir Uraloğlu başkanlığında 7 Temmuz 2025&apos;te gerçekleştirilen
+                  Sayın Bakanımız Abdulkadir Uraloğlu başkanlığında 7 Temmuz 2025&apos;te gerçekleştirilen
                   törenle Konya Tramvay 2. Etap inşaatı resmen başladı. Konya&apos;nın raylı
                   sistem ağı 134 km&apos;ye çıkacak.
                 </p>

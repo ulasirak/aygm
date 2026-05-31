@@ -37,7 +37,7 @@ const timeline: TimelineItem[] = [
     year: "2025",
     month: "7 Temmuz",
     title: "Temel Atma Töreni",
-    desc: "Bakan Abdülkadir Uraloğlu başkanlığında temel atma töreni gerçekleştirildi. İnşaat resmen başladı.",
+    desc: "Sayın Bakanımız Abdulkadir Uraloğlu başkanlığında temel atma töreni gerçekleştirildi. İnşaat resmen başladı.",
     status: "done",
   },
   {

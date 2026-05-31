@@ -54,7 +54,7 @@ const faqData = [
     faqs: [
       {
         q: "İnşaat ne zaman başladı?",
-        a: "İnşaat, T.C. Ulaştırma ve Altyapı Bakanı Abdülkadir Uraloğlu başkanlığında 7 Temmuz 2025 tarihinde gerçekleştirilen temel atma töreniyle resmen başlamıştır.",
+        a: "İnşaat, T.C. Ulaştırma ve Altyapı Bakanı Sayın Bakanımız Abdulkadir Uraloğlu başkanlığında 7 Temmuz 2025 tarihinde gerçekleştirilen temel atma töreniyle resmen başlamıştır.",
       },
       {
         q: "Proje ne zaman tamamlanacak?",
