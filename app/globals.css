@@ -124,6 +124,12 @@ img, video, svg, canvas {
   background-clip: text;
 }
 
+/* ── Renk körlüğü filtreleri ── */
+html.cb-deuteranopia { filter: url(#cb-deuteranopia); }
+html.cb-protanopia   { filter: url(#cb-protanopia); }
+html.cb-tritanopia   { filter: url(#cb-tritanopia); }
+html.cb-achromato    { filter: grayscale(100%); }
+
 /* ── Mobil kompakt mod ── */
 @media (max-width: 767px) {
   html.view-compact {

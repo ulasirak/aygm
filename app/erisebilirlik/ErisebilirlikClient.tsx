@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FaChevronRight, FaUniversalAccess, FaKeyboard, FaMobile, FaEye, FaTextHeight } from "react-icons/fa";
 import { useLang } from "@/context/LangContext";
 import { useMobileView } from "@/context/MobileViewContext";
+import { useColorBlind, type ColorBlindMode } from "@/context/ColorBlindContext";
 
 const FEATURES = [
   { icon: FaKeyboard, titleKey: "erisebilirlik.f1_title", descKey: "erisebilirlik.f1_desc" },
@@ -16,6 +17,15 @@ const FEATURES = [
 export default function ErisebilirlikClient() {
   const { t } = useLang();
   const { mobileView, setMobileView } = useMobileView();
+  const { cbMode, setCbMode } = useColorBlind();
+
+  const CB_OPTIONS: { mode: ColorBlindMode; swatches: string[] }[] = [
+    { mode: "none",         swatches: ["#007A75","#C9A84C","#1D5C3A","#E74C3C"] },
+    { mode: "deuteranopia", swatches: ["#686600","#C9A84C","#4A5200","#BB7200"] },
+    { mode: "protanopia",   swatches: ["#606600","#C9A84C","#3D5200","#BB7200"] },
+    { mode: "tritanopia",   swatches: ["#007A75","#008899","#1D5C3A","#005566"] },
+    { mode: "achromato",    swatches: ["#757575","#B0B0B0","#3D3D3D","#8A8A8A"] },
+  ];
   return (
     <>
       <main>
@@ -87,6 +97,51 @@ export default function ErisebilirlikClient() {
                 <Link href="/iletisim" className="btn-primary" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
                   {t("erisebilirlik.feedback_btn")}
                 </Link>
+              </div>
+
+              {/* ── Renk Körlüğü ── */}
+              <div id="renk-korlugu" style={{ border: "1px solid var(--gray-100)", borderRadius: "1rem", overflow: "hidden" }}>
+                <div style={{ background: "var(--forest)", padding: "1rem 1.5rem", display: "flex", alignItems: "center", gap: "0.625rem" }}>
+                  <FaEye style={{ color: "var(--gold)", fontSize: 14 }} />
+                  <h2 className="font-bold text-sm" style={{ color: "white", fontFamily: "var(--font-heading)", letterSpacing: "0.02em" }}>
+                    {t("colorblind.title")}
+                  </h2>
+                </div>
+                <div style={{ padding: "1.25rem 1.5rem" }}>
+                  <p style={{ color: "var(--gray-600)", fontSize: "0.85rem", lineHeight: 1.7, marginBottom: "1.25rem" }}>
+                    {t("colorblind.desc")}
+                  </p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                    {CB_OPTIONS.map(({ mode, swatches }) => (
+                      <button
+                        key={mode}
+                        onClick={() => setCbMode(mode)}
+                        style={{
+                          display: "flex", alignItems: "center", gap: "0.875rem",
+                          padding: "0.75rem 1rem", borderRadius: "0.75rem", cursor: "pointer", textAlign: "left",
+                          border: cbMode === mode ? "2px solid var(--teal)" : "1px solid var(--gray-100)",
+                          background: cbMode === mode ? "rgba(0,184,174,0.06)" : "var(--gray-50)",
+                          transition: "all 0.18s",
+                        }}
+                      >
+                        <div style={{ display: "flex", gap: 3, flexShrink: 0 }}>
+                          {swatches.map((c, i) => (
+                            <div key={i} style={{ width: 14, height: 14, borderRadius: "50%", background: c }} />
+                          ))}
+                        </div>
+                        <div style={{ flex: 1 }}>
+                          <span style={{ fontWeight: cbMode === mode ? 700 : 500, fontSize: "0.875rem", color: cbMode === mode ? "var(--teal)" : "var(--forest)", fontFamily: "var(--font-heading)" }}>
+                            {t(`colorblind.${mode}`)}
+                          </span>
+                          <span style={{ marginLeft: "0.5rem", fontSize: "0.75rem", color: "var(--gray-400)" }}>
+                            {t(`colorblind.${mode}_desc`)}
+                          </span>
+                        </div>
+                        {cbMode === mode && <span style={{ fontSize: "0.7rem", color: "var(--teal)", flexShrink: 0 }}>✓</span>}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               {/* ── Görsel Boyut (yalnızca mobil) ── */}

@@ -4,6 +4,8 @@ import Navbar from "@/components/Navbar";
 import ScrollToTop from "@/components/ScrollToTop";
 import { LangProvider } from "@/context/LangContext";
 import { MobileViewProvider } from "@/context/MobileViewContext";
+import { ColorBlindProvider } from "@/context/ColorBlindContext";
+import ColorBlindFilters from "@/components/ColorBlindFilters";
 import "./globals.css";
 
 const plexSerif = IBM_Plex_Serif({
@@ -64,13 +66,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="tr" className={`${plexSerif.variable} ${plexSans.variable}`} suppressHydrationWarning>
       <body style={{ fontFamily: "var(--font-body)" }}>
         <LangProvider>
-          <MobileViewProvider>
-            <Navbar />
-            {/* Spacer for fixed navbar: desktop only (mobile navbar is static) */}
-            <div className="h-0 md:h-[100px]" />
-            {children}
-            <ScrollToTop />
-          </MobileViewProvider>
+          <ColorBlindProvider>
+            <MobileViewProvider>
+              <ColorBlindFilters />
+              <Navbar />
+              {/* Spacer for fixed navbar: desktop only (mobile navbar is static) */}
+              <div className="h-0 md:h-[100px]" />
+              {children}
+              <ScrollToTop />
+            </MobileViewProvider>
+          </ColorBlindProvider>
         </LangProvider>
       </body>
     </html>
