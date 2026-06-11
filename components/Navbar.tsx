@@ -12,12 +12,46 @@ import { useLang } from "@/context/LangContext";
 import { LANG_NAMES } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 
-function runSearch<T extends { label: string; keywords: string[] }>(items: T[], q: string): T[] {
-  const lower = q.toLowerCase().trim();
-  if (!lower) return [];
-  return items.filter(
-    (item) => item.label.toLowerCase().includes(lower) || item.keywords.some((kw) => kw.includes(lower))
-  );
+/* ── Türkçe karakter + diakritik normalize ── */
+const NORM_MAP: Record<string, string> = {
+  ı:"i", ğ:"g", ş:"s", ö:"o", ü:"u", ç:"c",
+  İ:"i", Ğ:"g", Ş:"s", Ö:"o", Ü:"u", Ç:"c",
+};
+function norm(s: string): string {
+  return s.toLowerCase().split("").map(c => NORM_MAP[c] ?? c).join("")
+    .normalize("NFD").replace(/[̀-ͯ]/g, "");
+}
+function scoreText(hay: string, needle: string): number {
+  if (!hay) return 0;
+  const h = norm(hay), n = norm(needle);
+  if (h === n) return 100;
+  if (h.startsWith(n)) return 85;
+  const words = h.split(/[\s,·\-_()/[\]]+/);
+  for (const w of words) {
+    if (w === n) return 78;
+    if (w.startsWith(n)) return 55;
+  }
+  if (h.includes(n)) return 40;
+  return 0;
+}
+function runSearch<T extends { label: string; desc?: string; keywords: string[] }>(
+  items: T[], q: string
+): T[] {
+  const query = q.trim();
+  if (query.length < 2) return [];
+  return items
+    .map(item => ({
+      item,
+      s: Math.max(
+        scoreText(item.label, query),
+        scoreText(item.desc ?? "", query),
+        ...item.keywords.map(k => scoreText(k, query)),
+      ),
+    }))
+    .filter(x => x.s > 0)
+    .sort((a, b) => b.s - a.s)
+    .slice(0, 6)
+    .map(x => x.item);
 }
 
 function NavEagle() {
@@ -53,16 +87,112 @@ export default function Navbar() {
   const langRef     = useRef<HTMLDivElement>(null);
 
   const searchIndex = useMemo(() => [
-    { href: "/",                         label: t("nav.si_home_label"),     icon: FaHome,          desc: t("nav.si_home_desc"),     keywords: ["ana sayfa","anasayfa","giriş","konya tramvay","tramvay","etap","home"] },
-    { href: "/proje",                    label: t("nav.si_project_label"),  icon: FaInfoCircle,    desc: t("nav.si_project_desc"),  keywords: ["proje","hakkında","kapsam"] },
-    { href: "/proje#teknik-veriler",     label: t("nav.si_tech_label"),     icon: FaInfoCircle,    desc: t("nav.si_tech_desc"),     keywords: ["teknik","teknik veri","80 km/sa","10 km"] },
-    { href: "/guzergah",                 label: t("nav.si_route_label"),    icon: FaRoute,         desc: t("nav.si_route_desc"),    keywords: ["güzergah","istasyon","hat"] },
-    { href: "/guzergah#istasyonlar",     label: t("nav.si_stations_label"), icon: FaRoute,         desc: t("nav.si_stations_desc"), keywords: ["konya stadyumu","real","ecdad","otogar","novaland","çimento","banliyö","tüyap","aslidaş","yeni sanayi"] },
-    { href: "/haberler/temel-atma-toreni", label: t("nav.si_news1_label"), icon: FaNewspaper,     desc: t("nav.si_news1_desc"),    keywords: ["temel atma","7 temmuz","temmuz 2025","tören"] },
-    { href: "/haberler/ihale-tamamlandi",  label: t("nav.si_news2_label"), icon: FaNewspaper,     desc: t("nav.si_news2_desc"),    keywords: ["ihale","uğursal","onh","9,06 milyar"] },
-    { href: "/haberler",                 label: t("nav.si_allnews_label"),  icon: FaNewspaper,     desc: t("nav.si_allnews_desc"),  keywords: ["haber","haberler","duyuru","basın"] },
-    { href: "/sss",                      label: t("nav.si_faq_label"),      icon: FaQuestionCircle,desc: t("nav.si_faq_desc"),      keywords: ["sss","soru cevap","faq"] },
-    { href: "/iletisim",                 label: t("nav.si_contact_label"),  icon: FaEnvelope,      desc: t("nav.si_contact_desc"),  keywords: ["iletişim","telefon","email","adres","form"] },
+    {
+      href: "/", label: t("nav.si_home_label"), icon: FaHome, desc: t("nav.si_home_desc"),
+      keywords: [
+        "ana sayfa","anasayfa","giriş","konya tramvay","tramvay","etap","2. etap",
+        "aygm","uab","ulaştırma","bakanlık","altyapı yatırımları","raylı sistem","metro",
+        "konya büyükşehir","belediye","transit","light rail","tram",
+        "home","main","start","başlangıç","project overview",
+        "tramway","strassenbahn","трамвай","tranvía","tramvia",
+      ],
+    },
+    {
+      href: "/proje", label: t("nav.si_project_label"), icon: FaInfoCircle, desc: t("nav.si_project_desc"),
+      keywords: [
+        "proje","hakkında","kapsam","amaç","hedef","özet","genel","bilgi",
+        "10 km","10 istasyon","maliyet","bütçe","yatırım","bütçe",
+        "uğursal","onh","ortak girişim","yüklenici","inşaat","sözleşme",
+        "30 mayıs","ihale sonucu","aygm","uab","altyapı",
+        "134 km","elektrikli","emisyon","çevre","sürdürülebilir",
+        "project","about","scope","budget","cost","contractor","investment","overview",
+        "projekt","über","sobre el proyecto","о проекте","关于项目",
+      ],
+    },
+    {
+      href: "/proje#teknik-veriler", label: t("nav.si_tech_label"), icon: FaInfoCircle, desc: t("nav.si_tech_desc"),
+      keywords: [
+        "teknik","veri","teknik veri","özellik","parametre",
+        "80 km","80 km/sa","hız","maksimum hız","kapasite","60000","yolcu",
+        "köprü","üst geçit","ray","tünel","depo","bakım","sinyal","enerji",
+        "technical","spec","data","speed","capacity","bridge","overpass","rail",
+        "technisch","technique","技术","технический","técnico",
+      ],
+    },
+    {
+      href: "/guzergah", label: t("nav.si_route_label"), icon: FaRoute, desc: t("nav.si_route_desc"),
+      keywords: [
+        "güzergah","guzergah","hat","rota","yol","harita","durak",
+        "konya stadyumu","yeni sanayi","şehir hastanesi","hastane","karatay","selçuklu",
+        "banliyö","otogar","terminal","konyaray","metro bağlantı","aktarma","transfer",
+        "21 durak","21,2 km","entegrasyon","tüyap","fuar","sanayi",
+        "route","map","line","path","stop","station list","corridor",
+        "strecke","parcours","маршрут","ruta","线路","خط",
+      ],
+    },
+    {
+      href: "/guzergah#istasyonlar", label: t("nav.si_stations_label"), icon: FaRoute, desc: t("nav.si_stations_desc"),
+      keywords: [
+        "istasyon","durak","tüm istasyonlar","istasyon listesi",
+        "konya stadyumu","stadyum","m1 real","real","ecdad","ecdad bahçesi",
+        "otogar","terminal","novaland","çimento","banliyö","banliyo",
+        "tüyap","tuyap","fuar","aslidaş","aslidash","yeni sanayi",
+        "aslım","aslim","kobisan","atiker","kosgeb","hayvanat bahçesi",
+        "şehir hastanesi","hastane","sehir","beydili","horozluhan",
+        "selçuklu","karatay","1. etap","phase 1","phase 2",
+        "station","stop","halt","stations list",
+        "station","bahnhof","gare","станция","estación","车站","محطة",
+      ],
+    },
+    {
+      href: "/haberler/temel-atma-toreni", label: t("nav.si_news1_label"), icon: FaNewspaper, desc: t("nav.si_news1_desc"),
+      keywords: [
+        "temel atma","tören","töreni","7 temmuz","temmuz 2025","july 2025",
+        "inşaat başladı","başlangıç","açılış","kutlama","resmi tören",
+        "vali","kaymakam","ibrahim akın","altay","ugur ibrahim",
+        "groundbreaking","ceremony","construction start","inauguration",
+        "grundsteinlegung","cérémonie","церемония",
+      ],
+    },
+    {
+      href: "/haberler/ihale-tamamlandi", label: t("nav.si_news2_label"), icon: FaNewspaper, desc: t("nav.si_news2_desc"),
+      keywords: [
+        "ihale","ihale sonucu","ihale tamamlandı","teklif","sözleşme","imzalandı",
+        "uğursal","ugursal","onh","onh inşaat","ortak girişim","yüklenici",
+        "9 milyar","9,06 milyar","10,987","bedel","toplam maliyet",
+        "30 mayıs","mayıs 2025","may 2025",
+        "tender","contract","bid","award","procurement","contractor",
+        "ausschreibung","appel d'offres","тендер","licitación",
+      ],
+    },
+    {
+      href: "/haberler", label: t("nav.si_allnews_label"), icon: FaNewspaper, desc: t("nav.si_allnews_desc"),
+      keywords: [
+        "haber","haberler","duyuru","basın","gelişme","güncel","son dakika",
+        "devir","vizyon","konyaray","ihale","tören","proje haberleri",
+        "news","announcement","press","update","latest","media",
+        "nachrichten","nouvelles","новости","noticias","新闻","أخبار",
+      ],
+    },
+    {
+      href: "/sss", label: t("nav.si_faq_label"), icon: FaQuestionCircle, desc: t("nav.si_faq_desc"),
+      keywords: [
+        "sss","soru","cevap","sıkça sorulan","yardım","bilgi","merak edilen",
+        "ne zaman","kaç istasyon","bilet","fiyat","açılış tarihi","tamamlanma",
+        "faq","question","answer","help","info","frequently asked","q&a",
+        "fragen","questions","вопросы","preguntas","问答",
+      ],
+    },
+    {
+      href: "/iletisim", label: t("nav.si_contact_label"), icon: FaEnvelope, desc: t("nav.si_contact_desc"),
+      keywords: [
+        "iletişim","iletisim","telefon","e-posta","email","adres","form","ulaş","yaz",
+        "ankara","emek mahallesi","hakkı turalyiç","uab","aygm","bize ulaşın",
+        "312","mesaj","görüş","şikayet","öneri",
+        "contact","phone","email","address","form","reach","write",
+        "kontakt","contacter","связаться","contacto","联系","اتصال",
+      ],
+    },
   ], [t]);
 
   const navLinks = useMemo(() => [
