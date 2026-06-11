@@ -9,7 +9,7 @@ export default function Hero() {
   const { t } = useLang();
   return (
     <section
-      className="relative min-h-[92vh] flex items-center overflow-hidden"
+      className="relative min-h-[calc(100svh-58px)] md:min-h-[92vh] flex items-center overflow-hidden"
       style={{
         background: "linear-gradient(155deg, #041B19 0%, #063330 30%, #0A4E4A 60%, #007A75 85%, #00B8AE 100%)",
       }}
