@@ -315,6 +315,7 @@ export default function Navbar() {
 
   return (
     <nav
+      className="navbar-aygm"
       onMouseEnter={handleNavMouseEnter}
       onMouseLeave={handleNavMouseLeave}
       style={{

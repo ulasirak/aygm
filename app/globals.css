@@ -125,6 +125,13 @@ img, video, svg, canvas {
 }
 
 /* ── Navbar ── */
+@media (max-width: 767px) {
+  .navbar-aygm {
+    position: static !important;
+    transform: none !important;
+  }
+}
+
 .nav-link {
   position: relative;
   font-size: 0.875rem;
