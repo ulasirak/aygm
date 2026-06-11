@@ -89,8 +89,8 @@ export default function ErisebilirlikClient() {
                 </Link>
               </div>
 
-              {/* ── Görsel Boyut (mobil) ── */}
-              <div id="gorsel-boyut" style={{ border: "1px solid var(--gray-100)", borderRadius: "1rem", overflow: "hidden" }}>
+              {/* ── Görsel Boyut (yalnızca mobil) ── */}
+              <div id="gorsel-boyut" className="md:hidden" style={{ border: "1px solid var(--gray-100)", borderRadius: "1rem", overflow: "hidden" }}>
                 <div style={{ background: "var(--forest)", padding: "1rem 1.5rem", display: "flex", alignItems: "center", gap: "0.625rem" }}>
                   <FaTextHeight style={{ color: "var(--gold)", fontSize: 14 }} />
                   <h2 className="font-bold text-sm" style={{ color: "white", fontFamily: "var(--font-heading)", letterSpacing: "0.02em" }}>
