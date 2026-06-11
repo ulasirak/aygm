@@ -6,8 +6,11 @@ import {
   FaArrowLeft, FaCalendarAlt, FaExternalLinkAlt,
   FaUsers, FaChevronRight, FaArrowRight,
 } from "react-icons/fa";
+import { useRef } from "react";
 import type { NewsItem } from "@/lib/news";
+import { allNews } from "@/lib/news";
 import { useLang } from "@/context/LangContext";
+import { useTranslate } from "@/hooks/useTranslate";
 
 const catColors: Record<string, string> = {
   toren:    "#007A75",
@@ -18,6 +21,9 @@ const catColors: Record<string, string> = {
   konyaray: "#00B8AE",
 };
 
+// Paylaşımlı önbellek için tüm haberlerin düz metin listesi
+const allNewsTexts = allNews.flatMap(n => [n.title, n.summary]);
+
 interface Props {
   item: NewsItem;
   otherNews: NewsItem[];
@@ -27,9 +33,31 @@ export default function NewsDetailClient({ item, otherNews }: Props) {
   const { t } = useLang();
   const catColor = catColors[item.category] ?? "var(--forest)";
 
+  // Makale metinleri — prop statik olduğu için useRef ile tek seferlik hesap
+  const articleTexts = useRef([
+    item.title,
+    item.summary,
+    ...item.body,
+    ...(item.keyFacts ?? []).map(f => f.value),
+  ]).current;
+
+  const { out, loading } = useTranslate(articleTexts, `news-detail:${item.slug}`);
+  // Diğer haberlerin başlık/özeti için paylaşımlı önbellek
+  const { out: allOut } = useTranslate(allNewsTexts, "haberler-list");
+
+  const tTitle   = out[0] ?? item.title;
+  const tSummary = out[1] ?? item.summary;
+  const tBody    = item.body.map((p, i) => out[2 + i] ?? p);
+  const factOffset = 2 + item.body.length;
+  const tFacts   = (item.keyFacts ?? []).map((f, i) => ({
+    ...f,
+    value: out[factOffset + i] ?? f.value,
+  }));
+
   return (
     <>
       <main>
+        {/* ── Hero ── */}
         <div
           className="relative overflow-hidden"
           style={{ background: "linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 55%, var(--forest) 100%)", paddingTop: "6rem", paddingBottom: "6rem" }}
@@ -55,15 +83,18 @@ export default function NewsDetailClient({ item, otherNews }: Props) {
               </span>
             </div>
 
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white max-w-3xl leading-tight" style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.01em", marginBottom: "1.5rem" }}>
-              {item.title}
-            </h1>
-            <p className="text-base md:text-lg max-w-2xl leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
-              {item.summary}
-            </p>
+            <div style={{ transition: "opacity 0.4s", opacity: loading ? 0.65 : 1 }}>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white max-w-3xl leading-tight" style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.01em", marginBottom: "1.5rem" }}>
+                {tTitle}
+              </h1>
+              <p className="text-base md:text-lg max-w-2xl leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
+                {tSummary}
+              </p>
+            </div>
           </div>
         </div>
 
+        {/* ── İçerik ── */}
         <div className="section-padding" style={{ background: "white" }}>
           <div className="container-aygm">
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
@@ -74,8 +105,8 @@ export default function NewsDetailClient({ item, otherNews }: Props) {
                   {t("haberler.back")}
                 </Link>
 
-                <div className="prose-aygm space-y-6 mb-10">
-                  {item.body.map((para, i) => (
+                <div className="prose-aygm space-y-6 mb-10" style={{ transition: "opacity 0.4s", opacity: loading ? 0.65 : 1 }}>
+                  {tBody.map((para, i) => (
                     <p key={i} className="text-base leading-[1.85]" style={{ color: i === 0 ? "var(--forest)" : "var(--gray-600)" }}>
                       {i === 0 ? <strong style={{ fontWeight: 600 }}>{para}</strong> : para}
                     </p>
@@ -98,15 +129,16 @@ export default function NewsDetailClient({ item, otherNews }: Props) {
                 </div>
               </article>
 
+              {/* ── Kenar çubuğu ── */}
               <aside style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-                {item.keyFacts && item.keyFacts.length > 0 && (
-                  <div style={{ border: "1px solid var(--gray-100)", borderRadius: "1rem", overflow: "hidden", width: "100%" }}>
+                {tFacts.length > 0 && (
+                  <div style={{ border: "1px solid var(--gray-100)", borderRadius: "1rem", overflow: "hidden", width: "100%", transition: "opacity 0.4s", opacity: loading ? 0.65 : 1 }}>
                     <div style={{ background: "var(--forest)", padding: "1rem 1.5rem" }}>
                       <h3 className="text-white font-bold text-sm uppercase tracking-wider" style={{ fontFamily: "var(--font-heading)" }}>
                         {t("haberler.key_facts")}
                       </h3>
                     </div>
-                    {item.keyFacts.map((fact, i) => (
+                    {tFacts.map((fact, i) => (
                       <div key={fact.label} style={{ padding: "0.875rem 1.5rem", borderTop: i === 0 ? "none" : "1px solid var(--gray-100)" }}>
                         <div style={{ color: "var(--gray-400)", fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.2rem" }}>{t(fact.label)}</div>
                         <div style={{ color: "var(--forest)", fontSize: "0.875rem", fontWeight: 600, wordBreak: "break-word", overflowWrap: "break-word" }}>{fact.value}</div>
@@ -138,7 +170,7 @@ export default function NewsDetailClient({ item, otherNews }: Props) {
                   </h3>
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.375rem" }}>
                     {[
-                      { href: "/proje", label: t("footer.link_about") },
+                      { href: "/proje",    label: t("footer.link_about") },
                       { href: "/guzergah", label: t("footer.link_route") },
                     ].map((link) => (
                       <Link key={link.href} href={link.href} className="hover:bg-white/10"
@@ -155,6 +187,7 @@ export default function NewsDetailClient({ item, otherNews }: Props) {
           </div>
         </div>
 
+        {/* ── Diğer haberler ── */}
         {otherNews.length > 0 && (
           <div style={{ background: "var(--gray-50)", paddingTop: "2rem", paddingBottom: "5rem" }}>
             <div className="container-aygm">
@@ -169,6 +202,9 @@ export default function NewsDetailClient({ item, otherNews }: Props) {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {otherNews.map((n) => {
                   const cc = catColors[n.category] ?? "var(--forest)";
+                  const nIdx = allNews.findIndex(a => a.slug === n.slug);
+                  const nTitle   = nIdx >= 0 ? (allOut[nIdx * 2]     ?? n.title)   : n.title;
+                  const nSummary = nIdx >= 0 ? (allOut[nIdx * 2 + 1] ?? n.summary) : n.summary;
                   return (
                     <Link key={n.slug} href={`/haberler/${n.slug}`} className="news-card block group" style={{ padding: "1.75rem" }}>
                       <div className="flex items-center gap-2" style={{ marginBottom: "1rem" }}>
@@ -176,10 +212,10 @@ export default function NewsDetailClient({ item, otherNews }: Props) {
                         <span className="text-xs" style={{ color: "var(--gray-400)" }}>{n.date}</span>
                       </div>
                       <h3 className="font-bold text-base leading-snug" style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", marginBottom: "0.75rem" }}>
-                        {n.title}
+                        {nTitle}
                       </h3>
                       <p className="text-sm leading-relaxed" style={{ color: "var(--gray-500)" }}>
-                        {n.summary.slice(0, 130)}…
+                        {nSummary.slice(0, 130)}…
                       </p>
                       <div className="flex items-center gap-1.5 text-xs font-semibold" style={{ color: "var(--forest)", marginTop: "1.25rem" }}>
                         {t("haberler.read_more")} <FaArrowRight style={{ fontSize: 9 }} />

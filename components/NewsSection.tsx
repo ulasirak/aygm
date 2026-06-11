@@ -2,25 +2,26 @@
 import Link from "next/link";
 import { FaArrowRight, FaCalendarAlt } from "react-icons/fa";
 import { useLang } from "@/context/LangContext";
+import { useTranslate } from "@/hooks/useTranslate";
+import { allNews } from "@/lib/news";
 
 const catColors: Record<string, string> = {
-  toren: "#007A75",
-  ihale: "#1D5C3A",
-  devir: "#3A8A50",
+  toren:    "#007A75",
+  ihale:    "#1D5C3A",
+  devir:    "#3A8A50",
   guzergah: "#00B8AE",
-  vizyon: "#2E7D32",
+  vizyon:   "#2E7D32",
   konyaray: "#00B8AE",
 };
 
-const news = [
-  { id: 1, category: "ihale",    date: "30 Mayıs 2025", title: "2. Etap İhalesi Tamamlandı",                               summary: "Uğursal Elektrik – ONH İnşaat Ortak Girişimi, 9,06 milyar TL bedelle ihaleyi kazandı.",                                                              href: "/haberler/ihale-tamamlandi" },
-  { id: 2, category: "toren",    date: "7 Temmuz 2025",  title: "Temel Atma Töreni Gerçekleştirildi",                       summary: "Sayın Vali İbrahim Akın başkanlığında temel atma töreniyle inşaat resmen başladı.",                                                                href: "/haberler/temel-atma-toreni" },
-  { id: 3, category: "devir",    date: "Nisan 2025",      title: "2. Etap Altyapı Yatırımları Genel Müdürlüğü'ne Devredildi", summary: "Konya Büyükşehir Belediyesi, 2. Etap tramvay hattı yapımını T.C. Ulaştırma ve Altyapı Bakanlığı'na resmi olarak devretti.",                       href: "/haberler/aygm-devir" },
-  { id: 4, category: "guzergah", date: "2025",             title: "Güzergah Detayları Açıklandı",                             summary: "Aslım Caddesi – TÜMOSAN Kavşağı – Aksaray Kavşağı güzergahı, Karatay ve Selçuklu ilçelerini birbirine bağlıyor.",                                href: "/haberler/guzergah-detaylari" },
-];
+// Ana sayfada gösterilecek 3 kart (featured hariç ilk 3)
+const homeItems = allNews.filter(n => !n.featured).slice(0, 3);
+// Paylaşımlı haberler-list önbelleği için tüm haberlerin düz metni
+const allTexts  = allNews.flatMap(n => [n.title, n.summary]);
 
 export default function NewsSection() {
   const { t } = useLang();
+  const { out } = useTranslate(allTexts, "haberler-list");
 
   return (
     <section className="section-padding" style={{ background: "linear-gradient(to bottom, rgba(0,158,152,0.09) 0%, var(--gray-50) 110px, var(--gray-50) 100%)" }}>
@@ -38,6 +39,7 @@ export default function NewsSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10">
+          {/* ── Öne çıkan kart (i18n'den) ── */}
           <div className="md:row-span-2">
             <div className="news-card h-full flex flex-col">
               <div className="h-48 md:h-72 flex items-center justify-center relative overflow-hidden" style={{ background: "linear-gradient(135deg, #041B19 0%, #007A75 100%)" }}>
@@ -72,10 +74,14 @@ export default function NewsSection() {
             </div>
           </div>
 
-          {news.slice(0, 3).map((item) => {
+          {/* ── 3 küçük kart (otomatik çeviri) ── */}
+          {homeItems.map((item) => {
             const catColor = catColors[item.category] ?? "var(--forest)";
+            const idx = allNews.findIndex(a => a.slug === item.slug);
+            const title   = (idx >= 0 ? out[idx * 2]     : undefined) ?? item.title;
+            const summary = (idx >= 0 ? out[idx * 2 + 1] : undefined) ?? item.summary;
             return (
-              <Link key={item.id} href={item.href} className="news-card block p-8 group">
+              <Link key={item.slug} href={`/haberler/${item.slug}`} className="news-card block p-8 group">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-xs font-bold px-2 py-0.5 rounded" style={{ background: `${catColor}15`, color: catColor }}>
                     {t(`news.cat_${item.category}`)}
@@ -86,10 +92,10 @@ export default function NewsSection() {
                   </span>
                 </div>
                 <h3 className="font-bold mb-2 text-base group-hover:text-opacity-80 transition-colors" style={{ fontFamily: "var(--font-heading)", color: "var(--forest)" }}>
-                  {item.title}
+                  {title}
                 </h3>
                 <p className="text-sm leading-relaxed" style={{ color: "var(--gray-600)" }}>
-                  {item.summary}
+                  {summary.slice(0, 120)}…
                 </p>
               </Link>
             );
