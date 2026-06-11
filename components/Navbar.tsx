@@ -550,7 +550,7 @@ export default function Navbar() {
 
       {/* ══════════ MOBİL MENÜ PANELİ ══════════ */}
       {mobileOpen && (
-        <div className="md:hidden" style={{ background: "rgba(3,30,28,0.98)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(0,184,174,0.12)", boxShadow: "0 16px 40px rgba(0,0,0,0.4)" }}>
+        <div className="md:hidden" style={{ background: "rgba(3,30,28,0.98)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(0,184,174,0.12)", boxShadow: "0 16px 40px rgba(0,0,0,0.4)", maxHeight: "calc(100svh - 58px)", overflowY: "auto", overscrollBehavior: "contain" }}>
           <div style={{ padding: "0.75rem 1rem 1.25rem" }}>
 
             <div style={{ marginBottom: "0.75rem" }}>
