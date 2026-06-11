@@ -514,4 +514,12 @@ export const ru: Dict = {
   "nav.si_faq_desc": "FAQ по проекту",
   "nav.si_contact_label": "Контакты",
   "nav.si_contact_desc": "Свяжитесь с нами",
+  "nav.si_view_label": "Размер отображения",
+  "nav.si_view_desc": "Настроить размер текста на мобильном",
+  "mobile_view.title": "Размер отображения",
+  "mobile_view.zoomed": "Увеличенный",
+  "mobile_view.normal": "Обычный",
+  "mobile_view.zoomed_hint": "Крупный текст и элементы",
+  "mobile_view.normal_hint": "Компактный вид",
+  "mobile_view.only_mobile": "Только для мобильных устройств",
 };

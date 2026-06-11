@@ -514,4 +514,12 @@ export const de: Dict = {
   "nav.si_faq_desc": "FAQ zum Projekt",
   "nav.si_contact_label": "Kontakt",
   "nav.si_contact_desc": "Kontaktieren Sie uns",
+  "nav.si_view_label": "Anzeigemodus",
+  "nav.si_view_desc": "Textgröße auf Mobilgeräten anpassen",
+  "mobile_view.title": "Anzeigemodus",
+  "mobile_view.zoomed": "Vergrößert",
+  "mobile_view.normal": "Normal",
+  "mobile_view.zoomed_hint": "Größere Texte und Elemente",
+  "mobile_view.normal_hint": "Kompakte Ansicht",
+  "mobile_view.only_mobile": "Nur auf Mobilgeräten wirksam",
 };

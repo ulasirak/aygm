@@ -2,8 +2,9 @@
 
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import { FaChevronRight, FaUniversalAccess, FaKeyboard, FaMobile, FaEye } from "react-icons/fa";
+import { FaChevronRight, FaUniversalAccess, FaKeyboard, FaMobile, FaEye, FaTextHeight } from "react-icons/fa";
 import { useLang } from "@/context/LangContext";
+import { useMobileView } from "@/context/MobileViewContext";
 
 const FEATURES = [
   { icon: FaKeyboard, titleKey: "erisebilirlik.f1_title", descKey: "erisebilirlik.f1_desc" },
@@ -14,6 +15,7 @@ const FEATURES = [
 
 export default function ErisebilirlikClient() {
   const { t } = useLang();
+  const { mobileView, setMobileView } = useMobileView();
   return (
     <>
       <main>
@@ -85,6 +87,43 @@ export default function ErisebilirlikClient() {
                 <Link href="/iletisim" className="btn-primary" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
                   {t("erisebilirlik.feedback_btn")}
                 </Link>
+              </div>
+
+              {/* ── Görsel Boyut (mobil) ── */}
+              <div id="gorsel-boyut" style={{ border: "1px solid var(--gray-100)", borderRadius: "1rem", overflow: "hidden" }}>
+                <div style={{ background: "var(--forest)", padding: "1rem 1.5rem", display: "flex", alignItems: "center", gap: "0.625rem" }}>
+                  <FaTextHeight style={{ color: "var(--gold)", fontSize: 14 }} />
+                  <h2 className="font-bold text-sm" style={{ color: "white", fontFamily: "var(--font-heading)", letterSpacing: "0.02em" }}>
+                    {t("mobile_view.title")}
+                  </h2>
+                </div>
+                <div style={{ padding: "1.25rem 1.5rem" }}>
+                  <p style={{ color: "var(--gray-600)", fontSize: "0.85rem", lineHeight: 1.7, marginBottom: "1.25rem" }}>
+                    {t("mobile_view.only_mobile")}
+                  </p>
+                  <div className="grid grid-cols-2 gap-3">
+                    {(["zoomed", "normal"] as const).map((v) => (
+                      <button
+                        key={v}
+                        onClick={() => setMobileView(v)}
+                        style={{
+                          padding: "1rem", borderRadius: "0.875rem", cursor: "pointer", textAlign: "left",
+                          border: mobileView === v ? "2px solid var(--teal)" : "1px solid var(--gray-100)",
+                          background: mobileView === v ? "rgba(0,184,174,0.06)" : "var(--gray-50)",
+                          transition: "all 0.18s",
+                        }}
+                      >
+                        <div style={{ fontWeight: 700, fontSize: "0.875rem", color: mobileView === v ? "var(--teal)" : "var(--forest)", fontFamily: "var(--font-heading)", marginBottom: "0.25rem" }}>
+                          {t(`mobile_view.${v}`)}
+                          {mobileView === v && <span style={{ marginLeft: "0.375rem", fontSize: "0.65rem", color: "var(--teal)" }}>✓</span>}
+                        </div>
+                        <div style={{ fontSize: "0.78rem", color: "var(--gray-500)", lineHeight: 1.5 }}>
+                          {t(`mobile_view.${v}_hint`)}
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               <div style={{ background: "var(--pale)", border: "1px solid var(--gray-100)", borderRadius: "1rem", padding: "1.5rem" }}>

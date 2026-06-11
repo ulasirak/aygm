@@ -514,4 +514,12 @@ export const tr: Dict = {
   "nav.si_faq_desc": "Proje hakkında SSS",
   "nav.si_contact_label": "İletişim",
   "nav.si_contact_desc": "Bize ulaşın",
+  "nav.si_view_label": "Görsel Boyut",
+  "nav.si_view_desc": "Mobil metin ve içerik boyutunu ayarla",
+  "mobile_view.title": "Görsel Boyut",
+  "mobile_view.zoomed": "Yakınlaştırılmış",
+  "mobile_view.normal": "Normal",
+  "mobile_view.zoomed_hint": "Büyük metin ve öğeler",
+  "mobile_view.normal_hint": "Kompakt görünüm",
+  "mobile_view.only_mobile": "Yalnızca mobil cihazlarda etkili",
 };

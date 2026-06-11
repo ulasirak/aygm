@@ -6,9 +6,10 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   FaBars, FaTimes, FaTrain, FaChevronDown, FaLeaf,
   FaInfoCircle, FaRoute, FaHome, FaNewspaper, FaQuestionCircle,
-  FaEnvelope, FaChevronRight, FaSearch, FaGlobe,
+  FaEnvelope, FaChevronRight, FaSearch, FaGlobe, FaTextHeight,
 } from "react-icons/fa";
 import { useLang } from "@/context/LangContext";
+import { useMobileView } from "@/context/MobileViewContext";
 import { LANG_NAMES } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 
@@ -66,6 +67,7 @@ const VLINE = <div style={{ width: 1, height: 24, background: "rgba(255,255,255,
 
 export default function Navbar() {
   const { lang, setLang, t } = useLang();
+  const { mobileView, setMobileView } = useMobileView();
 
   const [scrolled,      setScrolled]      = useState(false);
   const [visible,       setVisible]       = useState(true);
@@ -191,6 +193,15 @@ export default function Navbar() {
         "312","mesaj","görüş","şikayet","öneri",
         "contact","phone","email","address","form","reach","write",
         "kontakt","contacter","связаться","contacto","联系","اتصال",
+      ],
+    },
+    {
+      href: "/erisebilirlik#gorsel-boyut", label: t("nav.si_view_label"), icon: FaTextHeight, desc: t("nav.si_view_desc"),
+      keywords: [
+        "görsel boyut","yazı boyutu","metin boyutu","yakınlaştırılmış","kompakt","normal mod",
+        "mobil boyut","erişilebilirlik ayarı","font boyutu","büyük yazı","küçük yazı",
+        "view mode","text size","zoom","compact","font size","visual size","accessibility",
+        "schriftgröße","taille texte","размер текста","tamaño texto",
       ],
     },
   ], [t]);
@@ -621,6 +632,34 @@ export default function Navbar() {
             <MobileLink href="/sss"      label={t("nav.faq")}     Icon={FaQuestionCircle} active={pathname === "/sss"} />
 
             <div style={{ height: 1, background: "rgba(255,255,255,0.06)", margin: "0.75rem 0" }} />
+
+            {/* Görsel Boyut toggle — mobil */}
+            <div style={{ marginBottom: "0.5rem" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.625rem", padding: "0.5rem 0.875rem 0.4rem", color: "rgba(255,255,255,0.35)", fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                <FaTextHeight style={{ fontSize: 9 }} />
+                {t("mobile_view.title")}
+              </div>
+              <div style={{ display: "flex", gap: "0.375rem", padding: "0 0.875rem 0.75rem" }}>
+                {(["zoomed", "normal"] as const).map((v) => (
+                  <button
+                    key={v}
+                    onClick={() => setMobileView(v)}
+                    style={{
+                      flex: 1, padding: "0.5rem 0.25rem", borderRadius: "0.625rem",
+                      border: mobileView === v ? "1px solid rgba(0,184,174,0.5)" : "1px solid rgba(255,255,255,0.08)",
+                      background: mobileView === v ? "rgba(0,184,174,0.12)" : "rgba(255,255,255,0.03)",
+                      color: mobileView === v ? "#00B8AE" : "rgba(255,255,255,0.55)",
+                      fontSize: "0.78rem", fontWeight: mobileView === v ? 600 : 400,
+                      fontFamily: "var(--font-body)", cursor: "pointer",
+                      display: "flex", flexDirection: "column", alignItems: "center", gap: "0.15rem",
+                    }}
+                  >
+                    <span>{t(`mobile_view.${v}`)}</span>
+                    <span style={{ fontSize: "0.6rem", opacity: 0.7 }}>{t(`mobile_view.${v}_hint`)}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
 
             {/* Dil seçici — mobil */}
             <div style={{ marginBottom: "0.75rem" }}>

@@ -514,4 +514,12 @@ export const en: Dict = {
   "nav.si_faq_desc": "FAQ about the project",
   "nav.si_contact_label": "Contact",
   "nav.si_contact_desc": "Get in touch with us",
+  "nav.si_view_label": "Visual Size",
+  "nav.si_view_desc": "Adjust text and content size on mobile",
+  "mobile_view.title": "Visual Size",
+  "mobile_view.zoomed": "Zoomed",
+  "mobile_view.normal": "Normal",
+  "mobile_view.zoomed_hint": "Larger text and elements",
+  "mobile_view.normal_hint": "Compact view",
+  "mobile_view.only_mobile": "Only affects mobile devices",
 };

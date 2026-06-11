@@ -514,4 +514,12 @@ export const zh: Dict = {
   "nav.si_faq_desc": "项目相关问题",
   "nav.si_contact_label": "联系我们",
   "nav.si_contact_desc": "与我们取得联系",
+  "nav.si_view_label": "显示大小",
+  "nav.si_view_desc": "调整移动端文字大小",
+  "mobile_view.title": "显示大小",
+  "mobile_view.zoomed": "放大",
+  "mobile_view.normal": "正常",
+  "mobile_view.zoomed_hint": "更大的文字和元素",
+  "mobile_view.normal_hint": "紧凑视图",
+  "mobile_view.only_mobile": "仅适用于移动设备",
 };

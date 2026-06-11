@@ -124,6 +124,16 @@ img, video, svg, canvas {
   background-clip: text;
 }
 
+/* ── Mobil kompakt mod ── */
+@media (max-width: 767px) {
+  html.view-compact {
+    font-size: 14px;
+  }
+  html.view-compact .section-padding {
+    padding: 2.75rem 0 4.5rem;
+  }
+}
+
 /* ── Navbar ── */
 @media (max-width: 767px) {
   .navbar-aygm {

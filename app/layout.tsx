@@ -3,6 +3,7 @@ import { IBM_Plex_Serif, IBM_Plex_Sans } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import ScrollToTop from "@/components/ScrollToTop";
 import { LangProvider } from "@/context/LangContext";
+import { MobileViewProvider } from "@/context/MobileViewContext";
 import "./globals.css";
 
 const plexSerif = IBM_Plex_Serif({
@@ -60,14 +61,16 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="tr" className={`${plexSerif.variable} ${plexSans.variable}`}>
+    <html lang="tr" className={`${plexSerif.variable} ${plexSans.variable}`} suppressHydrationWarning>
       <body style={{ fontFamily: "var(--font-body)" }}>
         <LangProvider>
-          <Navbar />
-          {/* Spacer for fixed navbar: desktop only (mobile navbar is static) */}
-          <div className="h-0 md:h-[100px]" />
-          {children}
-          <ScrollToTop />
+          <MobileViewProvider>
+            <Navbar />
+            {/* Spacer for fixed navbar: desktop only (mobile navbar is static) */}
+            <div className="h-0 md:h-[100px]" />
+            {children}
+            <ScrollToTop />
+          </MobileViewProvider>
         </LangProvider>
       </body>
     </html>

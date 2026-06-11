@@ -514,4 +514,12 @@ export const ar: Dict = {
   "nav.si_faq_desc": "الأسئلة الشائعة عن المشروع",
   "nav.si_contact_label": "اتصل بنا",
   "nav.si_contact_desc": "تواصل معنا",
+  "nav.si_view_label": "حجم العرض",
+  "nav.si_view_desc": "ضبط حجم النص على الجوال",
+  "mobile_view.title": "حجم العرض",
+  "mobile_view.zoomed": "مكبّر",
+  "mobile_view.normal": "عادي",
+  "mobile_view.zoomed_hint": "نص وعناصر أكبر",
+  "mobile_view.normal_hint": "عرض مضغوط",
+  "mobile_view.only_mobile": "يؤثر فقط على الأجهزة المحمولة",
 };

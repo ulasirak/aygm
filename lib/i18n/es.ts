@@ -514,4 +514,12 @@ export const es: Dict = {
   "nav.si_faq_desc": "Preguntas sobre el proyecto",
   "nav.si_contact_label": "Contacto",
   "nav.si_contact_desc": "Póngase en contacto con nosotros",
+  "nav.si_view_label": "Tamaño Visual",
+  "nav.si_view_desc": "Ajustar tamaño de texto en móvil",
+  "mobile_view.title": "Tamaño Visual",
+  "mobile_view.zoomed": "Ampliado",
+  "mobile_view.normal": "Normal",
+  "mobile_view.zoomed_hint": "Texto y elementos más grandes",
+  "mobile_view.normal_hint": "Vista compacta",
+  "mobile_view.only_mobile": "Solo afecta dispositivos móviles",
 };
