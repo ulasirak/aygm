@@ -64,8 +64,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body style={{ fontFamily: "var(--font-body)" }}>
         <LangProvider>
           <Navbar />
-          {/* Spacer for fixed navbar: 58px mobile, 100px desktop */}
-          <div className="h-[58px] md:h-[100px]" />
+          {/* Spacer for fixed navbar: desktop only (mobile navbar is static) */}
+          <div className="h-0 md:h-[100px]" />
           {children}
           <ScrollToTop />
         </LangProvider>
