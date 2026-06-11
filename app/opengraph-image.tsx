@@ -3,7 +3,7 @@ import { readFileSync } from "fs";
 import { join } from "path";
 
 export const runtime = "nodejs";
-export const alt = "T.C. Ulaştırma ve Altyapı Bakanlığı — AYGM";
+export const alt = "T.C. Ulaştırma ve Altyapı Bakanlığı — Altyapı Yatırımları Genel Müdürlüğü";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -33,7 +33,7 @@ export default function OGImage() {
             objectFit: "contain",
             filter: "brightness(0) invert(1)",
           }}
-          alt="AYGM Logo"
+          alt="Altyapı Yatırımları Genel Müdürlüğü"
         />
       </div>
     ),

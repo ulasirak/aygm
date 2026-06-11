@@ -1,246 +1,231 @@
 "use client";
 
-import { FaMapMarkerAlt, FaArrowRight, FaFutbol, FaIndustry, FaExchangeAlt } from "react-icons/fa";
+import { useMemo } from "react";
+import { FaMapMarkerAlt, FaArrowRight, FaFutbol, FaIndustry, FaExchangeAlt, FaHospital, FaTrain, FaBus, FaQuestion } from "react-icons/fa";
 import Link from "next/link";
+import { useLang } from "@/context/LangContext";
 
-const stations = [
-  {
-    id: 1,
-    name: "Yeni Sanayi",
-    icon: FaIndustry,
-    type: "transfer",
-    desc: "1. Etap bağlantı noktası — Aslım Cad.",
-    transferLabel: "1. Etap Bağlantısı",
-  },
-  {
-    id: 2,
-    name: "ASLİDAŞ",
-    icon: FaMapMarkerAlt,
-    type: "normal",
-    desc: "OSB çalışanlarına hizmet",
-  },
-  {
-    id: 3,
-    name: "TÜYAP",
-    icon: FaMapMarkerAlt,
-    type: "normal",
-    desc: "Fuar ve Kongre Merkezi",
-  },
-  {
-    id: 4,
-    name: "Banliyö",
-    icon: FaExchangeAlt,
-    type: "transfer",
-    desc: "Aksaray Köprülü Kavşağı",
-    transferLabel: "KONYARAY Bağlantısı",
-  },
-  {
-    id: 5,
-    name: "Çimento",
-    icon: FaMapMarkerAlt,
-    type: "normal",
-    desc: "Karatay — Sadık Ahmet Cad.",
-  },
-  {
-    id: 6,
-    name: "Novaland",
-    icon: FaMapMarkerAlt,
-    type: "normal",
-    desc: "Konut ve ticaret bölgesi",
-  },
-  {
-    id: 7,
-    name: "Otogar",
-    icon: FaMapMarkerAlt,
-    type: "highlight",
-    desc: "Şehirlerarası terminal — Dr. H. Ürün Cad.",
-    highlightColor: "var(--forest)",
-  },
-  {
-    id: 8,
-    name: "Ecdad Bahçesi",
-    icon: FaMapMarkerAlt,
-    type: "normal",
-    desc: "Kültür ve park alanı",
-  },
-  {
-    id: 9,
-    name: "Real",
-    icon: FaMapMarkerAlt,
-    type: "normal",
-    desc: "Alışveriş ve ticaret bölgesi",
-  },
-  {
-    id: 10,
-    name: "Konya Stadyumu",
-    icon: FaFutbol,
-    type: "highlight",
-    desc: "Son istasyon — Barış Cad. Hattı bağlantısı",
-    highlightColor: "var(--red)",
-  },
-];
+type StationType = "normal" | "transfer" | "junction" | "endpoint" | "pending";
+
+interface Station {
+  id: number; name: string; icon: React.ElementType;
+  type: StationType; desc: string; transferLabel?: string;
+}
+
+const typeColor: Record<StationType, string> = {
+  endpoint: "var(--forest)",
+  junction: "#00B8AE",
+  transfer: "var(--gold)",
+  normal:   "#007A75",
+  pending:  "var(--gray-300)",
+};
+const typeBg: Record<StationType, string> = {
+  endpoint: "rgba(29,92,58,0.12)",
+  junction: "rgba(0,184,174,0.12)",
+  transfer: "rgba(201,168,76,0.12)",
+  normal:   "transparent",
+  pending:  "rgba(0,0,0,0.02)",
+};
+const typeBorder: Record<StationType, string> = {
+  endpoint: "1px solid rgba(29,92,58,0.2)",
+  junction: "1px solid rgba(0,184,174,0.25)",
+  transfer: "1px solid rgba(201,168,76,0.2)",
+  normal:   "1px solid transparent",
+  pending:  "1px dashed var(--gray-200)",
+};
+
+function StopRow({ station, globalNo, pendingLabel }: { station: Station; globalNo: number; pendingLabel: string }) {
+  const Icon = station.icon;
+  const color    = typeColor[station.type];
+  const isPending = station.type === "pending";
+  const dotSize  = station.type === "endpoint" || station.type === "junction" ? 14 : station.type === "transfer" ? 12 : 9;
+  return (
+    <div style={{ position: "relative", display: "flex", alignItems: "flex-start", marginBottom: "0.625rem" }}>
+      <div style={{ flexShrink: 0, width: "2.5rem", display: "flex", justifyContent: "center", paddingTop: "0.75rem", position: "relative", zIndex: 10 }}>
+        <div
+          className={isPending ? "" : "transition-transform group-hover:scale-125"}
+          style={{
+            width: dotSize, height: dotSize, borderRadius: "50%",
+            background: isPending ? "var(--gray-100)" : station.type === "normal" ? "white" : color,
+            border: isPending ? "2px dashed var(--gray-300)" : `2px solid ${color}`,
+            boxShadow: station.type === "endpoint" || station.type === "junction" ? `0 0 0 3px ${color}33` : "none",
+          }}
+        />
+      </div>
+      <div style={{ flexShrink: 0, width: "1.25rem" }} />
+      <div className="flex-1 rounded-xl" style={{ background: typeBg[station.type], border: typeBorder[station.type], padding: "0.625rem 0.75rem", minWidth: 0 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <Icon style={{ flexShrink: 0, color, fontSize: 12, opacity: isPending ? 0.4 : 1 }} />
+          <span style={{ flex: 1, minWidth: 0, fontSize: "0.875rem", fontWeight: 600, color: isPending ? "var(--gray-300)" : color, lineHeight: 1.3, fontStyle: isPending ? "italic" : "normal" }}>
+            {isPending ? pendingLabel : station.name}
+          </span>
+          <span style={{ flexShrink: 0, fontSize: "0.75rem", color: "var(--gray-400)", fontVariantNumeric: "tabular-nums" }}>
+            {globalNo}
+          </span>
+        </div>
+        <p style={{ fontSize: "0.75rem", marginTop: "0.125rem", marginLeft: "1.25rem", color: isPending ? "var(--gray-300)" : "var(--gray-400)" }}>
+          {station.desc}
+        </p>
+        {station.transferLabel && (
+          <div style={{ fontSize: "0.75rem", marginTop: "0.125rem", marginLeft: "1.25rem", fontWeight: 500, color: typeColor[station.type] }}>
+            ⇄ {station.transferLabel}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function RouteSection() {
+  const { t } = useLang();
+  const pendingLabel = t("route.pending_name");
+  const pendingDesc  = t("route.pending_desc");
+
+  const phase2 = useMemo<Station[]>(() => [
+    {
+      id: 1, name: "Konya Stadyumu", icon: FaFutbol, type: "endpoint",
+      desc: t("guzergah.sub_terminal") + " · Selçuklu",
+      transferLabel: t("route.transfer_baris"),
+    },
+    { id: 2, name: "M1 Real",       icon: FaMapMarkerAlt, type: "normal",   desc: t("guzergah.sub_shopping")    + " · Selçuklu" },
+    { id: 3, name: "Ecdad Bahçesi", icon: FaMapMarkerAlt, type: "normal",   desc: t("guzergah.sub_culture")     + " · Selçuklu" },
+    {
+      id: 4, name: "Otogar",        icon: FaBus,          type: "transfer",
+      desc: t("route.otogar_desc"),
+      transferLabel: t("route.transfer_intercity"),
+    },
+    { id: 5, name: "Novaland",      icon: FaMapMarkerAlt, type: "normal",   desc: t("guzergah.sub_residential") + " · Karatay" },
+    { id: 6, name: "Çimento",       icon: FaMapMarkerAlt, type: "normal",   desc: t("route.cimento_desc") },
+    {
+      id: 7, name: "Banliyö",       icon: FaExchangeAlt,  type: "transfer",
+      desc: t("route.banliyo_desc"),
+      transferLabel: t("route.transfer_konyaray"),
+    },
+    { id: 8,  name: "TÜYAP",        icon: FaMapMarkerAlt, type: "normal",   desc: t("guzergah.sub_fair")        + " · Karatay" },
+    { id: 9,  name: "ASLİDAŞ",      icon: FaMapMarkerAlt, type: "normal",   desc: t("guzergah.sub_osb")         + " · Karatay" },
+    {
+      id: 10, name: "Yeni Sanayi",  icon: FaIndustry,     type: "junction",
+      desc: t("guzergah.sub_junction") + " · Karatay",
+      transferLabel: t("route.transfer_phase1"),
+    },
+  ], [t]);
+
+  const phase1 = useMemo<Station[]>(() => [
+    { id: 11, name: "Aslım",    icon: FaMapMarkerAlt, type: "normal",  desc: t("route.aslim_desc") },
+    { id: 12, name: "KOBİSAN", icon: FaMapMarkerAlt, type: "normal",  desc: t("guzergah.sub_industrial") + " · Karatay" },
+    { id: 13, name: "Atiker",  icon: FaMapMarkerAlt, type: "normal",  desc: t("guzergah.sub_local")      + " · Karatay" },
+    { id: 14, name: "KOSGEB",  icon: FaMapMarkerAlt, type: "normal",  desc: t("guzergah.sub_support")    + " · Karatay" },
+    { id: 15, name: "—",       icon: FaQuestion,     type: "pending", desc: pendingDesc },
+    { id: 16, name: "—",       icon: FaQuestion,     type: "pending", desc: pendingDesc },
+    { id: 17, name: "—",       icon: FaQuestion,     type: "pending", desc: pendingDesc },
+    { id: 18, name: "—",       icon: FaQuestion,     type: "pending", desc: pendingDesc },
+    { id: 19, name: "—",       icon: FaQuestion,     type: "pending", desc: pendingDesc },
+    { id: 20, name: "Karatay Hayvanat Bahçesi", icon: FaMapMarkerAlt, type: "normal", desc: t("guzergah.sub_recreation") + " · Karatay" },
+    {
+      id: 21, name: "Şehir Hastanesi", icon: FaHospital, type: "endpoint",
+      desc: t("route.hastane_desc"),
+    },
+  ], [t, pendingDesc]);
+
+  const integrationItems = useMemo(() => [
+    { color: "var(--forest)", label: t("guzergah.int_1_line") },
+    { color: "var(--forest)", label: t("guzergah.int_2_line") },
+    { color: "#00B8AE",       label: t("guzergah.int_3_line") },
+    { color: "var(--gold)",   label: t("guzergah.int_4_line") },
+    { color: "#3A8A50",       label: t("guzergah.int_5_line") },
+  ], [t]);
+
   return (
     <section className="section-padding" style={{ background: "white" }}>
       <div className="container-aygm">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center" style={{ marginTop: "-1rem" }}>
-          {/* Left: Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start" style={{ marginTop: "-1rem" }}>
+
+          {/* ── Sol: Açıklama ── */}
           <div>
             <h2
-              className="text-3xl md:text-4xl font-black mb-8"
-              style={{ fontFamily: "var(--font-heading)", color: "var(--forest)" }}
+              className="text-3xl md:text-4xl font-black"
+              style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", marginBottom: "1.5rem" }}
             >
-              Sanayi&apos;den Stadyum&apos;a{" "}
-              <span className="gradient-text-green">10 Kilometre</span>
+              {t("route.heading1")}{" "}
+              <span className="gradient-text-teal">{t("route.heading2")}</span>
             </h2>
-            <p className="text-base leading-relaxed mb-6 md:mb-14" style={{ color: "var(--gray-600)" }}>
-              Yeni Sanayi istasyonundan başlayarak Şehir Hastanesi&apos;ni geçip Konya
-              Stadyumu&apos;nda son bulan hat; sanayi bölgeleri, sağlık tesisleri ve spor
-              komplekslerini şehir merkeziyle buluşturuyor.
+            <p className="text-base leading-relaxed" style={{ color: "var(--gray-600)", marginBottom: "1.5rem" }}>
+              {t("route.phase_desc")}
             </p>
 
-            {/* Integration info */}
-            <div
-              className="rounded-xl p-5 mb-10"
-              style={{ background: "var(--gray-50)", border: "1px solid var(--gray-200)" }}
-            >
-              <div className="flex items-center gap-2 mb-3">
-                <FaExchangeAlt style={{ color: "var(--forest)", fontSize: 14 }} />
-                <span className="text-sm font-bold" style={{ color: "var(--forest)" }}>
-                  Entegrasyon Noktaları
-                </span>
+            {/* Faz göstergesi */}
+            <div className="rounded-xl p-4" style={{ background: "var(--gray-50)", border: "1px solid var(--gray-100)", marginBottom: "1.5rem" }}>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: "var(--forest)" }} />
+                <span className="text-sm font-semibold" style={{ color: "var(--forest)" }}>{t("route.phase1_label")}</span>
               </div>
-              <div className="space-y-2 text-sm" style={{ color: "var(--gray-600)" }}>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: "var(--forest)" }} />
-                  Mevcut Konya Tramvay Ağı (1. Etap)
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: "var(--green)" }} />
-                  KONYARAY Banliyö Hattı
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: "var(--gold)" }} />
-                  Barış Caddesi Hatları
-                </div>
+              <div className="flex items-center gap-3">
+                <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: "#00B8AE" }} />
+                <span className="text-sm font-semibold" style={{ color: "#00B8AE" }}>{t("route.phase2_label")}</span>
               </div>
             </div>
 
-            <Link href="/guzergah" className="btn-outline-navy">
-              Tüm Güzergahı Gör
+            {/* Entegrasyon noktaları */}
+            <div className="rounded-xl p-5" style={{ background: "rgba(0,122,117,0.04)", border: "1px solid rgba(0,122,117,0.15)", marginBottom: "2.5rem" }}>
+              <div className="flex items-center gap-2" style={{ marginBottom: "0.875rem" }}>
+                <FaExchangeAlt style={{ color: "#007A75", fontSize: 14 }} />
+                <span className="text-sm font-bold" style={{ color: "#007A75" }}>{t("route.integration_title")}</span>
+              </div>
+              <div className="space-y-2 text-sm" style={{ color: "var(--gray-600)" }}>
+                {integrationItems.map((item) => (
+                  <div key={item.label} className="flex items-start gap-2">
+                    <div className="w-2 h-2 rounded-full flex-shrink-0 mt-1.5" style={{ background: item.color }} />
+                    <span>{item.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <Link
+              href="/guzergah"
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "0.5rem",
+                background: "transparent", color: "#007A75",
+                padding: "0.75rem 1.75rem", borderRadius: "0.5rem",
+                fontWeight: 600, fontSize: "0.875rem", textDecoration: "none",
+                border: "1.5px solid #007A75", transition: "all 0.2s",
+              }}
+            >
+              {t("route.see_all")}
               <FaArrowRight style={{ fontSize: 12 }} />
             </Link>
           </div>
 
-          {/* Right: Station list */}
-          <div>
+          {/* ── Sağ: 21 Durak ── */}
+          <div style={{ maxHeight: "clamp(450px, 70vh, 640px)", overflowY: "auto", paddingRight: "0.5rem" }}>
             <div className="relative">
-              {/* Vertical line — centered in the 40px dot column */}
               <div
                 className="absolute w-0.5"
-                style={{
-                  left: "19px",
-                  top: "22px",
-                  bottom: "22px",
-                  background: "linear-gradient(to bottom, var(--forest), var(--green))",
-                }}
+                style={{ left: "19px", top: "18px", bottom: "18px", background: "linear-gradient(to bottom, #00B8AE 40%, var(--gold) 55%, var(--forest))" }}
               />
 
-              {stations.map((station, i) => {
-                const Icon = station.icon;
-                const isHighlight = station.type === "highlight";
-                const isTransfer = station.type === "transfer";
-                const dotSize = isHighlight ? 16 : isTransfer ? 14 : 10;
+              <div style={{ marginLeft: "3rem", marginBottom: "0.75rem" }}>
+                <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: "rgba(0,184,174,0.1)", color: "#00B8AE", letterSpacing: "0.06em" }}>
+                  {t("route.phase2_header")} — 10
+                </span>
+              </div>
 
-                return (
-                  <div key={station.id} className="relative flex items-start mb-7 group">
-                    {/* Dot column — fixed 40px wide, dot centered at x=20 */}
-                    <div className="flex-shrink-0 w-10 flex justify-center pt-3.5 relative z-10">
-                      <div
-                        className="transition-transform group-hover:scale-125"
-                        style={{
-                          width: dotSize,
-                          height: dotSize,
-                          borderRadius: "50%",
-                          background: isHighlight
-                            ? station.highlightColor
-                            : isTransfer
-                            ? "var(--gold)"
-                            : "white",
-                          border: `2px solid ${isHighlight ? (station.highlightColor ?? "var(--red)") : isTransfer ? "var(--gold)" : "var(--forest)"}`,
-                          boxShadow: isHighlight ? `0 0 0 3px ${station.highlightColor}33` : "none",
-                        }}
-                      />
-                    </div>
+              {phase2.map((s, i) => (
+                <StopRow key={s.id} station={s} globalNo={i + 1} pendingLabel={pendingLabel} />
+              ))}
 
-                    {/* Gap between dot column and content */}
-                    <div className="flex-shrink-0 w-7" />
+              <div style={{ marginLeft: "3rem", marginTop: "0.75rem", marginBottom: "0.75rem" }}>
+                <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: "rgba(29,92,58,0.1)", color: "var(--forest)", letterSpacing: "0.06em" }}>
+                  {t("route.phase1_header")} — 11
+                </span>
+              </div>
 
-                    {/* Content */}
-                    <div
-                      className="flex-1 rounded-xl p-5 transition-all cursor-default"
-                      style={{
-                        background: isHighlight
-                          ? `${station.highlightColor}08`
-                          : isTransfer
-                          ? "rgba(201,168,76,0.06)"
-                          : "transparent",
-                        border: isHighlight
-                          ? `1px solid ${station.highlightColor}20`
-                          : isTransfer
-                          ? "1px solid rgba(201,168,76,0.2)"
-                          : "1px solid transparent",
-                      }}
-                    >
-                      <div className="flex items-center gap-2">
-                        <Icon
-                          className="flex-shrink-0"
-                          style={{
-                            color: isHighlight ? station.highlightColor : isTransfer ? "var(--gold)" : "var(--gray-400)",
-                            fontSize: 13,
-                          }}
-                        />
-                        <span
-                          className="text-sm font-semibold flex-1 min-w-0 truncate"
-                          style={{ color: isHighlight ? station.highlightColor : "var(--forest)" }}
-                        >
-                          {station.name}
-                        </span>
-                        <div className="flex items-center gap-1.5 flex-shrink-0">
-                          {isTransfer && (
-                            <span
-                              className="text-xs px-2 py-0.5 rounded-full font-medium"
-                              style={{ background: "rgba(201,168,76,0.15)", color: "var(--gold)" }}
-                            >
-                              Aktarma
-                            </span>
-                          )}
-                          <span
-                            className="text-xs tabular-nums w-5 text-right"
-                            style={{ color: "var(--gray-400)" }}
-                          >
-                            {i + 1}
-                          </span>
-                        </div>
-                      </div>
-                      <p className="text-xs mt-1 ml-5" style={{ color: "var(--gray-400)" }}>
-                        {station.desc}
-                      </p>
-                      {station.transferLabel && (
-                        <div
-                          className="text-xs mt-1 ml-5 font-medium"
-                          style={{ color: "var(--gold)" }}
-                        >
-                          {station.transferLabel}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
+              {phase1.map((s, i) => (
+                <StopRow key={s.id} station={s} globalNo={phase2.length + i + 1} pendingLabel={pendingLabel} />
+              ))}
             </div>
           </div>
+
         </div>
       </div>
     </section>

@@ -1,90 +1,62 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight, FaPlay } from "react-icons/fa";
-
-const counters = [
-  { value: 10, suffix: " km", label: "Yeni Hat Uzunluğu" },
-  { value: 10, suffix: "", label: "Yeni İstasyon" },
-  { value: 60000, suffix: "", label: "Günlük Yolcu", format: true },
-  { value: 2027, suffix: "", label: "Hizmet Yılı" },
-];
-
-function AnimatedCounter({ value, suffix, format }: { value: number; suffix: string; format?: boolean }) {
-  const ref = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        observer.disconnect();
-
-        const duration = 1800;
-        let startTime = 0;
-        const step = (timestamp: number) => {
-          if (!startTime) startTime = timestamp;
-          const progress = Math.min((timestamp - startTime) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          const current = Math.floor(eased * value);
-          el.textContent = (format ? current.toLocaleString("tr-TR") : current) + suffix;
-          if (progress < 1) requestAnimationFrame(step);
-          else el.textContent = (format ? value.toLocaleString("tr-TR") : value) + suffix;
-        };
-        requestAnimationFrame(step);
-      },
-      { threshold: 0.5 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [value, suffix, format]);
-
-  return <span ref={ref}>0{suffix}</span>;
-}
+import { useLang } from "@/context/LangContext";
 
 export default function Hero() {
+  const { t } = useLang();
   return (
     <section
-      className="relative min-h-[92vh] flex items-center overflow-hidden hero-pattern"
-      style={{ background: "linear-gradient(155deg, var(--forest-deep) 0%, var(--forest) 55%, var(--green-mid) 100%)" }}
+      className="relative min-h-[92vh] flex items-center overflow-hidden"
+      style={{
+        background: "linear-gradient(155deg, #041B19 0%, #063330 30%, #0A4E4A 60%, #007A75 85%, #00B8AE 100%)",
+      }}
     >
-      {/* Dekoratif öğeler */}
+      {/* Aurora katmanları */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
-        {/* Tramvay ray çizgileri */}
-        <div
-          className="absolute bottom-0 left-0 right-0 h-1"
-          style={{ background: "linear-gradient(90deg, transparent, var(--gold), transparent)", opacity: 0.3 }}
-        />
-        <div
-          className="absolute bottom-6 left-0 right-0 h-px"
-          style={{ background: "linear-gradient(90deg, transparent, var(--gold), transparent)", opacity: 0.15 }}
-        />
+        {/* Büyük turkuaz aydınlık — sağ üst */}
+        <div style={{
+          position: "absolute", top: "-15%", right: "-8%",
+          width: "65vw", height: "65vw",
+          background: "radial-gradient(circle, rgba(0,184,174,0.14) 0%, rgba(0,122,117,0.09) 40%, transparent 70%)",
+          borderRadius: "50%",
+        }} />
+        {/* Turkuaz ışık — sol alt */}
+        <div style={{
+          position: "absolute", bottom: "-15%", left: "-5%",
+          width: "50vw", height: "50vw",
+          background: "radial-gradient(circle, rgba(0,184,174,0.12) 0%, transparent 65%)",
+          borderRadius: "50%",
+        }} />
+        {/* Orta derin teal leke */}
+        <div style={{
+          position: "absolute", top: "30%", left: "25%",
+          width: "35vw", height: "35vw",
+          background: "radial-gradient(circle, rgba(0,184,174,0.06) 0%, transparent 70%)",
+          borderRadius: "50%",
+        }} />
 
-        {/* Köşe dekorasyon */}
-        <div
-          className="absolute top-0 right-0 w-96 h-96 rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%)",
-            transform: "translate(30%, -30%)",
-          }}
-        />
-        <div
-          className="absolute bottom-0 left-0 w-80 h-80 rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(26,107,58,0.08) 0%, transparent 70%)",
-            transform: "translate(-30%, 30%)",
-          }}
-        />
+        {/* Tramvay ray çizgileri — gold */}
+        <div style={{
+          position: "absolute", bottom: 0, left: 0, right: 0, height: "2px",
+          background: "linear-gradient(90deg, transparent, rgba(201,168,76,0.35), transparent)",
+        }} />
+        <div style={{
+          position: "absolute", bottom: 8, left: 0, right: 0, height: "1px",
+          background: "linear-gradient(90deg, transparent, rgba(201,168,76,0.15), transparent)",
+        }} />
 
-        {/* Ulaştırma Bakanlığı logosu — üst sol filigran */}
-        <div
-          className="absolute pointer-events-none"
-          style={{ top: "3%", left: "1%", zIndex: 1 }}
-        >
+        {/* Noktalı doku */}
+        <div style={{
+          position: "absolute", inset: 0,
+          backgroundImage: "radial-gradient(circle, rgba(0,184,174,0.04) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+        }} />
+
+        {/* AYGM logo filigran */}
+        <div className="absolute pointer-events-none" style={{ top: "3%", left: "1%", zIndex: 1 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/aygm-logo.svg"
@@ -93,26 +65,40 @@ export default function Hero() {
             style={{
               width: 860,
               maxWidth: "90vw",
-              opacity: 0.08,
-              filter: "drop-shadow(0 0 60px rgba(255,255,255,0.5))",
+              opacity: 0.055,
+              filter: "drop-shadow(0 0 80px rgba(0,184,174,0.6))",
             }}
           />
         </div>
 
-        {/* Tramvay görseli — sağ alt köşe, sola doğru geliyor */}
+        {/* Tramvay görseli */}
         <div
           className="absolute pointer-events-none"
-          style={{ bottom: "0%", right: "-3%", zIndex: 1 }}
+          style={{
+            bottom: "0%",
+            right: "-2%",
+            zIndex: 1,
+            width: 820,
+            maxWidth: "84vw",
+          }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/tram.svg"
+          <Image
+            src="/tram-illustration.webp"
             alt=""
             aria-hidden
+            width={1400}
+            height={764}
+            unoptimized
+            priority
             style={{
-              width: 640,
-              opacity: 0.22,
-              filter: "drop-shadow(0 0 30px rgba(168,213,186,0.3))",
+              width: "100%",
+              height: "auto",
+              opacity: 0.42,
+              filter: "drop-shadow(0 0 30px rgba(0,184,174,0.4))",
+              maskImage: "linear-gradient(to bottom, transparent 0%, black 40%), linear-gradient(to left, black 35%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 40%), linear-gradient(to left, black 35%, transparent 100%)",
+              maskComposite: "intersect",
+              WebkitMaskComposite: "source-in",
             }}
           />
         </div>
@@ -126,20 +112,55 @@ export default function Hero() {
             className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-8"
             style={{ fontFamily: "var(--font-heading)", color: "white", letterSpacing: "-0.01em" }}
           >
-            Konya&apos;nın{" "}
-            <span className="gradient-text-green">Geleceği</span>
-            <span className="block" style={{ marginTop: "-0.15em" }}>Raylarda Şekilleniyor</span>
+            {t("hero.t1")}{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg, #00B8AE 0%, #5EEBE5 40%, #A5F5F2 65%, #00B8AE 100%)",
+                backgroundSize: "200% auto",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                animation: "shimmer 4s linear infinite",
+                display: "inline-block",
+                filter: "drop-shadow(0 0 20px rgba(0,184,174,0.4))",
+              }}
+            >
+              {t("hero.t2")}
+            </span>
+            <span className="block" style={{ marginTop: "-0.15em" }}>
+              {t("hero.t3")}
+            </span>
           </h1>
 
           {/* CTA Butonlar */}
           <div className="flex flex-col sm:flex-row items-start gap-4" style={{ marginTop: "5rem" }}>
-            <Link href="/guzergah" className="btn-primary">
-              Güzergahı İncele
+            <Link
+              href="/guzergah"
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "0.6rem",
+                background: "linear-gradient(135deg, #007A75, #00B8AE)",
+                color: "white", padding: "1rem 2rem", borderRadius: "0.625rem",
+                fontWeight: 700, fontSize: "0.9rem", letterSpacing: "0.02em",
+                textDecoration: "none", boxShadow: "0 8px 32px rgba(0,122,117,0.45)",
+                border: "1px solid rgba(0,184,174,0.3)",
+              }}
+            >
+              {t("hero.cta_route")}
               <FaArrowRight style={{ fontSize: 13 }} />
             </Link>
-            <Link href="/proje" className="btn-secondary">
-              <FaPlay style={{ fontSize: 11 }} />
-              Proje Hakkında
+            <Link
+              href="/proje"
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "0.6rem",
+                background: "transparent", color: "rgba(255,255,255,0.85)",
+                padding: "1rem 2rem", borderRadius: "0.625rem",
+                fontWeight: 600, fontSize: "0.9rem",
+                textDecoration: "none",
+                border: "1.5px solid rgba(0,184,174,0.3)",
+              }}
+            >
+              <FaPlay style={{ fontSize: 11, color: "#00B8AE" }} />
+              {t("hero.cta_project")}
             </Link>
           </div>
 

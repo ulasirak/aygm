@@ -413,7 +413,8 @@ export default function BillboardPage() {
         {/* Sol: Logo + bakanlık + QR */}
         <div style={{ display: "flex", alignItems: "center", gap: 36 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/aygm-amblem.svg" alt="AYGM"
+          <img src="/aygm-amblem.svg" alt="Altyapı Yatırımları Genel Müdürlüğü"
+            width={100} height={100}
             style={{ height: 100, filter: "brightness(0) invert(1)", opacity: 0.9 }} />
           <div style={{ width: 2, height: 80, background: "rgba(255,255,255,0.2)" }} />
           <div>

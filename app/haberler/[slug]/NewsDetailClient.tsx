@@ -1,0 +1,198 @@
+"use client";
+
+import Footer from "@/components/Footer";
+import Link from "next/link";
+import {
+  FaArrowLeft, FaCalendarAlt, FaExternalLinkAlt,
+  FaUsers, FaChevronRight, FaArrowRight,
+} from "react-icons/fa";
+import type { NewsItem } from "@/lib/news";
+import { useLang } from "@/context/LangContext";
+
+const catColors: Record<string, string> = {
+  toren:    "#007A75",
+  ihale:    "#1D5C3A",
+  devir:    "#3A8A50",
+  guzergah: "#00B8AE",
+  vizyon:   "#2E7D32",
+  konyaray: "#00B8AE",
+};
+
+interface Props {
+  item: NewsItem;
+  otherNews: NewsItem[];
+}
+
+export default function NewsDetailClient({ item, otherNews }: Props) {
+  const { t } = useLang();
+  const catColor = catColors[item.category] ?? "var(--forest)";
+
+  return (
+    <>
+      <main>
+        <div
+          className="relative overflow-hidden"
+          style={{ background: "linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 55%, var(--forest) 100%)", paddingTop: "6rem", paddingBottom: "6rem" }}
+        >
+          <div className="absolute inset-0 pointer-events-none" aria-hidden style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+          <div className="container-aygm relative z-10">
+            <div className="flex items-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.5)", marginBottom: "2.25rem" }}>
+              <Link href="/" className="hover:text-white transition-colors">{t("common.home")}</Link>
+              <FaChevronRight style={{ fontSize: 9 }} />
+              <Link href="/haberler" className="hover:text-white transition-colors">{t("haberler.heading")}</Link>
+              <FaChevronRight style={{ fontSize: 9 }} />
+              <span style={{ color: "var(--gold)" }}>{t(`news.cat_${item.category}`)}</span>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3" style={{ marginBottom: "1.5rem" }}>
+              {item.featured && <span className="badge-red">{t("news.featured")}</span>}
+              <span className="text-xs font-bold px-3 py-1 rounded-full" style={{ background: `${catColor}20`, color: catColor, border: `1px solid ${catColor}30` }}>
+                {t(`news.cat_${item.category}`)}
+              </span>
+              <span className="flex items-center gap-1.5 text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>
+                <FaCalendarAlt style={{ fontSize: 10 }} />
+                {item.date}
+              </span>
+            </div>
+
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white max-w-3xl leading-tight" style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.01em", marginBottom: "1.5rem" }}>
+              {item.title}
+            </h1>
+            <p className="text-base md:text-lg max-w-2xl leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
+              {item.summary}
+            </p>
+          </div>
+        </div>
+
+        <div className="section-padding" style={{ background: "white" }}>
+          <div className="container-aygm">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+
+              <article className="lg:col-span-3">
+                <Link href="/haberler" className="inline-flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all" style={{ marginBottom: "3.5rem", color: "var(--forest)" }}>
+                  <FaArrowLeft style={{ fontSize: 12 }} />
+                  {t("haberler.back")}
+                </Link>
+
+                <div className="prose-aygm space-y-6 mb-10">
+                  {item.body.map((para, i) => (
+                    <p key={i} className="text-base leading-[1.85]" style={{ color: i === 0 ? "var(--forest)" : "var(--gray-600)" }}>
+                      {i === 0 ? <strong style={{ fontWeight: 600 }}>{para}</strong> : para}
+                    </p>
+                  ))}
+                </div>
+
+                <div className="h-px" style={{ background: "var(--gray-100)", marginTop: "2.5rem", marginBottom: "6rem" }} />
+
+                <div className="rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4" style={{ background: "var(--gray-50)", border: "1px solid var(--gray-100)" }}>
+                  <div>
+                    <div className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: "var(--gray-400)" }}>{t("haberler.source")}</div>
+                    <div className="font-semibold text-sm" style={{ color: "var(--forest)" }}>{item.source}</div>
+                  </div>
+                  {item.sourceUrl && (
+                    <Link href={item.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-lg transition-colors" style={{ background: "var(--forest)", color: "white" }}>
+                      {t("haberler.source_link")}
+                      <FaExternalLinkAlt style={{ fontSize: 10 }} />
+                    </Link>
+                  )}
+                </div>
+              </article>
+
+              <aside style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+                {item.keyFacts && item.keyFacts.length > 0 && (
+                  <div style={{ border: "1px solid var(--gray-100)", borderRadius: "1rem", overflow: "hidden", width: "100%" }}>
+                    <div style={{ background: "var(--forest)", padding: "1rem 1.5rem" }}>
+                      <h3 className="text-white font-bold text-sm uppercase tracking-wider" style={{ fontFamily: "var(--font-heading)" }}>
+                        {t("haberler.key_facts")}
+                      </h3>
+                    </div>
+                    {item.keyFacts.map((fact, i) => (
+                      <div key={fact.label} style={{ padding: "0.875rem 1.5rem", borderTop: i === 0 ? "none" : "1px solid var(--gray-100)" }}>
+                        <div style={{ color: "var(--gray-400)", fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.2rem" }}>{t(fact.label)}</div>
+                        <div style={{ color: "var(--forest)", fontSize: "0.875rem", fontWeight: 600, wordBreak: "break-word", overflowWrap: "break-word" }}>{fact.value}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {item.participants && item.participants.length > 0 && (
+                  <div style={{ background: "var(--pale)", border: "1px solid var(--gray-100)", borderRadius: "1rem", padding: "1.5rem", overflow: "hidden", width: "100%" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "1rem" }}>
+                      <FaUsers style={{ color: "var(--forest)", fontSize: 13, flexShrink: 0 }} />
+                      <h3 className="font-bold text-sm uppercase tracking-wider" style={{ fontFamily: "var(--font-heading)", color: "var(--forest)" }}>{t("haberler.participants")}</h3>
+                    </div>
+                    <ul style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
+                      {item.participants.map((p) => (
+                        <li key={p} style={{ display: "flex", alignItems: "flex-start", gap: "0.5rem", color: "var(--gray-600)", fontSize: "0.8rem", lineHeight: 1.5, wordBreak: "break-word", overflowWrap: "break-word" }}>
+                          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--green)", flexShrink: 0, marginTop: 5 }} />
+                          {p}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                <div style={{ background: "var(--forest)", borderRadius: "1rem", padding: "1.5rem", overflow: "hidden", width: "100%" }}>
+                  <h3 className="font-bold text-sm uppercase tracking-wider" style={{ fontFamily: "var(--font-heading)", color: "var(--gold)", marginBottom: "1rem" }}>
+                    {t("haberler.explore")}
+                  </h3>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.375rem" }}>
+                    {[
+                      { href: "/proje", label: t("footer.link_about") },
+                      { href: "/guzergah", label: t("footer.link_route") },
+                    ].map((link) => (
+                      <Link key={link.href} href={link.href} className="hover:bg-white/10"
+                        style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.75rem 1rem", borderRadius: "0.5rem", color: "rgba(255,255,255,0.8)", fontSize: "0.875rem", transition: "background 0.2s" }}
+                      >
+                        <span>{link.label}</span>
+                        <FaArrowRight style={{ fontSize: 10, flexShrink: 0 }} />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+
+        {otherNews.length > 0 && (
+          <div style={{ background: "var(--gray-50)", paddingTop: "2rem", paddingBottom: "5rem" }}>
+            <div className="container-aygm">
+              <div className="flex items-center justify-between" style={{ marginBottom: "2rem" }}>
+                <h2 className="text-2xl font-black" style={{ fontFamily: "var(--font-heading)", color: "var(--forest)" }}>
+                  {t("haberler.other_news")}
+                </h2>
+                <Link href="/haberler" className="flex items-center gap-1.5 text-sm font-semibold" style={{ color: "var(--forest)" }}>
+                  {t("news.all")} <FaArrowRight style={{ fontSize: 11 }} />
+                </Link>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {otherNews.map((n) => {
+                  const cc = catColors[n.category] ?? "var(--forest)";
+                  return (
+                    <Link key={n.slug} href={`/haberler/${n.slug}`} className="news-card block group" style={{ padding: "1.75rem" }}>
+                      <div className="flex items-center gap-2" style={{ marginBottom: "1rem" }}>
+                        <span className="text-xs font-bold px-2 py-0.5 rounded" style={{ background: `${cc}15`, color: cc }}>{t(`news.cat_${n.category}`)}</span>
+                        <span className="text-xs" style={{ color: "var(--gray-400)" }}>{n.date}</span>
+                      </div>
+                      <h3 className="font-bold text-base leading-snug" style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", marginBottom: "0.75rem" }}>
+                        {n.title}
+                      </h3>
+                      <p className="text-sm leading-relaxed" style={{ color: "var(--gray-500)" }}>
+                        {n.summary.slice(0, 130)}…
+                      </p>
+                      <div className="flex items-center gap-1.5 text-xs font-semibold" style={{ color: "var(--forest)", marginTop: "1.25rem" }}>
+                        {t("haberler.read_more")} <FaArrowRight style={{ fontSize: 9 }} />
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
+      </main>
+      <Footer />
+    </>
+  );
+}

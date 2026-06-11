@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Serif, IBM_Plex_Sans } from "next/font/google";
+import Navbar from "@/components/Navbar";
+import ScrollToTop from "@/components/ScrollToTop";
+import { LangProvider } from "@/context/LangContext";
 import "./globals.css";
 
 const plexSerif = IBM_Plex_Serif({
@@ -19,8 +22,8 @@ const plexSans = IBM_Plex_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL("https://aygm.vercel.app"),
   title: {
-    default: "Konya Tramvay 2. Etap | AYGM — T.C. Ulaştırma ve Altyapı Bakanlığı",
-    template: "%s | Konya Tramvay — AYGM",
+    default: "Konya Tramvay 2. Etap | Altyapı Yatırımları Genel Müdürlüğü — T.C. Ulaştırma ve Altyapı Bakanlığı",
+    template: "%s | Konya Tramvay — Altyapı Yatırımları Genel Müdürlüğü",
   },
   description:
     "Konya Stadyum–Şehir Hastanesi Tramvay Hattı 2. Etap projesi: 10 km yeni hat, 10 istasyon, günlük 60.000 yolcu kapasitesi. T.C. Ulaştırma ve Altyapı Bakanlığı, Altyapı Yatırımları Genel Müdürlüğü.",
@@ -29,21 +32,21 @@ export const metadata: Metadata = {
     "Konya raylı sistem", "Şehir Hastanesi tramvay", "Yeni Sanayi tramvay",
     "Konya stadyum tramvay", "kentsel ulaşım", "KONYARAY", "toplu taşıma Konya",
   ],
-  authors: [{ name: "T.C. Ulaştırma ve Altyapı Bakanlığı — AYGM" }],
-  creator: "AYGM",
+  authors: [{ name: "T.C. Ulaştırma ve Altyapı Bakanlığı — Altyapı Yatırımları Genel Müdürlüğü" }],
+  creator: "Altyapı Yatırımları Genel Müdürlüğü",
   publisher: "T.C. Ulaştırma ve Altyapı Bakanlığı",
   openGraph: {
     type: "website",
     locale: "tr_TR",
-    siteName: "Konya Tramvay 2. Etap — AYGM",
-    title: "Konya Tramvay 2. Etap | AYGM",
+    siteName: "Konya Tramvay 2. Etap — Altyapı Yatırımları Genel Müdürlüğü",
+    title: "Konya Tramvay 2. Etap | Altyapı Yatırımları Genel Müdürlüğü",
     description: "10 km yeni hat, 10 istasyon, günlük 60.000 yolcu. Konya'nın geleceği raylarda.",
-    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Konya Tramvay 2. Etap | AYGM" }],
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Konya Tramvay 2. Etap | Altyapı Yatırımları Genel Müdürlüğü" }],
   },
   robots: { index: true, follow: true },
   twitter: {
     card: "summary_large_image",
-    title: "Konya Tramvay 2. Etap | AYGM",
+    title: "Konya Tramvay 2. Etap | Altyapı Yatırımları Genel Müdürlüğü",
     description: "10 km yeni hat, 10 istasyon, günlük 60.000 yolcu. Konya'nın geleceği raylarda.",
     images: ["/opengraph-image"],
   },
@@ -58,7 +61,15 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="tr" className={`${plexSerif.variable} ${plexSans.variable}`}>
-      <body style={{ fontFamily: "var(--font-body)" }}>{children}</body>
+      <body style={{ fontFamily: "var(--font-body)" }}>
+        <LangProvider>
+          <Navbar />
+          {/* Spacer for fixed navbar: 58px mobile, 100px desktop */}
+          <div className="h-[58px] md:h-[100px]" />
+          {children}
+          <ScrollToTop />
+        </LangProvider>
+      </body>
     </html>
   );
 }
