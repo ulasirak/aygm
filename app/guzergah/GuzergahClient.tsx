@@ -157,11 +157,11 @@ export default function GuzergahClient() {
                                 <div style={{ width: 30, height: 30, borderRadius: "0.625rem", background: "var(--gray-100)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                                   <FaMapMarkerAlt style={{ color: "var(--gray-300)", fontSize: 11 }} />
                                 </div>
-                                <span style={{ fontSize: "0.55rem", fontWeight: 700, color: "var(--gray-300)" }}>{t("guzergah.station_short")}{s1.no}</span>
+                                <span style={{ fontSize: "0.55rem", fontWeight: 700, color: "var(--text-muted)" }}>{t("guzergah.station_short")}{s1.no}</span>
                               </div>
                               <div>
                                 <div style={{ fontSize: "0.78rem", fontWeight: 600, color: "var(--gray-400)" }}>{pendingDesc}</div>
-                                <div style={{ fontSize: "0.65rem", color: "var(--gray-300)", marginTop: "0.15rem" }}>{s1.district} · {routeByLabel}</div>
+                                <div style={{ fontSize: "0.65rem", color: "var(--text-muted)", marginTop: "0.15rem" }}>{s1.district} · {routeByLabel}</div>
                               </div>
                             </div>
                           </div>

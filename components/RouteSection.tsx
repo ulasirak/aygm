@@ -56,14 +56,14 @@ function StopRow({ station, globalNo, pendingLabel }: { station: Station; global
       <div className="flex-1 rounded-xl" style={{ background: typeBg[station.type], border: typeBorder[station.type], padding: "0.625rem 0.75rem", minWidth: 0 }}>
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
           <Icon style={{ flexShrink: 0, color, fontSize: 12, opacity: isPending ? 0.4 : 1 }} />
-          <span style={{ flex: 1, minWidth: 0, fontSize: "0.875rem", fontWeight: 600, color: isPending ? "var(--gray-300)" : color, lineHeight: 1.3, fontStyle: isPending ? "italic" : "normal" }}>
+          <span style={{ flex: 1, minWidth: 0, fontSize: "0.875rem", fontWeight: 600, color: isPending ? "var(--text-muted)" : color, lineHeight: 1.3, fontStyle: isPending ? "italic" : "normal" }}>
             {isPending ? pendingLabel : station.name}
           </span>
           <span style={{ flexShrink: 0, fontSize: "0.75rem", color: "var(--gray-400)", fontVariantNumeric: "tabular-nums" }}>
             {globalNo}
           </span>
         </div>
-        <p style={{ fontSize: "0.75rem", marginTop: "0.125rem", marginLeft: "1.25rem", color: isPending ? "var(--gray-300)" : "var(--gray-400)" }}>
+        <p style={{ fontSize: "0.75rem", marginTop: "0.125rem", marginLeft: "1.25rem", color: isPending ? "var(--text-muted)" : "var(--gray-400)" }}>
           {station.desc}
         </p>
         {station.transferLabel && (

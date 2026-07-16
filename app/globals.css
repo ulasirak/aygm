@@ -19,7 +19,11 @@
   --gray-50:      #FAFDFD;
   --gray-100:     #E9F4F3;
   --gray-200:     #CDE3E1;
+  /* --gray-300 sadece grafik/dekoratif (kesikli çerçeve, küçük ikon) — beyazda 3.25:1.
+     Metin için kullanma, --text-muted kullan. */
+  --gray-300:     #749593;
   --gray-400:     #5A7A78;
+  --gray-500:     #577775;
   --gray-600:     #537472;
   --text:         #173539;
   --text-muted:   #587678;
