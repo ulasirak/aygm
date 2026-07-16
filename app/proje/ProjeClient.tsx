@@ -48,7 +48,7 @@ export default function ProjeClient() {
       <main>
         <div
           className="relative py-28"
-          style={{ background: "linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 55%, var(--forest) 100%)", paddingTop: "6rem", paddingBottom: "6rem" }}
+          style={{ background: "linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 55%, var(--teal-dark) 100%)", paddingTop: "6rem", paddingBottom: "6rem" }}
         >
           <div className="container-aygm relative z-10">
             <div className="flex items-center gap-2 text-sm" style={{ color: "rgba(255,255,255,0.5)", marginBottom: "2.25rem" }}>
@@ -76,7 +76,7 @@ export default function ProjeClient() {
                 <section id="genel-tanim">
                   <h2
                     className="text-2xl font-black"
-                    style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", marginBottom: "1.5rem" }}
+                    style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)", marginBottom: "1.5rem" }}
                   >
                     {t("proje.scope_title")}
                   </h2>
@@ -91,14 +91,14 @@ export default function ProjeClient() {
                 <section id="hedefler">
                   <h2
                     className="text-2xl font-black"
-                    style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", marginBottom: "1.5rem" }}
+                    style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)", marginBottom: "1.5rem" }}
                   >
                     {t("proje.obj_title")}
                   </h2>
                   <ul className="space-y-3">
                     {OBJ_KEYS.map((key) => (
                       <li key={key} className="flex items-start gap-3">
-                        <FaCheckCircle className="flex-shrink-0 mt-0.5" style={{ color: "var(--green)", fontSize: 16 }} />
+                        <FaCheckCircle className="flex-shrink-0 mt-0.5" style={{ color: "var(--teal)", fontSize: 16 }} />
                         <span className="text-base" style={{ color: "var(--gray-600)" }}>{t(key)}</span>
                       </li>
                     ))}
@@ -109,7 +109,7 @@ export default function ProjeClient() {
                 <section id="entegrasyon">
                   <h2
                     className="text-2xl font-black"
-                    style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", marginBottom: "1.5rem" }}
+                    style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)", marginBottom: "1.5rem" }}
                   >
                     {t("proje.int_title")}
                   </h2>
@@ -124,27 +124,27 @@ export default function ProjeClient() {
                         style={{ background: "var(--gray-50)", border: "1px solid var(--gray-100)" }}
                       >
                         <div className="flex items-start gap-2 mb-1">
-                          <span className="text-sm font-semibold flex-1 min-w-0 leading-snug" style={{ color: "var(--forest)" }}>
+                          <span className="text-sm font-semibold flex-1 min-w-0 leading-snug" style={{ color: "var(--teal-dark)" }}>
                             {t(line.nameKey)}
                           </span>
                           <span
                             className="text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 mt-0.5"
                             style={{
-                              background: line.statusKey === "proje.status_active" ? "rgba(0,184,174,0.12)" : line.statusKey === "proje.status_construction" ? "rgba(29,92,58,0.12)" : "rgba(58,138,80,0.12)",
-                              color: line.statusKey === "proje.status_active" ? "#00B8AE" : line.statusKey === "proje.status_construction" ? "#1D5C3A" : "#3A8A50",
+                              background: line.statusKey === "proje.status_active" ? "rgba(111,221,214,0.12)" : line.statusKey === "proje.status_construction" ? "rgba(10,107,102,0.12)" : "rgba(41,189,181,0.12)",
+                              color: line.statusKey === "proje.status_active" ? "#6FDDD6" : line.statusKey === "proje.status_construction" ? "#0A6B66" : "#29BDB5",
                             }}
                           >
                             {t(line.statusKey)}
                           </span>
                         </div>
-                        <div className="text-lg font-black" style={{ fontFamily: "var(--font-heading)", color: "var(--forest)" }}>
+                        <div className="text-lg font-black" style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)" }}>
                           {line.km}
                         </div>
                       </div>
                     ))}
                     <div
                       className="rounded-xl p-4 flex items-center justify-between"
-                      style={{ background: "linear-gradient(135deg, var(--forest), var(--forest))", border: "1px solid rgba(201,168,76,0.2)" }}
+                      style={{ background: "linear-gradient(135deg, var(--teal-dark), var(--teal-dark))", border: "1px solid rgba(201,168,76,0.2)" }}
                     >
                       <div>
                         <span className="text-sm font-semibold text-white">{t("proje.total_target")}</span>
@@ -160,7 +160,7 @@ export default function ProjeClient() {
                 {/* Quote */}
                 <section>
                   <blockquote className="rounded-2xl p-6" style={{ background: "var(--gray-50)", borderLeft: "4px solid var(--gold)" }}>
-                    <p className="text-base italic leading-relaxed mb-4" style={{ color: "var(--forest)" }}>
+                    <p className="text-base italic leading-relaxed mb-4" style={{ color: "var(--teal-dark)" }}>
                       &ldquo;{t("proje.quote_text")}&rdquo;
                     </p>
                     <footer className="text-sm font-semibold" style={{ color: "var(--gray-600)" }}>
@@ -173,7 +173,7 @@ export default function ProjeClient() {
               {/* Sidebar */}
               <div className="lg:col-span-2" style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
                 <div id="teknik-veriler" style={{ border: "1px solid var(--gray-100)", borderRadius: "1rem" }}>
-                  <div style={{ background: "var(--forest)", borderRadius: "1rem 1rem 0 0", padding: "1rem 1.5rem" }}>
+                  <div style={{ background: "var(--teal-dark)", borderRadius: "1rem 1rem 0 0", padding: "1rem 1.5rem" }}>
                     <h3 className="text-white font-bold text-sm uppercase tracking-wider" style={{ fontFamily: "var(--font-heading)" }}>
                       {t("proje.tech_title")}
                     </h3>
@@ -184,13 +184,13 @@ export default function ProjeClient() {
                       style={{ padding: "0.875rem 1.5rem", borderTop: i === 0 ? "none" : "1px solid var(--gray-100)" }}
                     >
                       <div className="text-xs" style={{ color: "var(--gray-400)", marginBottom: "0.2rem" }}>{t(item.labelKey)}</div>
-                      <div className="text-sm font-semibold" style={{ color: "var(--forest)", wordBreak: "break-word" }}>{item.value}</div>
+                      <div className="text-sm font-semibold" style={{ color: "var(--teal-dark)", wordBreak: "break-word" }}>{item.value}</div>
                     </div>
                   ))}
                 </div>
 
                 <div style={{ background: "var(--gray-50)", border: "1px solid var(--gray-100)", borderRadius: "1rem", padding: "1.5rem" }}>
-                  <h3 className="font-bold text-sm uppercase tracking-wider" style={{ color: "var(--forest)", fontFamily: "var(--font-heading)", marginBottom: "1rem" }}>
+                  <h3 className="font-bold text-sm uppercase tracking-wider" style={{ color: "var(--teal-dark)", fontFamily: "var(--font-heading)", marginBottom: "1rem" }}>
                     {t("proje.links_title")}
                   </h3>
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
@@ -200,7 +200,7 @@ export default function ProjeClient() {
                     ].map((link) => (
                       <Link key={link.href} href={link.href} target="_blank" rel="noopener noreferrer"
                         className="text-sm hover:underline"
-                        style={{ color: "var(--forest)", display: "flex", alignItems: "center", gap: "0.5rem", wordBreak: "break-word" }}
+                        style={{ color: "var(--teal-dark)", display: "flex", alignItems: "center", gap: "0.5rem", wordBreak: "break-word" }}
                       >
                         <FaExternalLinkAlt style={{ fontSize: 9, opacity: 0.4, flexShrink: 0 }} />
                         {link.label}
@@ -209,7 +209,7 @@ export default function ProjeClient() {
                   </div>
                 </div>
 
-                <div style={{ background: "var(--forest)", borderRadius: "1rem", padding: "1.5rem" }}>
+                <div style={{ background: "var(--teal-dark)", borderRadius: "1rem", padding: "1.5rem" }}>
                   <h3 className="font-bold text-sm uppercase tracking-wider" style={{ fontFamily: "var(--font-heading)", color: "var(--gold)", marginBottom: "1rem" }}>
                     {t("proje.more_title")}
                   </h3>

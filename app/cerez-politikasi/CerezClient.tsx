@@ -17,7 +17,7 @@ export default function CerezClient() {
   return (
     <>
       <main>
-        <div className="relative" style={{ background: "linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 55%, var(--forest) 100%)", paddingTop: "6rem", paddingBottom: "6rem" }}>
+        <div className="relative" style={{ background: "linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 55%, var(--teal-dark) 100%)", paddingTop: "6rem", paddingBottom: "6rem" }}>
           <div className="container-aygm relative z-10">
             <div className="flex items-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.5)", marginBottom: "2.5rem" }}>
               <Link href="/" className="hover:text-white transition-colors">{t("common.home")}</Link>
@@ -38,7 +38,7 @@ export default function CerezClient() {
             <div style={{ display: "flex", flexDirection: "column", gap: "3rem" }}>
 
               <div>
-                <h2 className="text-lg font-bold" style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", marginBottom: "1.25rem" }}>
+                <h2 className="text-lg font-bold" style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)", marginBottom: "1.25rem" }}>
                   {t("cerez.what_title")}
                 </h2>
                 <p style={{ color: "var(--gray-600)", fontSize: "0.9rem", lineHeight: 1.85 }}>
@@ -47,19 +47,19 @@ export default function CerezClient() {
               </div>
 
               <div>
-                <h2 className="text-lg font-bold" style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", marginBottom: "1.5rem" }}>
+                <h2 className="text-lg font-bold" style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)", marginBottom: "1.5rem" }}>
                   {t("cerez.types_title")}
                 </h2>
                 <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
                   {cookieTypes.map((c, i) => (
                     <div key={i} style={{ border: "1px solid var(--gray-100)", borderRadius: "1rem", padding: "1.5rem" }}>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.75rem", flexWrap: "wrap", gap: "0.5rem" }}>
-                        <h3 className="font-bold text-base" style={{ color: "var(--forest)", fontFamily: "var(--font-heading)" }}>{c.name}</h3>
+                        <h3 className="font-bold text-base" style={{ color: "var(--teal-dark)", fontFamily: "var(--font-heading)" }}>{c.name}</h3>
                         <span style={{
                           fontSize: "0.7rem", fontWeight: 700, padding: "0.2rem 0.75rem",
                           borderRadius: "100px", letterSpacing: "0.06em",
-                          background: c.canDisable ? "rgba(201,168,76,0.1)" : "rgba(29,92,58,0.08)",
-                          color: c.canDisable ? "var(--gold)" : "var(--green)",
+                          background: c.canDisable ? "rgba(201,168,76,0.1)" : "rgba(10,107,102,0.08)",
+                          color: c.canDisable ? "var(--gold)" : "var(--teal)",
                         }}>
                           {c.canDisable ? t("cerez.optional") : t("cerez.mandatory")}
                         </span>
@@ -81,7 +81,7 @@ export default function CerezClient() {
               </div>
 
               <div>
-                <h2 className="text-lg font-bold" style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", marginBottom: "1.25rem" }}>
+                <h2 className="text-lg font-bold" style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)", marginBottom: "1.25rem" }}>
                   {t("cerez.control_title")}
                 </h2>
                 <p style={{ color: "var(--gray-600)", fontSize: "0.9rem", lineHeight: 1.85 }}>

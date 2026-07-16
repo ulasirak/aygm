@@ -20,7 +20,7 @@ export default function GizlilikClient() {
   return (
     <>
       <main>
-        <div className="relative" style={{ background: "linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 55%, var(--forest) 100%)", paddingTop: "6rem", paddingBottom: "6rem" }}>
+        <div className="relative" style={{ background: "linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 55%, var(--teal-dark) 100%)", paddingTop: "6rem", paddingBottom: "6rem" }}>
           <div className="container-aygm relative z-10">
             <div className="flex items-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.5)", marginBottom: "2.5rem" }}>
               <Link href="/" className="hover:text-white transition-colors">{t("common.home")}</Link>
@@ -41,7 +41,7 @@ export default function GizlilikClient() {
             <div style={{ display: "flex", flexDirection: "column", gap: "3rem" }}>
               {sections.map((s, i) => (
                 <div key={i}>
-                  <h2 className="text-lg font-bold" style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", marginBottom: "1.25rem" }}>
+                  <h2 className="text-lg font-bold" style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)", marginBottom: "1.25rem" }}>
                     {s.title}
                   </h2>
                   <div style={{ color: "var(--gray-600)", fontSize: "0.9rem", lineHeight: 1.85, whiteSpace: "pre-line" }}>

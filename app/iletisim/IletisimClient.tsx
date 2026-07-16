@@ -20,8 +20,8 @@ export default function IletisimClient() {
   const [loading, setLoading] = useState(false);
 
   const contactInfo = [
-    { icon: FaMapMarkerAlt, title: t("contact.address"), lines: [t("footer.address")], sub: `${t("footer.uab_label")} — ${t("footer.aygm_label")}`, color: "var(--forest)" },
-    { icon: FaPhone, title: t("contact.phone"), lines: ["+90 (312) 203 10 00"], sub: t("contact.hours"), color: "var(--green)" },
+    { icon: FaMapMarkerAlt, title: t("contact.address"), lines: [t("footer.address")], sub: `${t("footer.uab_label")} — ${t("footer.aygm_label")}`, color: "var(--teal-dark)" },
+    { icon: FaPhone, title: t("contact.phone"), lines: ["+90 (312) 203 10 00"], sub: t("contact.hours"), color: "var(--teal)" },
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -35,7 +35,7 @@ export default function IletisimClient() {
       <main>
 
         {/* Hero */}
-        <div className="relative" style={{ background: "linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 55%, var(--forest) 100%)", paddingTop: "6rem", paddingBottom: "6rem" }}>
+        <div className="relative" style={{ background: "linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 55%, var(--teal-dark) 100%)", paddingTop: "6rem", paddingBottom: "6rem" }}>
           <div className="absolute inset-0 pointer-events-none" aria-hidden style={{
             backgroundImage: "linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)",
             backgroundSize: "60px 60px",
@@ -65,7 +65,7 @@ export default function IletisimClient() {
                   <div key={item.title} style={{
                     background: "white", border: "1px solid var(--gray-100)",
                     borderRadius: "1.25rem", padding: "2rem 1.75rem",
-                    boxShadow: "0 2px 20px rgba(29,92,58,0.05)",
+                    boxShadow: "0 2px 20px rgba(10,107,102,0.05)",
                   }}>
                     <div style={{
                       width: 48, height: 48, borderRadius: "0.875rem", marginBottom: "1.25rem",
@@ -78,7 +78,7 @@ export default function IletisimClient() {
                       {item.title}
                     </div>
                     {item.lines.map((line, i) => (
-                      <div key={i} style={{ fontSize: "0.925rem", fontWeight: 600, color: "var(--forest)", marginBottom: "0.15rem" }}>{line}</div>
+                      <div key={i} style={{ fontSize: "0.925rem", fontWeight: 600, color: "var(--teal-dark)", marginBottom: "0.15rem" }}>{line}</div>
                     ))}
                     <div style={{ fontSize: "0.78rem", color: "var(--gray-400)", marginTop: "0.35rem" }}>{item.sub}</div>
                   </div>
@@ -95,7 +95,7 @@ export default function IletisimClient() {
 
               {/* Form */}
               <div className="lg:col-span-3">
-                <h2 className="text-2xl font-black" style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", marginBottom: "0.75rem" }}>
+                <h2 className="text-2xl font-black" style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)", marginBottom: "0.75rem" }}>
                   {t("contact.form_heading")}
                 </h2>
                 <p className="text-sm mb-8" style={{ color: "var(--gray-400)" }}>
@@ -103,9 +103,9 @@ export default function IletisimClient() {
                 </p>
 
                 {submitted ? (
-                  <div style={{ background: "rgba(26,107,58,0.05)", border: "1px solid rgba(26,107,58,0.15)", borderRadius: "1.25rem", padding: "3rem 2rem", textAlign: "center" }}>
-                    <FaCheckCircle style={{ color: "var(--green)", fontSize: 44, margin: "0 auto 1.25rem" }} />
-                    <h3 className="text-xl font-bold" style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", marginBottom: "1rem" }}>
+                  <div style={{ background: "rgba(11,124,119,0.05)", border: "1px solid rgba(11,124,119,0.15)", borderRadius: "1.25rem", padding: "3rem 2rem", textAlign: "center" }}>
+                    <FaCheckCircle style={{ color: "var(--teal)", fontSize: 44, margin: "0 auto 1.25rem" }} />
+                    <h3 className="text-xl font-bold" style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)", marginBottom: "1rem" }}>
                       {t("contact.success_title")}
                     </h3>
                     <p className="text-sm mb-6" style={{ color: "var(--gray-600)" }}>
@@ -119,19 +119,19 @@ export default function IletisimClient() {
                   <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <div>
-                        <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--forest)" }}>{t("contact.form_name")} *</label>
+                        <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--teal-dark)" }}>{t("contact.form_name")} *</label>
                         <input type="text" required className="form-input" placeholder={t("contact.placeholder_name")}
                           value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
                       </div>
                       <div>
-                        <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--forest)" }}>{t("contact.form_email")} *</label>
+                        <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--teal-dark)" }}>{t("contact.form_email")} *</label>
                         <input type="email" required className="form-input" placeholder={t("contact.placeholder_email")}
                           value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--forest)" }}>{t("contact.form_category")} *</label>
+                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--teal-dark)" }}>{t("contact.form_category")} *</label>
                       <select required className="form-input" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })}>
                         <option value="">{t("common.select")}</option>
                         <option value="genel">{t("contact.cat_general")}</option>
@@ -144,13 +144,13 @@ export default function IletisimClient() {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--forest)" }}>{t("contact.form_subject")} *</label>
+                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--teal-dark)" }}>{t("contact.form_subject")} *</label>
                       <input type="text" required className="form-input" placeholder={t("contact.placeholder_subject")}
                         value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--forest)" }}>{t("contact.form_message")} *</label>
+                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--teal-dark)" }}>{t("contact.form_message")} *</label>
                       <textarea required rows={6} className="form-input resize-none" placeholder={t("contact.placeholder_message")}
                         value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
                     </div>
@@ -172,14 +172,14 @@ export default function IletisimClient() {
                 {/* Harita placeholder */}
                 <div style={{ borderRadius: "1.25rem", overflow: "hidden", border: "1px solid var(--gray-100)", background: "var(--gray-50)" }}>
                   <div style={{ padding: "2rem", textAlign: "center" }}>
-                    <div style={{ width: 56, height: 56, borderRadius: "1rem", background: "rgba(29,92,58,0.08)", border: "1px solid rgba(29,92,58,0.12)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1rem" }}>
-                      <FaMapMarkerAlt style={{ color: "var(--forest)", fontSize: 22 }} />
+                    <div style={{ width: 56, height: 56, borderRadius: "1rem", background: "rgba(10,107,102,0.08)", border: "1px solid rgba(10,107,102,0.12)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1rem" }}>
+                      <FaMapMarkerAlt style={{ color: "var(--teal-dark)", fontSize: 22 }} />
                     </div>
-                    <div className="font-bold text-base mb-1" style={{ color: "var(--forest)", fontFamily: "var(--font-heading)" }}>{t("footer.aygm_label")}</div>
+                    <div className="font-bold text-base mb-1" style={{ color: "var(--teal-dark)", fontFamily: "var(--font-heading)" }}>{t("footer.aygm_label")}</div>
                     <div className="text-sm mb-4" style={{ color: "var(--gray-600)" }}>{t("footer.address")}</div>
                     <Link href="https://maps.google.com/?q=AYGM+Altyapı+Yatırımları+Genel+Müdürlüğü+Ankara" target="_blank" rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-lg"
-                      style={{ background: "var(--forest)", color: "white" }}>
+                      style={{ background: "var(--teal-dark)", color: "white" }}>
                       {t("contact.maps_open")}
                       <FaExternalLinkAlt style={{ fontSize: 9 }} />
                     </Link>
@@ -188,7 +188,7 @@ export default function IletisimClient() {
 
                 {/* Hızlı bağlantılar */}
                 <div style={{ background: "var(--gray-50)", border: "1px solid var(--gray-100)", borderRadius: "1.25rem", padding: "1.5rem" }}>
-                  <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "var(--forest)", fontFamily: "var(--font-heading)" }}>
+                  <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "var(--teal-dark)", fontFamily: "var(--font-heading)" }}>
                     {t("contact.official_channels")}
                   </div>
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -200,7 +200,7 @@ export default function IletisimClient() {
                         className="hover:bg-white transition-colors"
                         style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.75rem 1rem", borderRadius: "0.75rem", border: "1px solid var(--gray-200)", textDecoration: "none" }}>
                         <div>
-                          <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--forest)" }}>{link.label}</div>
+                          <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--teal-dark)" }}>{link.label}</div>
                           <div style={{ fontSize: "0.72rem", color: "var(--gray-400)" }}>{link.note}</div>
                         </div>
                         <FaExternalLinkAlt style={{ color: "var(--gray-300)", fontSize: 10, flexShrink: 0 }} />
@@ -210,8 +210,8 @@ export default function IletisimClient() {
                 </div>
 
                 {/* KVKK notu */}
-                <div style={{ background: "rgba(29,92,58,0.04)", border: "1px solid rgba(29,92,58,0.08)", borderRadius: "1rem", padding: "1.25rem 1.5rem", fontSize: "0.8rem", color: "var(--gray-600)", lineHeight: 1.7 }}>
-                  <strong style={{ color: "var(--forest)" }}>{t("contact.kvkk_label")}</strong>{" "}{t("contact.kvkk_note")}
+                <div style={{ background: "rgba(10,107,102,0.04)", border: "1px solid rgba(10,107,102,0.08)", borderRadius: "1rem", padding: "1.25rem 1.5rem", fontSize: "0.8rem", color: "var(--gray-600)", lineHeight: 1.7 }}>
+                  <strong style={{ color: "var(--teal-dark)" }}>{t("contact.kvkk_label")}</strong>{" "}{t("contact.kvkk_note")}
                 </div>
 
               </div>

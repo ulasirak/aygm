@@ -11,7 +11,7 @@ export default function Hero() {
     <section
       className="relative min-h-[calc(100svh-58px)] md:min-h-[92vh] flex items-center overflow-hidden"
       style={{
-        background: "linear-gradient(155deg, #041B19 0%, #063330 30%, #0A4E4A 60%, #007A75 85%, #00B8AE 100%)",
+        background: "linear-gradient(155deg, #0A5C58 0%, #0A5C58 30%, #0A6B66 60%, #0B7C77 85%, #6FDDD6 100%)",
       }}
     >
       {/* Aurora katmanları */}
@@ -20,21 +20,21 @@ export default function Hero() {
         <div style={{
           position: "absolute", top: "-15%", right: "-8%",
           width: "65vw", height: "65vw",
-          background: "radial-gradient(circle, rgba(0,184,174,0.14) 0%, rgba(0,122,117,0.09) 40%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(111,221,214,0.14) 0%, rgba(11,124,119,0.09) 40%, transparent 70%)",
           borderRadius: "50%",
         }} />
         {/* Turkuaz ışık — sol alt */}
         <div style={{
           position: "absolute", bottom: "-15%", left: "-5%",
           width: "50vw", height: "50vw",
-          background: "radial-gradient(circle, rgba(0,184,174,0.12) 0%, transparent 65%)",
+          background: "radial-gradient(circle, rgba(111,221,214,0.12) 0%, transparent 65%)",
           borderRadius: "50%",
         }} />
         {/* Orta derin teal leke */}
         <div style={{
           position: "absolute", top: "30%", left: "25%",
           width: "35vw", height: "35vw",
-          background: "radial-gradient(circle, rgba(0,184,174,0.06) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(111,221,214,0.06) 0%, transparent 70%)",
           borderRadius: "50%",
         }} />
 
@@ -51,7 +51,7 @@ export default function Hero() {
         {/* Noktalı doku */}
         <div style={{
           position: "absolute", inset: 0,
-          backgroundImage: "radial-gradient(circle, rgba(0,184,174,0.04) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, rgba(111,221,214,0.04) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
         }} />
 
@@ -66,7 +66,7 @@ export default function Hero() {
               width: 860,
               maxWidth: "90vw",
               opacity: 0.055,
-              filter: "drop-shadow(0 0 80px rgba(0,184,174,0.6))",
+              filter: "drop-shadow(0 0 80px rgba(111,221,214,0.6))",
             }}
           />
         </div>
@@ -94,7 +94,7 @@ export default function Hero() {
               width: "100%",
               height: "auto",
               opacity: 0.42,
-              filter: "drop-shadow(0 0 30px rgba(0,184,174,0.4))",
+              filter: "drop-shadow(0 0 30px rgba(111,221,214,0.4))",
               maskImage: "linear-gradient(to bottom, transparent 0%, black 40%), linear-gradient(to left, black 35%, transparent 100%)",
               WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 40%), linear-gradient(to left, black 35%, transparent 100%)",
               maskComposite: "intersect",
@@ -115,14 +115,14 @@ export default function Hero() {
             {t("hero.t1")}{" "}
             <span
               style={{
-                background: "linear-gradient(135deg, #00B8AE 0%, #5EEBE5 40%, #A5F5F2 65%, #00B8AE 100%)",
+                background: "linear-gradient(135deg, #6FDDD6 0%, #8CF4EF 40%, #C2FAF8 65%, #6FDDD6 100%)",
                 backgroundSize: "200% auto",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
                 animation: "shimmer 4s linear infinite",
                 display: "inline-block",
-                filter: "drop-shadow(0 0 20px rgba(0,184,174,0.4))",
+                filter: "drop-shadow(0 0 20px rgba(111,221,214,0.4))",
               }}
             >
               {t("hero.t2")}
@@ -138,11 +138,11 @@ export default function Hero() {
               href="/guzergah"
               style={{
                 display: "inline-flex", alignItems: "center", gap: "0.6rem",
-                background: "linear-gradient(135deg, #007A75, #00B8AE)",
+                background: "linear-gradient(135deg, #0B7C77, #6FDDD6)",
                 color: "white", padding: "1rem 2rem", borderRadius: "0.625rem",
                 fontWeight: 700, fontSize: "0.9rem", letterSpacing: "0.02em",
-                textDecoration: "none", boxShadow: "0 8px 32px rgba(0,122,117,0.45)",
-                border: "1px solid rgba(0,184,174,0.3)",
+                textDecoration: "none", boxShadow: "0 8px 32px rgba(11,124,119,0.45)",
+                border: "1px solid rgba(111,221,214,0.3)",
               }}
             >
               {t("hero.cta_route")}
@@ -156,10 +156,10 @@ export default function Hero() {
                 padding: "1rem 2rem", borderRadius: "0.625rem",
                 fontWeight: 600, fontSize: "0.9rem",
                 textDecoration: "none",
-                border: "1.5px solid rgba(0,184,174,0.3)",
+                border: "1.5px solid rgba(111,221,214,0.3)",
               }}
             >
-              <FaPlay style={{ fontSize: 11, color: "#00B8AE" }} />
+              <FaPlay style={{ fontSize: 11, color: "#6FDDD6" }} />
               {t("hero.cta_project")}
             </Link>
           </div>

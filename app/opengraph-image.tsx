@@ -18,7 +18,7 @@ export default function OGImage() {
         style={{
           width: 1200,
           height: 630,
-          background: "#154530",
+          background: "#0A5C58",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",

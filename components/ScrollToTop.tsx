@@ -26,8 +26,8 @@ export default function ScrollToTop() {
         width: 40,
         height: 40,
         borderRadius: "50%",
-        background: "rgba(0,184,174,0.15)",
-        border: "1px solid rgba(0,184,174,0.4)",
+        background: "rgba(111,221,214,0.15)",
+        border: "1px solid rgba(111,221,214,0.4)",
         backdropFilter: "blur(12px)",
         display: "flex",
         alignItems: "center",
@@ -39,15 +39,15 @@ export default function ScrollToTop() {
         pointerEvents: visible ? "auto" : "none",
       }}
       onMouseEnter={e => {
-        (e.currentTarget as HTMLButtonElement).style.background = "rgba(0,184,174,0.28)";
-        (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(0,184,174,0.7)";
+        (e.currentTarget as HTMLButtonElement).style.background = "rgba(111,221,214,0.28)";
+        (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(111,221,214,0.7)";
       }}
       onMouseLeave={e => {
-        (e.currentTarget as HTMLButtonElement).style.background = "rgba(0,184,174,0.15)";
-        (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(0,184,174,0.4)";
+        (e.currentTarget as HTMLButtonElement).style.background = "rgba(111,221,214,0.15)";
+        (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(111,221,214,0.4)";
       }}
     >
-      <FaChevronUp style={{ color: "#00B8AE", fontSize: 13 }} />
+      <FaChevronUp style={{ color: "#6FDDD6", fontSize: 13 }} />
     </button>
   );
 }

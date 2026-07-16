@@ -62,7 +62,7 @@ function WheatStalk({ cx, cy, h, angle = 0, opacity = 0.08 }: {
 
   return (
     <g transform={`translate(${cx},${cy}) rotate(${angle})`} opacity={opacity}
-       fill="none" stroke="#14532d" strokeLinecap="round" strokeLinejoin="round">
+       fill="none" stroke="#0A5C58" strokeLinecap="round" strokeLinejoin="round">
 
       {/* Ana sap — hafif S eğrisi */}
       <path
@@ -148,7 +148,7 @@ export default function BillboardPage() {
   return (
     <div style={{
       width: "3840px", height: "2160px",
-      background: "#f0fdf4",
+      background: "#F5FEFE",
       overflow: "hidden", position: "relative",
       fontFamily: "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
       userSelect: "none",
@@ -183,7 +183,7 @@ export default function BillboardPage() {
         top: 0, left: 0, width: 1620, bottom: FOOTER,
         display: "flex", flexDirection: "column",
         padding: "100px 120px 80px 120px",
-        borderRight: "1.5px solid #bbf7d0",
+        borderRight: "1.5px solid #CDF2EF",
         overflow: "hidden",
       }}>
 
@@ -212,7 +212,7 @@ export default function BillboardPage() {
         {/* Etiket */}
         <div style={{
           fontSize: 36, fontWeight: 700, letterSpacing: "0.22em",
-          color: "#1a5c2e", textTransform: "uppercase", marginBottom: 40,
+          color: "#0B7C77", textTransform: "uppercase", marginBottom: 40,
           animation: "fadeIn 0.6s ease 0.1s both", position: "relative",
         }}>
           T.C. Ulaştırma ve Altyapı Bakanlığı
@@ -226,7 +226,7 @@ export default function BillboardPage() {
           <div style={{ fontSize: 200, fontWeight: 900, lineHeight: 0.86, color: "#111827", letterSpacing: "-0.03em" }}>
             TRAMVAY
           </div>
-          <div style={{ fontSize: 112, fontWeight: 900, color: "#1a5c2e", letterSpacing: "0.03em", marginTop: 14 }}>
+          <div style={{ fontSize: 112, fontWeight: 900, color: "#0B7C77", letterSpacing: "0.03em", marginTop: 14 }}>
             2. ETAP
           </div>
         </div>
@@ -236,13 +236,13 @@ export default function BillboardPage() {
           animation: "fadeIn 0.7s ease 0.3s both", position: "relative",
           marginTop: 32, marginBottom: 8,
           paddingLeft: 24,
-          borderLeft: "5px solid #1a5c2e",
+          borderLeft: "5px solid #0B7C77",
         }}>
           <div style={{ fontSize: 52, fontWeight: 300, color: "#374151", lineHeight: 1.55, letterSpacing: "0.01em" }}>
             Hayatınızı hızlandırıyor,
           </div>
           <div style={{ fontSize: 52, fontWeight: 300, color: "#374151", lineHeight: 1.55 }}>
-            sevdiklerinize <span style={{ fontWeight: 700, color: "#1a5c2e" }}>yaklaştırıyoruz.</span>
+            sevdiklerinize <span style={{ fontWeight: 700, color: "#0B7C77" }}>yaklaştırıyoruz.</span>
           </div>
           <div style={{ fontSize: 46, fontWeight: 400, color: "#6b7280", lineHeight: 1.6, marginTop: 10, fontStyle: "italic" }}>
             Sizinle Konyamızın her anını önemsiyoruz.
@@ -251,7 +251,7 @@ export default function BillboardPage() {
 
         {/* Ayırıcı */}
         <div style={{
-          width: 140, height: 5, background: "#1a5c2e", borderRadius: 3,
+          width: 140, height: 5, background: "#0B7C77", borderRadius: 3,
           margin: "40px 0", animation: "fadeIn 0.6s ease 0.35s both", position: "relative",
         }} />
 
@@ -260,9 +260,9 @@ export default function BillboardPage() {
 
           {/* Dairesel gösterge */}
           <svg width="760" height="760" viewBox="0 0 760 760" style={{ flexShrink: 0 }}>
-            <circle cx="380" cy="380" r={r} fill="none" stroke="#dcfce7" strokeWidth="26" />
+            <circle cx="380" cy="380" r={r} fill="none" stroke="#DDF7F5" strokeWidth="26" />
             <circle cx="380" cy="380" r={r} fill="none"
-              stroke="#1a5c2e" strokeWidth="26" strokeLinecap="round"
+              stroke="#0B7C77" strokeWidth="26" strokeLinecap="round"
               strokeDasharray={circ} strokeDashoffset={arcOffset}
               transform="rotate(-90 380 380)"
               style={{ transition: "stroke-dashoffset 0.025s linear" }}
@@ -273,7 +273,7 @@ export default function BillboardPage() {
             <text x="380" y="460" textAnchor="middle" fill="#111827" fontSize="80" fontWeight="700" fontFamily="IBM Plex Sans,Arial">
               %
             </text>
-            <text x="380" y="540" textAnchor="middle" fill="#1a5c2e" fontSize="42" fontWeight="700" fontFamily="IBM Plex Sans,Arial" letterSpacing="5">
+            <text x="380" y="540" textAnchor="middle" fill="#0B7C77" fontSize="42" fontWeight="700" fontFamily="IBM Plex Sans,Arial" letterSpacing="5">
               TAMAMLANDI
             </text>
           </svg>
@@ -289,7 +289,7 @@ export default function BillboardPage() {
               <div key={lbl} style={{
                 display: "flex", alignItems: "baseline", gap: 20,
                 paddingBottom: 28,
-                borderBottom: i < 3 ? "1.5px solid #dcfce7" : "none",
+                borderBottom: i < 3 ? "1.5px solid #DDF7F5" : "none",
               }}>
                 <span style={{ fontSize: 88, fontWeight: 900, color: "#111827", lineHeight: 1 }}>{val}</span>
                 <span style={{ fontSize: 40, color: "#6b7280", fontWeight: 500 }}>{lbl}</span>
@@ -306,12 +306,12 @@ export default function BillboardPage() {
         top: 0, left: 1622, right: 0, bottom: FOOTER,
         display: "flex", flexDirection: "column",
         padding: "70px 90px 50px 90px",
-        background: "#ecfdf5",
+        background: "#EFFDFC",
       }}>
 
         <div style={{
           fontSize: 58, fontWeight: 800, letterSpacing: "0.08em",
-          color: "#1a5c2e", textTransform: "uppercase", marginBottom: 36,
+          color: "#0B7C77", textTransform: "uppercase", marginBottom: 36,
         }}>
           Konya Stadyum – Şehir Hastanesi Tramvay Hattı
         </div>
@@ -327,7 +327,7 @@ export default function BillboardPage() {
             )}
 
             <path d={done} fill="none"
-              stroke="#1a5c2e" strokeWidth="16" strokeLinecap="round"
+              stroke="#0B7C77" strokeWidth="16" strokeLinecap="round"
               style={{ animation: "routeIn 2s ease 0.3s both" }}
             />
 
@@ -348,12 +348,12 @@ export default function BillboardPage() {
                   )}
                   <circle cx={s.x} cy={s.y}
                     r={isDone ? 32 : 18}
-                    fill={isDone ? "#1a5c2e" : "#f0fdf4"}
-                    stroke={isDone ? "#1a5c2e" : "#86efac"}
+                    fill={isDone ? "#0B7C77" : "#F5FEFE"}
+                    stroke={isDone ? "#0B7C77" : "#6FDDD6"}
                     strokeWidth={isDone ? 0 : 3.5}
                     style={isActive ? { animation: "stationPop 1.6s ease-in-out infinite" } : undefined}
                   />
-                  {isActive && <circle cx={s.x} cy={s.y} r={13} fill="#f0fdf4" />}
+                  {isActive && <circle cx={s.x} cy={s.y} r={13} fill="#F5FEFE" />}
 
                   <text x={s.x} y={s.y - 66}
                     textAnchor="middle"
@@ -380,7 +380,7 @@ export default function BillboardPage() {
         {/* Alt bilgi — 2 sütun + QR */}
         <div style={{
           display: "flex", alignItems: "center",
-          gap: 60, paddingTop: 40, borderTop: "1.5px solid #bbf7d0",
+          gap: 60, paddingTop: 40, borderTop: "1.5px solid #CDF2EF",
         }}>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 30, color: "#9ca3af", marginBottom: 10 }}>Temel Atma</div>
@@ -396,8 +396,8 @@ export default function BillboardPage() {
             display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
             flexShrink: 0,
           }}>
-            <QRCodeSVG value="https://aygm.vercel.app" size={130} fgColor="#14532d" bgColor="#ffffff" level="M" />
-            <span style={{ fontSize: 17, color: "#14532d", fontWeight: 600, letterSpacing: "0.05em" }}>Proje Sitesi</span>
+            <QRCodeSVG value="https://aygm.vercel.app" size={130} fgColor="#0A5C58" bgColor="#ffffff" level="M" />
+            <span style={{ fontSize: 17, color: "#0A5C58", fontWeight: 600, letterSpacing: "0.05em" }}>Proje Sitesi</span>
           </div>
         </div>
       </div>
@@ -405,7 +405,7 @@ export default function BillboardPage() {
       {/* ══ ALT ŞERIT (büyütülmüş) ══════════════════════════════════════════ */}
       <div style={{
         position: "absolute", bottom: 0, left: 0, right: 0, height: FOOTER,
-        background: "#1a5c2e",
+        background: "#0B7C77",
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "0 110px",
       }}>
@@ -431,8 +431,8 @@ export default function BillboardPage() {
             display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
             marginLeft: 12,
           }}>
-            <QRCodeSVG value="https://www.aygm.gov.tr" size={130} fgColor="#14532d" bgColor="#ffffff" level="M" />
-            <span style={{ fontSize: 17, color: "#14532d", fontWeight: 600, letterSpacing: "0.05em" }}>aygm.gov.tr</span>
+            <QRCodeSVG value="https://www.aygm.gov.tr" size={130} fgColor="#0A5C58" bgColor="#ffffff" level="M" />
+            <span style={{ fontSize: 17, color: "#0A5C58", fontWeight: 600, letterSpacing: "0.05em" }}>aygm.gov.tr</span>
           </div>
         </div>
 

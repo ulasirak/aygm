@@ -33,10 +33,10 @@ const STOPS: SimStop[] = [
   { id: 21, name: "Şehir Hastanesi",          phase: 1, type: "terminal",                                     district: "Karatay"  },
 ];
 
-const P2   = "#00B8AE";
-const P1   = "#1D5C3A";
+const P2   = "#6FDDD6";
+const P1   = "#0A6B66";
 const GOLD = "#B8892A";
-const JUNC = "#007A75";
+const JUNC = "#0B7C77";
 const PEND = "#94A3B8";
 const DWELL  = 1700;
 const TRAVEL = 800;

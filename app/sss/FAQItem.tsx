@@ -12,7 +12,7 @@ export default function FAQItem({ q, a }: { q: string; a: string }) {
         style={{ background: open ? "var(--gray-50)" : "white", padding: "1.5rem 1.75rem", borderRadius: open ? "0.75rem 0.75rem 0 0" : "0.75rem" }}
         onClick={() => setOpen(!open)}
       >
-        <span className="font-semibold text-base" style={{ color: "var(--forest)" }}>
+        <span className="font-semibold text-base" style={{ color: "var(--teal-dark)" }}>
           {q}
         </span>
         <FaChevronDown

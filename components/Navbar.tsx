@@ -297,14 +297,14 @@ export default function Navbar() {
     ? [["10 km", t("navstat.route_label")], ["60.000", t("navstat.daily_passenger")], [t("proje.val_opening"), t("navstat.target_opening")]]
     : [["10 km", t("navstat.route_label")], ["10", t("navstat.phase2_stations")], ["21", t("navstat.total_stations")]];
 
-  const navBg     = scrolled ? "rgba(3,35,33,0.78)"             : "rgba(3,52,50,0.96)";
-  const navBorder = scrolled ? "1px solid rgba(0,184,174,0.2)"  : "1px solid rgba(0,184,174,0.1)";
+  const navBg     = scrolled ? "rgba(10,92,88,0.78)"             : "rgba(10,92,88,0.96)";
+  const navBorder = scrolled ? "1px solid rgba(111,221,214,0.2)"  : "1px solid rgba(111,221,214,0.1)";
   const navShadow = scrolled ? "0 4px 32px rgba(0,0,0,0.25)"   : "none";
   const navStyle  = { background: navBg, backdropFilter: "blur(20px) saturate(160%)" as const, WebkitBackdropFilter: "blur(20px) saturate(160%)" as const, borderBottom: navBorder, boxShadow: navShadow };
 
   const topBarCell: React.CSSProperties = {
-    background: "#041B19", color: "rgba(255,255,255,0.55)",
-    borderBottom: "1px solid rgba(0,184,174,0.12)",
+    background: "#0A5C58", color: "rgba(255,255,255,0.55)",
+    borderBottom: "1px solid rgba(111,221,214,0.12)",
     fontSize: "0.75rem", display: "flex", alignItems: "center",
     justifyContent: "center", gap: 8, padding: "8px 0",
   };
@@ -339,15 +339,15 @@ export default function Navbar() {
       <div className="md:hidden flex items-center justify-between"
         style={{ ...navStyle, height: 58, padding: "0 1rem" }}>
         <Link href="/" className="flex items-center gap-2.5" style={{ textDecoration: "none" }}>
-          <div style={{ width: 34, height: 34, borderRadius: "0.625rem", flexShrink: 0, background: "rgba(0,184,174,0.15)", border: "1px solid rgba(0,184,174,0.3)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <FaTrain style={{ color: "#00B8AE", fontSize: 14 }} />
+          <div style={{ width: 34, height: 34, borderRadius: "0.625rem", flexShrink: 0, background: "rgba(111,221,214,0.15)", border: "1px solid rgba(111,221,214,0.3)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <FaTrain style={{ color: "#6FDDD6", fontSize: 14 }} />
           </div>
           <div style={{ lineHeight: 1.2 }}>
             <div style={{ color: "white", fontWeight: 700, fontSize: "0.88rem", fontFamily: "var(--font-heading)", letterSpacing: "0.01em" }}>Konya Tramvay</div>
-            <div style={{ color: "#00B8AE", fontSize: "0.52rem", letterSpacing: "0.22em", fontWeight: 600, textTransform: "uppercase" }}>{t("nav.phase_label")}</div>
+            <div style={{ color: "#6FDDD6", fontSize: "0.52rem", letterSpacing: "0.22em", fontWeight: 600, textTransform: "uppercase" }}>{t("nav.phase_label")}</div>
           </div>
         </Link>
-        <button onClick={() => setMobileOpen(!mobileOpen)} aria-label={t("common.menu")} style={{ width: 38, height: 38, borderRadius: "0.625rem", background: mobileOpen ? "rgba(0,184,174,0.15)" : "rgba(255,255,255,0.06)", border: mobileOpen ? "1px solid rgba(0,184,174,0.35)" : "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: mobileOpen ? "#00B8AE" : "rgba(255,255,255,0.85)", transition: "all 0.2s" }}>
+        <button onClick={() => setMobileOpen(!mobileOpen)} aria-label={t("common.menu")} style={{ width: 38, height: 38, borderRadius: "0.625rem", background: mobileOpen ? "rgba(111,221,214,0.15)" : "rgba(255,255,255,0.06)", border: mobileOpen ? "1px solid rgba(111,221,214,0.35)" : "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: mobileOpen ? "#6FDDD6" : "rgba(255,255,255,0.85)", transition: "all 0.2s" }}>
           {mobileOpen ? <FaTimes size={14} /> : <FaBars size={14} />}
         </button>
       </div>
@@ -355,15 +355,15 @@ export default function Navbar() {
       {/* ══════════ DESKTOP NAV ══════════ */}
       <div className="hidden md:grid" style={{ gridTemplateColumns: "1fr auto 1fr" }}>
         <div className="hidden md:flex pl-8 lg:pl-16" style={topBarCell}>
-          <span style={{ color: "#00B8AE", fontWeight: 600, letterSpacing: "0.02em" }}>{t("footer.uab_label")}</span>
+          <span style={{ color: "#6FDDD6", fontWeight: 600, letterSpacing: "0.02em" }}>{t("footer.uab_label")}</span>
           {SEP}
           <Link href="https://www.uab.gov.tr" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" style={{ letterSpacing: "0.02em" }}>uab.gov.tr</Link>
         </div>
-        <div className="hidden md:flex" style={{ ...topBarCell, padding: "8px 48px", borderBottom: "1px solid rgba(0,184,174,0.12)" }}>
-          <span style={{ fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#00B8AE", fontSize: "0.65rem", whiteSpace: "nowrap" }}>{t("nav.topbar_center")}</span>
+        <div className="hidden md:flex" style={{ ...topBarCell, padding: "8px 48px", borderBottom: "1px solid rgba(111,221,214,0.12)" }}>
+          <span style={{ fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#6FDDD6", fontSize: "0.65rem", whiteSpace: "nowrap" }}>{t("nav.topbar_center")}</span>
         </div>
         <div className="hidden md:flex pr-8 lg:pr-16" style={topBarCell}>
-          <span style={{ color: "#00B8AE", fontWeight: 600, letterSpacing: "0.02em" }}>{t("footer.aygm_label")}</span>
+          <span style={{ color: "#6FDDD6", fontWeight: 600, letterSpacing: "0.02em" }}>{t("footer.aygm_label")}</span>
           {SEP}
           <Link href="https://www.aygm.gov.tr" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" style={{ letterSpacing: "0.02em" }}>aygm.gov.tr</Link>
         </div>
@@ -375,12 +375,12 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-4" style={{ ...navStyle, height: 68 }}>
           <Link href="/" className="flex items-center gap-3 group mr-4">
-            <div className="flex items-center justify-center w-9 h-9 rounded-xl group-hover:scale-105 transition-transform" style={{ background: "rgba(0,184,174,0.15)", border: "1px solid rgba(0,184,174,0.25)" }}>
-              <FaTrain style={{ color: "#00B8AE", fontSize: 15 }} />
+            <div className="flex items-center justify-center w-9 h-9 rounded-xl group-hover:scale-105 transition-transform" style={{ background: "rgba(111,221,214,0.15)", border: "1px solid rgba(111,221,214,0.25)" }}>
+              <FaTrain style={{ color: "#6FDDD6", fontSize: 15 }} />
             </div>
             <div className="leading-snug">
               <div className="text-white font-bold text-sm" style={{ fontFamily: "var(--font-heading)", letterSpacing: "0.01em" }}>Konya Tramvay</div>
-              <div style={{ color: "#00B8AE", fontSize: "0.6rem", letterSpacing: "0.2em", fontWeight: 500, textTransform: "uppercase" }}>{t("nav.phase_label")}</div>
+              <div style={{ color: "#6FDDD6", fontSize: "0.6rem", letterSpacing: "0.2em", fontWeight: 500, textTransform: "uppercase" }}>{t("nav.phase_label")}</div>
             </div>
           </Link>
 
@@ -392,26 +392,26 @@ export default function Navbar() {
                 {navLinks.slice(0, 2).map((link) =>
                   link.children ? (
                     <div key={link.label} className="relative" onMouseEnter={() => setDropdownOpen(true)} onMouseLeave={() => setDropdownOpen(false)}>
-                      <button className="flex items-center gap-1.5 nav-link px-4 py-2 rounded-lg hover:bg-white/5 transition-colors text-sm" style={{ color: isProjectActive ? "#00B8AE" : "rgba(255,255,255,0.8)", fontFamily: "var(--font-body)" }}>
+                      <button className="flex items-center gap-1.5 nav-link px-4 py-2 rounded-lg hover:bg-white/5 transition-colors text-sm" style={{ color: isProjectActive ? "#6FDDD6" : "rgba(255,255,255,0.8)", fontFamily: "var(--font-body)" }}>
                         {link.label}
                         <FaChevronDown style={{ fontSize: 10, transition: "transform 0.2s", transform: dropdownOpen ? "rotate(180deg)" : "rotate(0)", opacity: 0.7 }} />
                       </button>
                       {dropdownOpen && (
-                        <div className="absolute top-full left-1/2 mt-3" style={{ transform: "translateX(-50%)", width: "320px", background: "rgba(2,40,38,0.97)", backdropFilter: "blur(20px)", border: "1px solid rgba(0,184,174,0.15)", boxShadow: "0 24px 60px rgba(0,0,0,0.45)", borderRadius: "1.25rem", overflow: "hidden" }}>
+                        <div className="absolute top-full left-1/2 mt-3" style={{ transform: "translateX(-50%)", width: "320px", background: "rgba(10,92,88,0.97)", backdropFilter: "blur(20px)", border: "1px solid rgba(111,221,214,0.15)", boxShadow: "0 24px 60px rgba(0,0,0,0.45)", borderRadius: "1.25rem", overflow: "hidden" }}>
                           <div style={{ padding: "1rem 1.25rem 0.75rem", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-                            <div style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "#00B8AE", opacity: 0.6 }}>{t("nav.dropdown_label")}</div>
+                            <div style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "#6FDDD6", opacity: 0.6 }}>{t("nav.dropdown_label")}</div>
                           </div>
                           <div style={{ padding: "0.5rem" }}>
                             {link.children.map((child) => {
                               const Icon = child.icon;
                               const isActive = pathname === child.href;
                               return (
-                                <Link key={child.href} href={child.href} style={{ display: "flex", alignItems: "center", gap: "0.875rem", padding: "0.875rem 1rem", borderRadius: "0.75rem", background: isActive ? "rgba(0,184,174,0.1)" : "transparent", transition: "background 0.15s", textDecoration: "none" }} onMouseEnter={(e) => { if (!isActive) e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }} onMouseLeave={(e) => { if (!isActive) e.currentTarget.style.background = "transparent"; }}>
-                                  <div style={{ width: 36, height: 36, borderRadius: "0.625rem", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", background: isActive ? "rgba(0,184,174,0.15)" : "rgba(255,255,255,0.06)", border: isActive ? "1px solid rgba(0,184,174,0.3)" : "1px solid rgba(255,255,255,0.08)" }}>
-                                    <Icon style={{ color: isActive ? "#00B8AE" : "rgba(255,255,255,0.5)", fontSize: 13 }} />
+                                <Link key={child.href} href={child.href} style={{ display: "flex", alignItems: "center", gap: "0.875rem", padding: "0.875rem 1rem", borderRadius: "0.75rem", background: isActive ? "rgba(111,221,214,0.1)" : "transparent", transition: "background 0.15s", textDecoration: "none" }} onMouseEnter={(e) => { if (!isActive) e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }} onMouseLeave={(e) => { if (!isActive) e.currentTarget.style.background = "transparent"; }}>
+                                  <div style={{ width: 36, height: 36, borderRadius: "0.625rem", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", background: isActive ? "rgba(111,221,214,0.15)" : "rgba(255,255,255,0.06)", border: isActive ? "1px solid rgba(111,221,214,0.3)" : "1px solid rgba(255,255,255,0.08)" }}>
+                                    <Icon style={{ color: isActive ? "#6FDDD6" : "rgba(255,255,255,0.5)", fontSize: 13 }} />
                                   </div>
                                   <div>
-                                    <div style={{ fontSize: "0.875rem", fontWeight: 600, color: isActive ? "#00B8AE" : "rgba(255,255,255,0.85)", fontFamily: "var(--font-body)" }}>{child.label}</div>
+                                    <div style={{ fontSize: "0.875rem", fontWeight: 600, color: isActive ? "#6FDDD6" : "rgba(255,255,255,0.85)", fontFamily: "var(--font-body)" }}>{child.label}</div>
                                     <div style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.35)", marginTop: "0.1rem" }}>{child.desc}</div>
                                   </div>
                                 </Link>
@@ -422,7 +422,7 @@ export default function Navbar() {
                       )}
                     </div>
                   ) : (
-                    <Link key={link.href} href={link.href!} className="nav-link px-4 py-2 rounded-lg text-sm hover:bg-white/5 transition-colors" style={{ color: pathname === link.href ? "#00B8AE" : "rgba(255,255,255,0.8)", fontWeight: pathname === link.href ? 600 : 400, fontFamily: "var(--font-body)" }}>
+                    <Link key={link.href} href={link.href!} className="nav-link px-4 py-2 rounded-lg text-sm hover:bg-white/5 transition-colors" style={{ color: pathname === link.href ? "#6FDDD6" : "rgba(255,255,255,0.8)", fontWeight: pathname === link.href ? 600 : 400, fontFamily: "var(--font-body)" }}>
                       {link.label}
                     </Link>
                   )
@@ -431,7 +431,7 @@ export default function Navbar() {
               <div style={{ flexShrink: 0 }}><NavEagle /></div>
               <div className="flex items-center gap-16">
                 {navLinks.slice(2).map((link) => (
-                  <Link key={link.href} href={link.href!} className="nav-link px-4 py-2 rounded-lg text-sm hover:bg-white/5 transition-colors" style={{ color: pathname === link.href ? "#00B8AE" : "rgba(255,255,255,0.8)", fontWeight: pathname === link.href ? 600 : 400, fontFamily: "var(--font-body)" }}>
+                  <Link key={link.href} href={link.href!} className="nav-link px-4 py-2 rounded-lg text-sm hover:bg-white/5 transition-colors" style={{ color: pathname === link.href ? "#6FDDD6" : "rgba(255,255,255,0.8)", fontWeight: pathname === link.href ? 600 : 400, fontFamily: "var(--font-body)" }}>
                     {link.label}
                   </Link>
                 ))}
@@ -443,9 +443,9 @@ export default function Navbar() {
                 <div key={label} style={{ display: "flex", alignItems: "center", gap: "2.5rem" }}>
                   <div style={{ textAlign: "center" }}>
                     <div style={{ fontSize: "1.15rem", fontWeight: 800, color: "white", fontFamily: "var(--font-heading)", lineHeight: 1 }}>{num}</div>
-                    <div style={{ fontSize: "0.58rem", color: "rgba(0,184,174,0.75)", letterSpacing: "0.1em", textTransform: "uppercase", marginTop: "0.2rem" }}>{label}</div>
+                    <div style={{ fontSize: "0.58rem", color: "rgba(111,221,214,0.75)", letterSpacing: "0.1em", textTransform: "uppercase", marginTop: "0.2rem" }}>{label}</div>
                   </div>
-                  {i < arr.length - 1 && <span style={{ color: "rgba(0,184,174,0.2)", fontSize: 5 }}>◆</span>}
+                  {i < arr.length - 1 && <span style={{ color: "rgba(111,221,214,0.2)", fontSize: 5 }}>◆</span>}
                 </div>
               ))}
             </div>
@@ -458,16 +458,16 @@ export default function Navbar() {
             {searchOpen ? (
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
-                  <FaSearch style={{ position: "absolute", left: 10, color: "rgba(0,184,174,0.55)", fontSize: 11, pointerEvents: "none", zIndex: 1 }} />
+                  <FaSearch style={{ position: "absolute", left: 10, color: "rgba(111,221,214,0.55)", fontSize: 11, pointerEvents: "none", zIndex: 1 }} />
                   <input
                     ref={searchInput}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onKeyDown={handleSearchKey}
                     placeholder={t("nav.search_placeholder")}
-                    style={{ paddingLeft: 30, paddingRight: 12, paddingTop: 8, paddingBottom: 8, borderRadius: "0.625rem", border: "1px solid rgba(0,184,174,0.35)", background: "rgba(0,184,174,0.07)", color: "white", fontSize: "0.825rem", fontFamily: "var(--font-body)", outline: "none", width: 180 }}
-                    onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(0,184,174,0.6)"; }}
-                    onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(0,184,174,0.35)"; }}
+                    style={{ paddingLeft: 30, paddingRight: 12, paddingTop: 8, paddingBottom: 8, borderRadius: "0.625rem", border: "1px solid rgba(111,221,214,0.35)", background: "rgba(111,221,214,0.07)", color: "white", fontSize: "0.825rem", fontFamily: "var(--font-body)", outline: "none", width: 180 }}
+                    onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(111,221,214,0.6)"; }}
+                    onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(111,221,214,0.35)"; }}
                   />
                 </div>
                 <button onClick={() => { setSearchOpen(false); setSearchQuery(""); }} style={{ width: 30, height: 30, borderRadius: "0.5rem", flexShrink: 0, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.45)", cursor: "pointer" }}>
@@ -475,31 +475,31 @@ export default function Navbar() {
                 </button>
               </div>
             ) : (
-              <button onClick={() => setSearchOpen(true)} aria-label={t("nav.search_aria_label")} style={{ width: 36, height: 36, borderRadius: "0.625rem", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.6)", cursor: "pointer", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,184,174,0.1)"; e.currentTarget.style.borderColor = "rgba(0,184,174,0.3)"; e.currentTarget.style.color = "#00B8AE"; }} onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.06)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.color = "rgba(255,255,255,0.6)"; }}>
+              <button onClick={() => setSearchOpen(true)} aria-label={t("nav.search_aria_label")} style={{ width: 36, height: 36, borderRadius: "0.625rem", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.6)", cursor: "pointer", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(111,221,214,0.1)"; e.currentTarget.style.borderColor = "rgba(111,221,214,0.3)"; e.currentTarget.style.color = "#6FDDD6"; }} onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.06)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.color = "rgba(255,255,255,0.6)"; }}>
                 <FaSearch size={12} />
               </button>
             )}
 
             {searchOpen && searchQuery.trim().length > 0 && (
-              <div style={{ position: "absolute", top: "calc(100% + 12px)", right: 0, width: 280, background: "rgba(2,40,38,0.97)", backdropFilter: "blur(20px)", border: "1px solid rgba(0,184,174,0.15)", boxShadow: "0 20px 50px rgba(0,0,0,0.45)", borderRadius: "1rem", overflow: "hidden", zIndex: 100 }}>
+              <div style={{ position: "absolute", top: "calc(100% + 12px)", right: 0, width: 280, background: "rgba(10,92,88,0.97)", backdropFilter: "blur(20px)", border: "1px solid rgba(111,221,214,0.15)", boxShadow: "0 20px 50px rgba(0,0,0,0.45)", borderRadius: "1rem", overflow: "hidden", zIndex: 100 }}>
                 {searchResults.length > 0 ? (
                   <>
                     <div style={{ padding: "0.625rem 1rem 0.375rem", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-                      <div style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(0,184,174,0.6)" }}>{t("nav.search_n_results").replace("{n}", String(searchResults.length))}</div>
+                      <div style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(111,221,214,0.6)" }}>{t("nav.search_n_results").replace("{n}", String(searchResults.length))}</div>
                     </div>
                     <div style={{ padding: "0.375rem" }}>
                       {searchResults.map((item) => {
                         const Icon = item.icon;
                         return (
-                          <button key={item.href} onClick={() => { router.push(item.href); setSearchOpen(false); setSearchQuery(""); }} style={{ width: "100%", display: "flex", alignItems: "center", gap: "0.75rem", padding: "0.75rem 0.875rem", borderRadius: "0.75rem", background: "transparent", border: "none", cursor: "pointer", textAlign: "left", transition: "background 0.15s" }} onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,184,174,0.08)"; }} onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}>
-                            <div style={{ width: 32, height: 32, borderRadius: "0.5rem", flexShrink: 0, background: "rgba(0,184,174,0.1)", border: "1px solid rgba(0,184,174,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                              <Icon style={{ color: "#00B8AE", fontSize: 12 }} />
+                          <button key={item.href} onClick={() => { router.push(item.href); setSearchOpen(false); setSearchQuery(""); }} style={{ width: "100%", display: "flex", alignItems: "center", gap: "0.75rem", padding: "0.75rem 0.875rem", borderRadius: "0.75rem", background: "transparent", border: "none", cursor: "pointer", textAlign: "left", transition: "background 0.15s" }} onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(111,221,214,0.08)"; }} onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}>
+                            <div style={{ width: 32, height: 32, borderRadius: "0.5rem", flexShrink: 0, background: "rgba(111,221,214,0.1)", border: "1px solid rgba(111,221,214,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                              <Icon style={{ color: "#6FDDD6", fontSize: 12 }} />
                             </div>
                             <div style={{ flex: 1, minWidth: 0 }}>
                               <div style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.85)", fontFamily: "var(--font-body)", fontWeight: 500 }}>{item.label}</div>
-                              {item.desc && <div style={{ fontSize: "0.68rem", color: "rgba(0,184,174,0.55)", marginTop: "0.1rem", lineHeight: 1.3 }}>{item.desc}</div>}
+                              {item.desc && <div style={{ fontSize: "0.68rem", color: "rgba(111,221,214,0.55)", marginTop: "0.1rem", lineHeight: 1.3 }}>{item.desc}</div>}
                             </div>
-                            <FaChevronRight style={{ color: "rgba(0,184,174,0.4)", fontSize: 9, marginLeft: "auto", flexShrink: 0 }} />
+                            <FaChevronRight style={{ color: "rgba(111,221,214,0.4)", fontSize: 9, marginLeft: "auto", flexShrink: 0 }} />
                           </button>
                         );
                       })}
@@ -519,8 +519,8 @@ export default function Navbar() {
             <button
               onClick={() => setLangOpen(!langOpen)}
               aria-label={t("common.lang_select")}
-              style={{ display: "flex", alignItems: "center", gap: 6, height: 36, padding: "0 12px", borderRadius: "0.625rem", background: langOpen ? "rgba(0,184,174,0.12)" : "rgba(255,255,255,0.06)", border: langOpen ? "1px solid rgba(0,184,174,0.35)" : "1px solid rgba(255,255,255,0.1)", color: langOpen ? "#00B8AE" : "rgba(255,255,255,0.75)", cursor: "pointer", fontSize: "0.78rem", fontFamily: "var(--font-body)", fontWeight: 500, transition: "all 0.2s" }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,184,174,0.1)"; e.currentTarget.style.borderColor = "rgba(0,184,174,0.3)"; e.currentTarget.style.color = "#00B8AE"; }}
+              style={{ display: "flex", alignItems: "center", gap: 6, height: 36, padding: "0 12px", borderRadius: "0.625rem", background: langOpen ? "rgba(111,221,214,0.12)" : "rgba(255,255,255,0.06)", border: langOpen ? "1px solid rgba(111,221,214,0.35)" : "1px solid rgba(255,255,255,0.1)", color: langOpen ? "#6FDDD6" : "rgba(255,255,255,0.75)", cursor: "pointer", fontSize: "0.78rem", fontFamily: "var(--font-body)", fontWeight: 500, transition: "all 0.2s" }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(111,221,214,0.1)"; e.currentTarget.style.borderColor = "rgba(111,221,214,0.3)"; e.currentTarget.style.color = "#6FDDD6"; }}
               onMouseLeave={(e) => { if (!langOpen) { e.currentTarget.style.background = "rgba(255,255,255,0.06)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.color = "rgba(255,255,255,0.75)"; } }}
             >
               <FaGlobe size={11} />
@@ -528,18 +528,18 @@ export default function Navbar() {
               <FaChevronDown size={9} style={{ opacity: 0.6, transform: langOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }} />
             </button>
             {langOpen && (
-              <div style={{ position: "absolute", top: "calc(100% + 10px)", right: 0, width: 160, background: "rgba(2,40,38,0.97)", backdropFilter: "blur(20px)", border: "1px solid rgba(0,184,174,0.15)", boxShadow: "0 16px 40px rgba(0,0,0,0.4)", borderRadius: "0.875rem", overflow: "hidden", zIndex: 200 }}>
+              <div style={{ position: "absolute", top: "calc(100% + 10px)", right: 0, width: 160, background: "rgba(10,92,88,0.97)", backdropFilter: "blur(20px)", border: "1px solid rgba(111,221,214,0.15)", boxShadow: "0 16px 40px rgba(0,0,0,0.4)", borderRadius: "0.875rem", overflow: "hidden", zIndex: 200 }}>
                 <div style={{ padding: "0.375rem" }}>
                   {(Object.entries(langNames) as [Lang, string][]).map(([code, name]) => (
                     <button
                       key={code}
                       onClick={() => { setLang(code); setLangOpen(false); }}
-                      style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.55rem 0.875rem", borderRadius: "0.5rem", background: lang === code ? "rgba(0,184,174,0.12)" : "transparent", border: "none", cursor: "pointer", color: lang === code ? "#00B8AE" : "rgba(255,255,255,0.75)", fontSize: "0.82rem", fontFamily: "var(--font-body)", fontWeight: lang === code ? 600 : 400, textAlign: "left", transition: "background 0.15s" }}
+                      style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.55rem 0.875rem", borderRadius: "0.5rem", background: lang === code ? "rgba(111,221,214,0.12)" : "transparent", border: "none", cursor: "pointer", color: lang === code ? "#6FDDD6" : "rgba(255,255,255,0.75)", fontSize: "0.82rem", fontFamily: "var(--font-body)", fontWeight: lang === code ? 600 : 400, textAlign: "left", transition: "background 0.15s" }}
                       onMouseEnter={(e) => { if (lang !== code) e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }}
                       onMouseLeave={(e) => { if (lang !== code) e.currentTarget.style.background = "transparent"; }}
                     >
                       {name}
-                      {lang === code && <span style={{ fontSize: 8, color: "#00B8AE" }}>✓</span>}
+                      {lang === code && <span style={{ fontSize: 8, color: "#6FDDD6" }}>✓</span>}
                     </button>
                   ))}
                 </div>
@@ -561,17 +561,17 @@ export default function Navbar() {
 
       {/* ══════════ MOBİL MENÜ PANELİ ══════════ */}
       {mobileOpen && (
-        <div className="md:hidden" style={{ background: "rgba(3,30,28,0.98)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(0,184,174,0.12)", boxShadow: "0 16px 40px rgba(0,0,0,0.4)", maxHeight: "calc(100svh - 58px)", overflowY: "auto", overscrollBehavior: "contain" }}>
+        <div className="md:hidden" style={{ background: "rgba(10,92,88,0.98)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(111,221,214,0.12)", boxShadow: "0 16px 40px rgba(0,0,0,0.4)", maxHeight: "calc(100svh - 58px)", overflowY: "auto", overscrollBehavior: "contain" }}>
           <div style={{ padding: "0.75rem 1rem 1.25rem" }}>
 
             <div style={{ marginBottom: "0.75rem" }}>
               <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
-                <FaSearch style={{ position: "absolute", left: 12, color: "rgba(0,184,174,0.5)", fontSize: 12, pointerEvents: "none", zIndex: 1 }} />
+                <FaSearch style={{ position: "absolute", left: 12, color: "rgba(111,221,214,0.5)", fontSize: 12, pointerEvents: "none", zIndex: 1 }} />
                 <input
                   value={mobileSearch}
                   onChange={(e) => setMobileSearch(e.target.value)}
                   placeholder={t("nav.mobile_search_placeholder")}
-                  style={{ width: "100%", paddingLeft: 36, paddingRight: 12, paddingTop: 10, paddingBottom: 10, borderRadius: "0.75rem", border: "1px solid rgba(0,184,174,0.2)", background: "rgba(0,184,174,0.06)", color: "white", fontSize: "0.85rem", fontFamily: "var(--font-body)", outline: "none" }}
+                  style={{ width: "100%", paddingLeft: 36, paddingRight: 12, paddingTop: 10, paddingBottom: 10, borderRadius: "0.75rem", border: "1px solid rgba(111,221,214,0.2)", background: "rgba(111,221,214,0.06)", color: "white", fontSize: "0.85rem", fontFamily: "var(--font-body)", outline: "none" }}
                 />
               </div>
               {mobileSearch.trim().length > 0 && (
@@ -579,13 +579,13 @@ export default function Navbar() {
                   {mobileResults.length > 0 ? mobileResults.map((item) => {
                     const Icon = item.icon;
                     return (
-                      <Link key={item.href} href={item.href} onClick={() => setMobileSearch("")} style={{ display: "flex", alignItems: "center", gap: "0.625rem", padding: "0.625rem 0.875rem", borderRadius: "0.625rem", background: "rgba(0,184,174,0.08)", border: "1px solid rgba(0,184,174,0.15)", textDecoration: "none" }}>
-                        <Icon style={{ color: "#00B8AE", fontSize: 11, flexShrink: 0 }} />
+                      <Link key={item.href} href={item.href} onClick={() => setMobileSearch("")} style={{ display: "flex", alignItems: "center", gap: "0.625rem", padding: "0.625rem 0.875rem", borderRadius: "0.625rem", background: "rgba(111,221,214,0.08)", border: "1px solid rgba(111,221,214,0.15)", textDecoration: "none" }}>
+                        <Icon style={{ color: "#6FDDD6", fontSize: 11, flexShrink: 0 }} />
                         <div style={{ flex: 1, minWidth: 0 }}>
                           <div style={{ fontSize: "0.825rem", color: "rgba(255,255,255,0.85)", fontFamily: "var(--font-body)" }}>{item.label}</div>
-                          {item.desc && <div style={{ fontSize: "0.67rem", color: "rgba(0,184,174,0.55)", marginTop: "0.05rem" }}>{item.desc}</div>}
+                          {item.desc && <div style={{ fontSize: "0.67rem", color: "rgba(111,221,214,0.55)", marginTop: "0.05rem" }}>{item.desc}</div>}
                         </div>
-                        <FaChevronRight style={{ color: "rgba(0,184,174,0.4)", fontSize: 8, marginLeft: "auto", flexShrink: 0 }} />
+                        <FaChevronRight style={{ color: "rgba(111,221,214,0.4)", fontSize: 8, marginLeft: "auto", flexShrink: 0 }} />
                       </Link>
                     );
                   }) : (
@@ -600,12 +600,12 @@ export default function Navbar() {
             <MobileLink href="/" label={t("nav.home")} Icon={FaHome} active={pathname === "/"} />
 
             <div>
-              <button onClick={() => setProjExpanded(!projExpanded)} style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.75rem 0.875rem", borderRadius: "0.75rem", background: isProjectActive ? "rgba(0,184,174,0.08)" : "transparent", border: "none", cursor: "pointer", marginBottom: "0.125rem" }}>
+              <button onClick={() => setProjExpanded(!projExpanded)} style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.75rem 0.875rem", borderRadius: "0.75rem", background: isProjectActive ? "rgba(111,221,214,0.08)" : "transparent", border: "none", cursor: "pointer", marginBottom: "0.125rem" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                  <div style={{ width: 30, height: 30, borderRadius: "0.5rem", background: isProjectActive ? "rgba(0,184,174,0.15)" : "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <FaTrain style={{ color: isProjectActive ? "#00B8AE" : "rgba(255,255,255,0.45)", fontSize: 11 }} />
+                  <div style={{ width: 30, height: 30, borderRadius: "0.5rem", background: isProjectActive ? "rgba(111,221,214,0.15)" : "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    <FaTrain style={{ color: isProjectActive ? "#6FDDD6" : "rgba(255,255,255,0.45)", fontSize: 11 }} />
                   </div>
-                  <span style={{ fontSize: "0.875rem", fontWeight: isProjectActive ? 600 : 400, color: isProjectActive ? "#00B8AE" : "rgba(255,255,255,0.85)" }}>{t("nav.project")}</span>
+                  <span style={{ fontSize: "0.875rem", fontWeight: isProjectActive ? 600 : 400, color: isProjectActive ? "#6FDDD6" : "rgba(255,255,255,0.85)" }}>{t("nav.project")}</span>
                 </div>
                 <FaChevronDown style={{ color: "rgba(255,255,255,0.3)", fontSize: 10, transform: projExpanded ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }} />
               </button>
@@ -617,10 +617,10 @@ export default function Navbar() {
                   ].map(({ href, label, icon: Icon }) => {
                     const active = pathname === href;
                     return (
-                      <Link key={href} href={href} style={{ display: "flex", alignItems: "center", gap: "0.625rem", padding: "0.625rem 0.875rem", borderRadius: "0.625rem", background: active ? "rgba(0,184,174,0.1)" : "rgba(255,255,255,0.03)", border: active ? "1px solid rgba(0,184,174,0.2)" : "1px solid rgba(255,255,255,0.05)", textDecoration: "none" }}>
-                        <Icon style={{ color: active ? "#00B8AE" : "rgba(255,255,255,0.35)", fontSize: 11, flexShrink: 0 }} />
-                        <span style={{ fontSize: "0.825rem", fontWeight: active ? 600 : 400, color: active ? "#00B8AE" : "rgba(255,255,255,0.7)" }}>{label}</span>
-                        {active && <FaChevronRight style={{ color: "#00B8AE", fontSize: 8, marginLeft: "auto" }} />}
+                      <Link key={href} href={href} style={{ display: "flex", alignItems: "center", gap: "0.625rem", padding: "0.625rem 0.875rem", borderRadius: "0.625rem", background: active ? "rgba(111,221,214,0.1)" : "rgba(255,255,255,0.03)", border: active ? "1px solid rgba(111,221,214,0.2)" : "1px solid rgba(255,255,255,0.05)", textDecoration: "none" }}>
+                        <Icon style={{ color: active ? "#6FDDD6" : "rgba(255,255,255,0.35)", fontSize: 11, flexShrink: 0 }} />
+                        <span style={{ fontSize: "0.825rem", fontWeight: active ? 600 : 400, color: active ? "#6FDDD6" : "rgba(255,255,255,0.7)" }}>{label}</span>
+                        {active && <FaChevronRight style={{ color: "#6FDDD6", fontSize: 8, marginLeft: "auto" }} />}
                       </Link>
                     );
                   })}
@@ -646,9 +646,9 @@ export default function Navbar() {
                     onClick={() => setMobileView(v)}
                     style={{
                       flex: 1, padding: "0.5rem 0.25rem", borderRadius: "0.625rem",
-                      border: mobileView === v ? "1px solid rgba(0,184,174,0.5)" : "1px solid rgba(255,255,255,0.08)",
-                      background: mobileView === v ? "rgba(0,184,174,0.12)" : "rgba(255,255,255,0.03)",
-                      color: mobileView === v ? "#00B8AE" : "rgba(255,255,255,0.55)",
+                      border: mobileView === v ? "1px solid rgba(111,221,214,0.5)" : "1px solid rgba(255,255,255,0.08)",
+                      background: mobileView === v ? "rgba(111,221,214,0.12)" : "rgba(255,255,255,0.03)",
+                      color: mobileView === v ? "#6FDDD6" : "rgba(255,255,255,0.55)",
                       fontSize: "0.78rem", fontWeight: mobileView === v ? 600 : 400,
                       fontFamily: "var(--font-body)", cursor: "pointer",
                       display: "flex", flexDirection: "column", alignItems: "center", gap: "0.15rem",
@@ -665,11 +665,11 @@ export default function Navbar() {
             <div style={{ marginBottom: "0.75rem" }}>
               <button
                 onClick={() => setMobileLangOpen(!mobileLangOpen)}
-                style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.75rem 0.875rem", borderRadius: "0.75rem", background: mobileLangOpen ? "rgba(0,184,174,0.08)" : "rgba(255,255,255,0.03)", border: mobileLangOpen ? "1px solid rgba(0,184,174,0.2)" : "1px solid rgba(255,255,255,0.05)", cursor: "pointer" }}
+                style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.75rem 0.875rem", borderRadius: "0.75rem", background: mobileLangOpen ? "rgba(111,221,214,0.08)" : "rgba(255,255,255,0.03)", border: mobileLangOpen ? "1px solid rgba(111,221,214,0.2)" : "1px solid rgba(255,255,255,0.05)", cursor: "pointer" }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                  <div style={{ width: 30, height: 30, borderRadius: "0.5rem", background: "rgba(0,184,174,0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <FaGlobe style={{ color: "#00B8AE", fontSize: 11 }} />
+                  <div style={{ width: 30, height: 30, borderRadius: "0.5rem", background: "rgba(111,221,214,0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <FaGlobe style={{ color: "#6FDDD6", fontSize: 11 }} />
                   </div>
                   <span style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.85)" }}>{langNames[lang]}</span>
                 </div>
@@ -681,17 +681,17 @@ export default function Navbar() {
                     <button
                       key={code}
                       onClick={() => { setLang(code); setMobileLangOpen(false); }}
-                      style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.55rem 0.875rem", borderRadius: "0.5rem", background: lang === code ? "rgba(0,184,174,0.1)" : "rgba(255,255,255,0.03)", border: "none", cursor: "pointer", color: lang === code ? "#00B8AE" : "rgba(255,255,255,0.7)", fontSize: "0.82rem", fontFamily: "var(--font-body)", fontWeight: lang === code ? 600 : 400 }}
+                      style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.55rem 0.875rem", borderRadius: "0.5rem", background: lang === code ? "rgba(111,221,214,0.1)" : "rgba(255,255,255,0.03)", border: "none", cursor: "pointer", color: lang === code ? "#6FDDD6" : "rgba(255,255,255,0.7)", fontSize: "0.82rem", fontFamily: "var(--font-body)", fontWeight: lang === code ? 600 : 400 }}
                     >
                       {name}
-                      {lang === code && <span style={{ fontSize: 8, color: "#00B8AE" }}>✓</span>}
+                      {lang === code && <span style={{ fontSize: 8, color: "#6FDDD6" }}>✓</span>}
                     </button>
                   ))}
                 </div>
               )}
             </div>
 
-            <Link href="/iletisim" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", background: "linear-gradient(135deg, #007A75, #00B8AE)", color: "white", padding: "0.875rem", borderRadius: "0.875rem", fontSize: "0.875rem", fontWeight: 600, textDecoration: "none", boxShadow: "0 4px 16px rgba(0,184,174,0.2)" }}>
+            <Link href="/iletisim" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", background: "linear-gradient(135deg, #0B7C77, #6FDDD6)", color: "white", padding: "0.875rem", borderRadius: "0.875rem", fontSize: "0.875rem", fontWeight: 600, textDecoration: "none", boxShadow: "0 4px 16px rgba(111,221,214,0.2)" }}>
               <FaEnvelope style={{ fontSize: 12 }} />
               {t("nav.contact_cta")}
             </Link>
@@ -704,12 +704,12 @@ export default function Navbar() {
 
 function MobileLink({ href, label, Icon, active }: { href: string; label: string; Icon: React.ElementType; active: boolean }) {
   return (
-    <Link href={href} style={{ display: "flex", alignItems: "center", gap: "0.75rem", padding: "0.75rem 0.875rem", borderRadius: "0.75rem", marginBottom: "0.125rem", background: active ? "rgba(0,184,174,0.08)" : "transparent", textDecoration: "none" }}>
-      <div style={{ width: 30, height: 30, borderRadius: "0.5rem", flexShrink: 0, background: active ? "rgba(0,184,174,0.15)" : "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <Icon style={{ color: active ? "#00B8AE" : "rgba(255,255,255,0.45)", fontSize: 11 }} />
+    <Link href={href} style={{ display: "flex", alignItems: "center", gap: "0.75rem", padding: "0.75rem 0.875rem", borderRadius: "0.75rem", marginBottom: "0.125rem", background: active ? "rgba(111,221,214,0.08)" : "transparent", textDecoration: "none" }}>
+      <div style={{ width: 30, height: 30, borderRadius: "0.5rem", flexShrink: 0, background: active ? "rgba(111,221,214,0.15)" : "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Icon style={{ color: active ? "#6FDDD6" : "rgba(255,255,255,0.45)", fontSize: 11 }} />
       </div>
-      <span style={{ fontSize: "0.875rem", fontWeight: active ? 600 : 400, color: active ? "#00B8AE" : "rgba(255,255,255,0.85)" }}>{label}</span>
-      {active && <FaChevronRight style={{ color: "#00B8AE", fontSize: 8, marginLeft: "auto" }} />}
+      <span style={{ fontSize: "0.875rem", fontWeight: active ? 600 : 400, color: active ? "#6FDDD6" : "rgba(255,255,255,0.85)" }}>{label}</span>
+      {active && <FaChevronRight style={{ color: "#6FDDD6", fontSize: 8, marginLeft: "auto" }} />}
     </Link>
   );
 }

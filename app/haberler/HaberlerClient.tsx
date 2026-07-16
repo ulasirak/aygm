@@ -8,12 +8,12 @@ import { useLang } from "@/context/LangContext";
 import { useTranslate } from "@/hooks/useTranslate";
 
 const catColors: Record<string, string> = {
-  toren:    "#007A75",
-  ihale:    "#1D5C3A",
-  devir:    "#3A8A50",
-  guzergah: "#00B8AE",
-  vizyon:   "#2E7D32",
-  konyaray: "#00B8AE",
+  toren:    "#0B7C77",
+  ihale:    "#0A6B66",
+  devir:    "#29BDB5",
+  guzergah: "#6FDDD6",
+  vizyon:   "#0B7C77",
+  konyaray: "#6FDDD6",
 };
 
 // Tüm haberlerin başlık+özet dizisi — sabit referans
@@ -29,7 +29,7 @@ export default function HaberlerClient() {
         {/* ── Hero ── */}
         <div
           className="relative py-28"
-          style={{ background: "linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 55%, var(--forest) 100%)", paddingTop: "6rem", paddingBottom: "6rem" }}
+          style={{ background: "linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 55%, var(--teal-dark) 100%)", paddingTop: "6rem", paddingBottom: "6rem" }}
         >
           <div className="container-aygm">
             <div className="flex items-center gap-2 text-sm" style={{ color: "rgba(255,255,255,0.5)", marginBottom: "2.25rem" }}>
@@ -51,7 +51,7 @@ export default function HaberlerClient() {
           <div className="container-aygm">
             <div className="max-w-3xl mx-auto" style={{ display: "flex", flexDirection: "column", gap: "2.25rem" }}>
               {allNews.map((item, idx) => {
-                const catColor = catColors[item.category] || "var(--forest)";
+                const catColor = catColors[item.category] || "var(--teal-dark)";
                 const title   = out[idx * 2]     ?? item.title;
                 const summary = out[idx * 2 + 1] ?? item.summary;
                 return (
@@ -79,7 +79,7 @@ export default function HaberlerClient() {
                           {item.date}
                         </span>
                       </div>
-                      <h2 className="text-lg font-bold" style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", marginBottom: "1rem" }}>
+                      <h2 className="text-lg font-bold" style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)", marginBottom: "1rem" }}>
                         {title}
                       </h2>
                       <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--gray-600)" }}>
@@ -92,7 +92,7 @@ export default function HaberlerClient() {
                         <Link
                           href={`/haberler/${item.slug}`}
                           className="flex items-center gap-1 text-xs font-semibold flex-shrink-0"
-                          style={{ color: "var(--forest)" }}
+                          style={{ color: "var(--teal-dark)" }}
                         >
                           {t("haberler.read_more")}
                           <FaArrowRight style={{ fontSize: 10 }} />

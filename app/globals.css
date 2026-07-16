@@ -1,33 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  /* === YEŞİL & BEYAZ PALET === */
-  --forest:       #1D5C3A;
-  --forest-deep:  #154530;
-  --green:        #2E7D32;
-  --green-mid:    #3A8A50;
-  --green-light:  #52B788;
-  --mint:         #A8D5BA;
-  --pale:         #EEF9F8;
-  --pale-2:       #F5FCFC;
-
   /* === TURKUAZ PALET === */
-  --teal-deep:    #041B19;
-  --teal:         #007A75;
-  --teal-mid:     #009E98;
-  --teal-light:   #00B8AE;
-  --teal-accent:  #5EEBE5;
-  --teal-pale:    #E6FFFE;
+  /* --teal okunabilirlik çapası: beyazda 5.04:1. Daha açığı AA'yı düşürür, sabit kalmalı. */
+  --teal-deep:    #0A5C58;
+  --teal-dark:    #0A6B66;
+  --teal:         #0B7C77;
+  --teal-mid:     #29BDB5;
+  --teal-light:   #6FDDD6;
+  --teal-accent:  #8CF4EF;
+  --mint:         #CDF2EF;
+  --teal-pale:    #EFFDFC;
+  --pale:         #F5FEFE;
+  --pale-2:       #FAFFFF;
 
-  /* Nötr */
+  /* Nötr (turkuaz tonlu) */
   --white:        #FFFFFF;
-  --gray-50:      #F8FBFB;
-  --gray-100:     #E4EDE8;
-  --gray-200:     #C5D8CC;
-  --gray-400:     #4E6E5E;
-  --gray-600:     #4A6B57;
-  --text:         #1A2B20;
-  --text-muted:   #4E6A58;
+  --gray-50:      #FAFDFD;
+  --gray-100:     #E9F4F3;
+  --gray-200:     #CDE3E1;
+  --gray-400:     #5A7A78;
+  --gray-600:     #537472;
+  --text:         #173539;
+  --text-muted:   #587678;
 
   /* Vurgu */
   --gold:         #B8892A;
@@ -76,7 +71,7 @@ img, video, svg, canvas {
 ::-webkit-scrollbar-thumb { background: var(--teal-light); border-radius: 3px; }
 
 /* Selection */
-::selection { background: var(--teal-accent); color: white; }
+::selection { background: var(--teal-accent); color: var(--teal-deep); }
 
 /* ── Layout ── */
 .container-aygm {
@@ -102,7 +97,7 @@ img, video, svg, canvas {
 .gradient-text-green {
   display: inline-block;
   padding-bottom: 0.12em;
-  background: linear-gradient(135deg, var(--green), var(--green-light));
+  background: linear-gradient(135deg, var(--teal), var(--teal-mid));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -110,7 +105,7 @@ img, video, svg, canvas {
 .gradient-text-teal {
   display: inline-block;
   padding-bottom: 0.12em;
-  background: linear-gradient(135deg, var(--teal-mid), var(--teal-light));
+  background: linear-gradient(135deg, var(--teal), var(--teal-mid));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -172,7 +167,7 @@ html.cb-achromato    { filter: grayscale(100%); }
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--green);
+  background: var(--teal);
   color: white;
   padding: 1.1rem 2.25rem;
   border-radius: 0.5rem;
@@ -186,9 +181,9 @@ html.cb-achromato    { filter: grayscale(100%); }
   font-family: var(--font-body);
 }
 .btn-primary:hover {
-  background: var(--forest);
+  background: var(--teal-dark);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(30,92,58,0.3);
+  box-shadow: 0 6px 20px rgba(10,107,102,0.3);
 }
 
 .btn-secondary {
@@ -218,19 +213,19 @@ html.cb-achromato    { filter: grayscale(100%); }
   align-items: center;
   gap: 0.5rem;
   background: transparent;
-  color: var(--forest);
+  color: var(--teal-dark);
   padding: 0.75rem 1.75rem;
   border-radius: 0.5rem;
   font-weight: 600;
   font-size: 0.875rem;
   text-decoration: none;
-  border: 1.5px solid var(--forest);
+  border: 1.5px solid var(--teal-dark);
   transition: all 0.2s;
   cursor: pointer;
   font-family: var(--font-body);
 }
 .btn-outline-navy:hover {
-  background: var(--forest);
+  background: var(--teal-dark);
   color: white;
 }
 
@@ -254,7 +249,7 @@ html.cb-achromato    { filter: grayscale(100%); }
 }
 .btn-contact:hover {
   background: white;
-  color: var(--forest);
+  color: var(--teal-dark);
   border-color: white;
 }
 
@@ -263,8 +258,8 @@ html.cb-achromato    { filter: grayscale(100%); }
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(82,183,136,0.12);
-  color: var(--green-mid);
+  background: rgba(111,221,214,0.16);
+  color: var(--teal);
   padding: 0.35rem 1rem;
   border-radius: 100px;
   font-size: 0.7rem;
@@ -272,7 +267,7 @@ html.cb-achromato    { filter: grayscale(100%); }
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-bottom: 1.25rem;
-  border: 1px solid rgba(82,183,136,0.2);
+  border: 1px solid rgba(111,221,214,0.28);
 }
 
 /* ── Cards ── */
@@ -280,7 +275,7 @@ html.cb-achromato    { filter: grayscale(100%); }
   background: white;
   border-radius: 1.25rem;
   padding: 1.5rem 1.25rem;
-  box-shadow: 0 2px 20px rgba(30,92,58,0.05);
+  box-shadow: 0 2px 20px rgba(10,107,102,0.06);
   border: 1px solid var(--gray-100);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -289,19 +284,19 @@ html.cb-achromato    { filter: grayscale(100%); }
 }
 .stat-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 14px 40px rgba(30,92,58,0.1);
+  box-shadow: 0 14px 40px rgba(10,107,102,0.12);
 }
 
 .news-card {
   background: white;
   border-radius: 1.25rem;
-  box-shadow: 0 2px 16px rgba(30,92,58,0.05);
+  box-shadow: 0 2px 16px rgba(10,107,102,0.06);
   border: 1px solid var(--gray-100);
   transition: transform 0.3s, box-shadow 0.3s;
 }
 .news-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 48px rgba(30,92,58,0.1);
+  box-shadow: 0 16px 48px rgba(10,107,102,0.12);
 }
 
 /* ── Badges ── */
@@ -318,7 +313,7 @@ html.cb-achromato    { filter: grayscale(100%); }
 }
 .badge-green {
   display: inline-block;
-  background: var(--green);
+  background: var(--teal);
   color: white;
   padding: 0.2rem 0.7rem;
   border-radius: 0.3rem;
@@ -342,8 +337,8 @@ html.cb-achromato    { filter: grayscale(100%); }
   font-family: var(--font-body);
 }
 .form-input:focus {
-  border-color: var(--green-mid);
-  box-shadow: 0 0 0 3px rgba(58,138,80,0.1);
+  border-color: var(--teal-mid);
+  box-shadow: 0 0 0 3px rgba(41,189,181,0.15);
   background: white;
 }
 .form-input option { color: var(--text); }
@@ -358,15 +353,15 @@ html.cb-achromato    { filter: grayscale(100%); }
 .progress-fill {
   height: 100%;
   border-radius: 3px;
-  background: linear-gradient(90deg, var(--mint), var(--green-light));
+  background: linear-gradient(90deg, var(--mint), var(--teal-light));
   transition: width 1.2s ease;
 }
 
 /* ── Hero ── */
 .hero-pattern {
   background-image:
-    radial-gradient(circle at 15% 60%, rgba(82,183,136,0.1) 0%, transparent 50%),
-    radial-gradient(circle at 85% 20%, rgba(168,213,186,0.08) 0%, transparent 50%),
+    radial-gradient(circle at 15% 60%, rgba(111,221,214,0.12) 0%, transparent 50%),
+    radial-gradient(circle at 85% 20%, rgba(205,242,239,0.1) 0%, transparent 50%),
     url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.025' fill-rule='evenodd'%3E%3Ccircle cx='40' cy='40' r='2'/%3E%3C/g%3E%3C/svg%3E");
 }
 
@@ -375,13 +370,13 @@ html.cb-achromato    { filter: grayscale(100%); }
   position: absolute;
   left: 1.5rem; top: 0; bottom: 0;
   width: 1.5px;
-  background: linear-gradient(to bottom, var(--green), var(--mint), var(--gray-100));
+  background: linear-gradient(to bottom, var(--teal), var(--mint), var(--gray-100));
 }
 
 /* ── Mobile menu ── */
 .mobile-menu {
-  background: #041B19;
-  border-top: 1px solid rgba(0,184,174,0.1);
+  background: var(--teal-deep);
+  border-top: 1px solid rgba(111,221,214,0.15);
   max-height: calc(100svh - 68px);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -423,7 +418,7 @@ html.cb-achromato    { filter: grayscale(100%); }
 
 /* ── Çevre bölümü ayırıcı ── */
 .env-divider {
-  border-bottom: 1px solid rgba(0,184,174,0.2);
+  border-bottom: 1px solid rgba(111,221,214,0.25);
   padding-bottom: 2rem;
   text-align: center;
   flex-shrink: 0;
@@ -431,7 +426,7 @@ html.cb-achromato    { filter: grayscale(100%); }
 @media (min-width: 768px) {
   .env-divider {
     border-bottom: none;
-    border-right: 1px solid rgba(0,184,174,0.2);
+    border-right: 1px solid rgba(111,221,214,0.25);
     padding-bottom: 0;
     padding-right: 2.5rem;
     margin-right: 0.5rem;

@@ -13,22 +13,22 @@ interface Station {
 }
 
 const typeColor: Record<StationType, string> = {
-  endpoint: "var(--forest)",
-  junction: "#00B8AE",
+  endpoint: "var(--teal-dark)",
+  junction: "#6FDDD6",
   transfer: "var(--gold)",
-  normal:   "#007A75",
+  normal:   "#0B7C77",
   pending:  "var(--gray-300)",
 };
 const typeBg: Record<StationType, string> = {
-  endpoint: "rgba(29,92,58,0.12)",
-  junction: "rgba(0,184,174,0.12)",
+  endpoint: "rgba(10,107,102,0.12)",
+  junction: "rgba(111,221,214,0.12)",
   transfer: "rgba(201,168,76,0.12)",
   normal:   "transparent",
   pending:  "rgba(0,0,0,0.02)",
 };
 const typeBorder: Record<StationType, string> = {
-  endpoint: "1px solid rgba(29,92,58,0.2)",
-  junction: "1px solid rgba(0,184,174,0.25)",
+  endpoint: "1px solid rgba(10,107,102,0.2)",
+  junction: "1px solid rgba(111,221,214,0.25)",
   transfer: "1px solid rgba(201,168,76,0.2)",
   normal:   "1px solid transparent",
   pending:  "1px dashed var(--gray-200)",
@@ -128,11 +128,11 @@ export default function RouteSection() {
   ], [t, pendingDesc]);
 
   const integrationItems = useMemo(() => [
-    { color: "var(--forest)", label: t("guzergah.int_1_line") },
-    { color: "var(--forest)", label: t("guzergah.int_2_line") },
-    { color: "#00B8AE",       label: t("guzergah.int_3_line") },
+    { color: "var(--teal-dark)", label: t("guzergah.int_1_line") },
+    { color: "var(--teal-dark)", label: t("guzergah.int_2_line") },
+    { color: "#6FDDD6",       label: t("guzergah.int_3_line") },
     { color: "var(--gold)",   label: t("guzergah.int_4_line") },
-    { color: "#3A8A50",       label: t("guzergah.int_5_line") },
+    { color: "#29BDB5",       label: t("guzergah.int_5_line") },
   ], [t]);
 
   return (
@@ -144,7 +144,7 @@ export default function RouteSection() {
           <div>
             <h2
               className="text-3xl md:text-4xl font-black"
-              style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", marginBottom: "1.5rem" }}
+              style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)", marginBottom: "1.5rem" }}
             >
               {t("route.heading1")}{" "}
               <span className="gradient-text-teal">{t("route.heading2")}</span>
@@ -156,20 +156,20 @@ export default function RouteSection() {
             {/* Faz göstergesi */}
             <div className="rounded-xl p-4" style={{ background: "var(--gray-50)", border: "1px solid var(--gray-100)", marginBottom: "1.5rem" }}>
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: "var(--forest)" }} />
-                <span className="text-sm font-semibold" style={{ color: "var(--forest)" }}>{t("route.phase1_label")}</span>
+                <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: "var(--teal-dark)" }} />
+                <span className="text-sm font-semibold" style={{ color: "var(--teal-dark)" }}>{t("route.phase1_label")}</span>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: "#00B8AE" }} />
-                <span className="text-sm font-semibold" style={{ color: "#00B8AE" }}>{t("route.phase2_label")}</span>
+                <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: "#6FDDD6" }} />
+                <span className="text-sm font-semibold" style={{ color: "#0B7C77" }}>{t("route.phase2_label")}</span>
               </div>
             </div>
 
             {/* Entegrasyon noktaları */}
-            <div className="rounded-xl p-5" style={{ background: "rgba(0,122,117,0.04)", border: "1px solid rgba(0,122,117,0.15)", marginBottom: "2.5rem" }}>
+            <div className="rounded-xl p-5" style={{ background: "rgba(11,124,119,0.04)", border: "1px solid rgba(11,124,119,0.15)", marginBottom: "2.5rem" }}>
               <div className="flex items-center gap-2" style={{ marginBottom: "0.875rem" }}>
-                <FaExchangeAlt style={{ color: "#007A75", fontSize: 14 }} />
-                <span className="text-sm font-bold" style={{ color: "#007A75" }}>{t("route.integration_title")}</span>
+                <FaExchangeAlt style={{ color: "#0B7C77", fontSize: 14 }} />
+                <span className="text-sm font-bold" style={{ color: "#0B7C77" }}>{t("route.integration_title")}</span>
               </div>
               <div className="space-y-2 text-sm" style={{ color: "var(--gray-600)" }}>
                 {integrationItems.map((item) => (
@@ -185,10 +185,10 @@ export default function RouteSection() {
               href="/guzergah"
               style={{
                 display: "inline-flex", alignItems: "center", gap: "0.5rem",
-                background: "transparent", color: "#007A75",
+                background: "transparent", color: "#0B7C77",
                 padding: "0.75rem 1.75rem", borderRadius: "0.5rem",
                 fontWeight: 600, fontSize: "0.875rem", textDecoration: "none",
-                border: "1.5px solid #007A75", transition: "all 0.2s",
+                border: "1.5px solid #0B7C77", transition: "all 0.2s",
               }}
             >
               {t("route.see_all")}
@@ -201,11 +201,11 @@ export default function RouteSection() {
             <div className="relative">
               <div
                 className="absolute w-0.5"
-                style={{ left: "19px", top: "18px", bottom: "18px", background: "linear-gradient(to bottom, #00B8AE 40%, var(--gold) 55%, var(--forest))" }}
+                style={{ left: "19px", top: "18px", bottom: "18px", background: "linear-gradient(to bottom, #6FDDD6 40%, var(--gold) 55%, var(--teal-dark))" }}
               />
 
               <div style={{ marginLeft: "3rem", marginBottom: "0.75rem" }}>
-                <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: "rgba(0,184,174,0.1)", color: "#00B8AE", letterSpacing: "0.06em" }}>
+                <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: "rgba(111,221,214,0.1)", color: "#6FDDD6", letterSpacing: "0.06em" }}>
                   {t("route.phase2_header")} — 10
                 </span>
               </div>
@@ -215,7 +215,7 @@ export default function RouteSection() {
               ))}
 
               <div style={{ marginLeft: "3rem", marginTop: "0.75rem", marginBottom: "0.75rem" }}>
-                <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: "rgba(29,92,58,0.1)", color: "var(--forest)", letterSpacing: "0.06em" }}>
+                <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: "rgba(10,107,102,0.1)", color: "var(--teal-dark)", letterSpacing: "0.06em" }}>
                   {t("route.phase1_header")} — 11
                 </span>
               </div>

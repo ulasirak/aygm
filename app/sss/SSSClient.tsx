@@ -21,7 +21,7 @@ export default function SSSClient() {
       <main>
         <div
           className="relative py-28"
-          style={{ background: "linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 55%, var(--forest) 100%)", paddingTop: "6rem", paddingBottom: "6rem" }}
+          style={{ background: "linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 55%, var(--teal-dark) 100%)", paddingTop: "6rem", paddingBottom: "6rem" }}
         >
           <div className="container-aygm">
             <div className="flex items-center gap-2 text-sm" style={{ color: "rgba(255,255,255,0.5)", marginBottom: "2.25rem" }}>
@@ -47,7 +47,7 @@ export default function SSSClient() {
               <div key={section.catKey} id={section.id} style={{ marginBottom: "4rem" }}>
                 <h2
                   className="text-xl font-black flex items-center gap-3"
-                  style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", marginBottom: "1.5rem" }}
+                  style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)", marginBottom: "1.5rem" }}
                 >
                   <span style={{ fontSize: "1.2rem", lineHeight: 1, flexShrink: 0 }}>✿</span>
                   {t(section.catKey)}
@@ -64,14 +64,14 @@ export default function SSSClient() {
               className="rounded-2xl text-center overflow-hidden"
               style={{
                 marginTop: "6rem",
-                background: "linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 45%, var(--forest) 100%)",
+                background: "linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 45%, var(--teal-dark) 100%)",
                 color: "white",
                 padding: "4rem 2rem",
                 position: "relative",
               }}
             >
-              <div aria-hidden style={{ position: "absolute", top: "-60px", right: "-60px", width: "220px", height: "220px", borderRadius: "50%", background: "radial-gradient(circle, rgba(0,122,117,0.35) 0%, transparent 70%)", pointerEvents: "none" }} />
-              <div aria-hidden style={{ position: "absolute", bottom: "-40px", left: "-40px", width: "160px", height: "160px", borderRadius: "50%", background: "radial-gradient(circle, rgba(0,184,174,0.15) 0%, transparent 70%)", pointerEvents: "none" }} />
+              <div aria-hidden style={{ position: "absolute", top: "-60px", right: "-60px", width: "220px", height: "220px", borderRadius: "50%", background: "radial-gradient(circle, rgba(11,124,119,0.35) 0%, transparent 70%)", pointerEvents: "none" }} />
+              <div aria-hidden style={{ position: "absolute", bottom: "-40px", left: "-40px", width: "160px", height: "160px", borderRadius: "50%", background: "radial-gradient(circle, rgba(111,221,214,0.15) 0%, transparent 70%)", pointerEvents: "none" }} />
               <h3 className="text-xl font-black" style={{ fontFamily: "var(--font-heading)", marginBottom: "1.25rem", position: "relative" }}>
                 {t("faq.cta_title")}
               </h3>

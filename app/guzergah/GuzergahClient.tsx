@@ -14,7 +14,7 @@ export default function GuzergahClient() {
   const { t } = useLang();
 
   const stations2 = useMemo(() => [
-    { no: 1,  name: "Konya Stadyumu", subtitle: t("guzergah.sub_terminal"),      district: "Selçuklu", type: "highlight", highlightColor: "#00B8AE", icon: FaFutbol,        features: [t("guzergah.feat_baris"), t("guzergah.feat_stadium")], desc: t("guzergah.desc_stadyum") },
+    { no: 1,  name: "Konya Stadyumu", subtitle: t("guzergah.sub_terminal"),      district: "Selçuklu", type: "highlight", highlightColor: "#6FDDD6", icon: FaFutbol,        features: [t("guzergah.feat_baris"), t("guzergah.feat_stadium")], desc: t("guzergah.desc_stadyum") },
     { no: 2,  name: "M1 Real",        subtitle: t("guzergah.sub_shopping"),      district: "Selçuklu", type: "normal",    icon: FaMapMarkerAlt,  features: [t("guzergah.feat_mall")],                                  desc: t("guzergah.desc_real") },
     { no: 3,  name: "Ecdad Bahçesi",  subtitle: t("guzergah.sub_culture"),       district: "Selçuklu", type: "normal",    icon: FaMapMarkerAlt,  features: [t("guzergah.feat_recreation")],                            desc: t("guzergah.desc_ecdad") },
     { no: 4,  name: "Otogar",         subtitle: t("guzergah.sub_intercity_term"),district: "Selçuklu", type: "transfer",  icon: FaBus,           features: [t("guzergah.feat_intercity_bus"), t("guzergah.feat_taxi")],desc: t("guzergah.desc_otogar") },
@@ -23,7 +23,7 @@ export default function GuzergahClient() {
     { no: 7,  name: "Banliyö",        subtitle: t("guzergah.sub_konyaray"),      district: "Karatay",  type: "transfer",  icon: FaTrain,         features: [t("route.transfer_konyaray"), t("guzergah.feat_park_ride")],   desc: t("guzergah.desc_banliyo") },
     { no: 8,  name: "TÜYAP",          subtitle: t("guzergah.sub_fair"),          district: "Karatay",  type: "normal",    icon: FaMapMarkerAlt,  features: [t("guzergah.feat_tuyap")],                                  desc: t("guzergah.desc_tuyap_st") },
     { no: 9,  name: "ASLİDAŞ",        subtitle: t("guzergah.sub_osb"),           district: "Karatay",  type: "normal",    icon: FaMapMarkerAlt,  features: [t("guzergah.feat_osb")],                                    desc: t("guzergah.desc_aslidash") },
-    { no: 10, name: "Yeni Sanayi",    subtitle: t("guzergah.sub_junction"),      district: "Karatay",  type: "highlight", highlightColor: "#007A75", icon: FaIndustry, features: [t("guzergah.feat_phase1"), t("guzergah.feat_parking")], desc: t("guzergah.desc_yenisanayi") },
+    { no: 10, name: "Yeni Sanayi",    subtitle: t("guzergah.sub_junction"),      district: "Karatay",  type: "highlight", highlightColor: "#0B7C77", icon: FaIndustry, features: [t("guzergah.feat_phase1"), t("guzergah.feat_parking")], desc: t("guzergah.desc_yenisanayi") },
   ], [t]);
 
   const stations1 = useMemo(() => [
@@ -37,16 +37,16 @@ export default function GuzergahClient() {
     { no: 18, name: "—",                        subtitle: t("guzergah.sub_on_route"),   district: "Karatay", type: "pending", icon: FaMapMarkerAlt, features: [],                                                        desc: "" },
     { no: 19, name: "—",                        subtitle: t("guzergah.sub_on_route"),   district: "Karatay", type: "pending", icon: FaMapMarkerAlt, features: [],                                                        desc: "" },
     { no: 20, name: "Karatay Hayvanat Bahçesi", subtitle: t("guzergah.sub_recreation"), district: "Karatay", type: "normal",  icon: FaMapMarkerAlt, features: [],                                                        desc: t("guzergah.desc_hayvanat") },
-    { no: 21, name: "Şehir Hastanesi",          subtitle: t("guzergah.sub_terminal"),   district: "Karatay", type: "highlight", highlightColor: "#1D5C3A", icon: FaHospital, features: [t("guzergah.feat_phase1_terminal"), t("guzergah.feat_emergency")], desc: t("guzergah.desc_hastane") },
+    { no: 21, name: "Şehir Hastanesi",          subtitle: t("guzergah.sub_terminal"),   district: "Karatay", type: "highlight", highlightColor: "#0A6B66", icon: FaHospital, features: [t("guzergah.feat_phase1_terminal"), t("guzergah.feat_emergency")], desc: t("guzergah.desc_hastane") },
   ], [t]);
 
   const integrationItems = [
-    { lineKey: "guzergah.int_1_line", detailKey: "guzergah.int_1_detail", tagKey: "guzergah.int_1_tag", icon: FaTrain, color: "var(--forest)" },
-    { lineKey: "guzergah.int_2_line", detailKey: "guzergah.int_2_detail", tagKey: "guzergah.int_2_tag", icon: FaTrain, color: "var(--forest)" },
-    { lineKey: "guzergah.int_3_line", detailKey: "guzergah.int_3_detail", tagKey: "guzergah.int_3_tag", icon: FaTrain, color: "#00B8AE" },
+    { lineKey: "guzergah.int_1_line", detailKey: "guzergah.int_1_detail", tagKey: "guzergah.int_1_tag", icon: FaTrain, color: "var(--teal-dark)" },
+    { lineKey: "guzergah.int_2_line", detailKey: "guzergah.int_2_detail", tagKey: "guzergah.int_2_tag", icon: FaTrain, color: "var(--teal-dark)" },
+    { lineKey: "guzergah.int_3_line", detailKey: "guzergah.int_3_detail", tagKey: "guzergah.int_3_tag", icon: FaTrain, color: "#6FDDD6" },
     { lineKey: "guzergah.int_4_line", detailKey: "guzergah.int_4_detail", tagKey: "guzergah.int_4_tag", icon: FaBus,   color: "var(--gold)" },
-    { lineKey: "guzergah.int_5_line", detailKey: "guzergah.int_5_detail", tagKey: "guzergah.int_5_tag", icon: FaTrain, color: "#3A8A50" },
-    { lineKey: "guzergah.int_6_line", detailKey: "guzergah.int_6_detail", tagKey: "guzergah.int_6_tag", icon: FaExchangeAlt, color: "#007A75" },
+    { lineKey: "guzergah.int_5_line", detailKey: "guzergah.int_5_detail", tagKey: "guzergah.int_5_tag", icon: FaTrain, color: "#29BDB5" },
+    { lineKey: "guzergah.int_6_line", detailKey: "guzergah.int_6_detail", tagKey: "guzergah.int_6_tag", icon: FaExchangeAlt, color: "#0B7C77" },
   ];
 
   type StationT = typeof stations2[0] & { highlightColor?: string };
@@ -59,7 +59,7 @@ export default function GuzergahClient() {
   return (
     <>
       <main>
-        <div style={{ background: "linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 55%, var(--forest) 100%)", paddingTop: "6rem", paddingBottom: "6rem", position: "relative", overflow: "hidden" }}>
+        <div style={{ background: "linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 55%, var(--teal-dark) 100%)", paddingTop: "6rem", paddingBottom: "6rem", position: "relative", overflow: "hidden" }}>
           <div className="absolute inset-0 pointer-events-none" aria-hidden style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px)", backgroundSize: "60px 60px" }} />
           <div className="container-aygm relative z-10">
             <div className="flex items-center gap-2 text-sm" style={{ color: "rgba(255,255,255,0.5)", marginBottom: "2.25rem" }}>
@@ -84,7 +84,7 @@ export default function GuzergahClient() {
 
         <div id="istasyonlar" className="section-padding" style={{ background: "white" }}>
           <div className="container-aygm">
-            <h2 className="text-2xl md:text-3xl font-black" style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", marginBottom: "2rem" }}>
+            <h2 className="text-2xl md:text-3xl font-black" style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)", marginBottom: "2rem" }}>
               {t("guzergah.station_details")}
             </h2>
 
@@ -93,10 +93,10 @@ export default function GuzergahClient() {
 
               <div className="grid grid-cols-2 gap-x-3 lg:gap-x-16" style={{ marginBottom: "1rem" }}>
                 <div className="ml-1 lg:ml-3.5">
-                  <span style={{ fontSize: "0.78rem", fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", color: "#00B8AE" }}>{t("guzergah.phase2_col")}</span>
+                  <span style={{ fontSize: "0.78rem", fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", color: "#0B7C77" }}>{t("guzergah.phase2_col")}</span>
                 </div>
                 <div className="mr-1 lg:mr-3.5">
-                  <span style={{ fontSize: "0.78rem", fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", color: "#1D5C3A" }}>{t("guzergah.phase1_col")}</span>
+                  <span style={{ fontSize: "0.78rem", fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", color: "#0A6B66" }}>{t("guzergah.phase1_col")}</span>
                 </div>
               </div>
 
@@ -107,13 +107,13 @@ export default function GuzergahClient() {
 
                   const s2IsHighlight = s2 && s2.type === "highlight";
                   const s2IsTransfer  = s2 && s2.type === "transfer";
-                  const s2Accent = s2IsHighlight ? (s2.highlightColor ?? "#00B8AE") : s2IsTransfer ? "var(--gold)" : "var(--forest)";
+                  const s2Accent = s2IsHighlight ? (s2.highlightColor ?? "#6FDDD6") : s2IsTransfer ? "var(--gold)" : "var(--teal-dark)";
                   const S2Icon = s2?.icon;
 
                   const s1IsPending   = s1 && s1.type === "pending";
                   const s1IsHighlight = s1 && s1.type === "highlight";
                   const s1IsTransfer  = s1 && s1.type === "transfer";
-                  const s1Accent = s1IsHighlight ? (s1.highlightColor ?? "#1D5C3A") : s1IsTransfer ? "var(--gold)" : "var(--forest)";
+                  const s1Accent = s1IsHighlight ? (s1.highlightColor ?? "#0A6B66") : s1IsTransfer ? "var(--gold)" : "var(--teal-dark)";
                   const S1Icon = s1?.icon;
 
                   return [
@@ -129,7 +129,7 @@ export default function GuzergahClient() {
                             </div>
                             <div style={{ flex: 1, minWidth: 0 }}>
                               <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.375rem", marginBottom: "0.25rem" }}>
-                                <h3 style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", fontSize: "0.82rem", fontWeight: 700, margin: 0 }}>{s2.name}</h3>
+                                <h3 style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)", fontSize: "0.82rem", fontWeight: 700, margin: 0 }}>{s2.name}</h3>
                                 {s2IsTransfer  && <span style={{ fontSize: "0.6rem", padding: "0.1rem 0.4rem", borderRadius: "999px", background: "rgba(184,137,42,0.12)", color: "var(--gold)", fontWeight: 600 }}>{transferLabel}</span>}
                                 {s2IsHighlight && <span style={{ fontSize: "0.6rem", padding: "0.1rem 0.4rem", borderRadius: "999px", background: `${s2Accent}15`, color: s2Accent, fontWeight: 600 }}>{highlightLabel}</span>}
                               </div>
@@ -176,7 +176,7 @@ export default function GuzergahClient() {
                               </div>
                               <div style={{ flex: 1, minWidth: 0 }}>
                                 <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.375rem", marginBottom: "0.25rem" }}>
-                                  <h3 style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", fontSize: "0.82rem", fontWeight: 700, margin: 0 }}>{s1.name}</h3>
+                                  <h3 style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)", fontSize: "0.82rem", fontWeight: 700, margin: 0 }}>{s1.name}</h3>
                                   {s1IsTransfer  && <span style={{ fontSize: "0.6rem", padding: "0.1rem 0.4rem", borderRadius: "999px", background: "rgba(184,137,42,0.12)", color: "var(--gold)", fontWeight: 600 }}>{transferLabel}</span>}
                                   {s1IsHighlight && <span style={{ fontSize: "0.6rem", padding: "0.1rem 0.4rem", borderRadius: "999px", background: `${s1Accent}15`, color: s1Accent, fontWeight: 600 }}>{highlightLabel}</span>}
                                 </div>
@@ -204,7 +204,7 @@ export default function GuzergahClient() {
 
         <div className="section-padding" style={{ background: "var(--gray-50)" }}>
           <div className="container-aygm">
-            <h2 className="text-2xl font-black" style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", marginBottom: "2rem" }}>
+            <h2 className="text-2xl font-black" style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)", marginBottom: "2rem" }}>
               {t("guzergah.integration_title")}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -220,7 +220,7 @@ export default function GuzergahClient() {
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.25rem", flexWrap: "wrap" }}>
-                        <span style={{ fontWeight: 600, fontSize: "0.875rem", color: "var(--forest)" }}>{line}</span>
+                        <span style={{ fontWeight: 600, fontSize: "0.875rem", color: "var(--teal-dark)" }}>{line}</span>
                         <span style={{ fontSize: "0.62rem", padding: "0.1rem 0.45rem", borderRadius: "4px", background: `${item.color}15`, color: item.color, fontWeight: 700, flexShrink: 0 }}>{tag}</span>
                       </div>
                       <div style={{ fontSize: "0.75rem", color: "var(--gray-400)" }}>

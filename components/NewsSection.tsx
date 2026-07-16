@@ -6,12 +6,12 @@ import { useTranslate } from "@/hooks/useTranslate";
 import { allNews } from "@/lib/news";
 
 const catColors: Record<string, string> = {
-  toren:    "#007A75",
-  ihale:    "#1D5C3A",
-  devir:    "#3A8A50",
-  guzergah: "#00B8AE",
-  vizyon:   "#2E7D32",
-  konyaray: "#00B8AE",
+  toren:    "#0B7C77",
+  ihale:    "#0A6B66",
+  devir:    "#29BDB5",
+  guzergah: "#6FDDD6",
+  vizyon:   "#0B7C77",
+  konyaray: "#6FDDD6",
 };
 
 // Ana sayfada gösterilecek 3 kart (featured hariç ilk 3)
@@ -28,11 +28,11 @@ export default function NewsSection() {
       <div className="container-aygm">
         <div className="flex flex-col md:flex-row items-start md:items-start justify-between gap-4 mb-16">
           <div>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "rgba(0,122,117,0.08)", color: "#007A75", padding: "0.35rem 1rem", borderRadius: "100px", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "1.25rem", border: "1px solid rgba(0,122,117,0.15)" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "rgba(11,124,119,0.08)", color: "#0B7C77", padding: "0.35rem 1rem", borderRadius: "100px", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "1.25rem", border: "1px solid rgba(11,124,119,0.15)" }}>
               {t("news.badge")}
             </div>
           </div>
-          <Link href="/haberler" className="flex items-center gap-2 text-sm font-semibold flex-shrink-0" style={{ color: "#007A75" }}>
+          <Link href="/haberler" className="flex items-center gap-2 text-sm font-semibold flex-shrink-0" style={{ color: "#0B7C77" }}>
             {t("news.all")}
             <FaArrowRight style={{ fontSize: 12 }} />
           </Link>
@@ -42,9 +42,9 @@ export default function NewsSection() {
           {/* ── Öne çıkan kart (i18n'den) ── */}
           <div className="md:row-span-2">
             <div className="news-card h-full flex flex-col">
-              <div className="h-48 md:h-72 flex items-center justify-center relative overflow-hidden" style={{ background: "linear-gradient(135deg, #041B19 0%, #007A75 100%)" }}>
-                <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(rgba(0,184,174,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,184,174,0.04) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
-                <div style={{ position: "absolute", top: "-20%", right: "-10%", width: "60%", height: "60%", borderRadius: "50%", background: "radial-gradient(circle, rgba(0,184,174,0.2) 0%, transparent 70%)" }} />
+              <div className="h-48 md:h-72 flex items-center justify-center relative overflow-hidden" style={{ background: "linear-gradient(135deg, #0A5C58 0%, #0B7C77 100%)" }}>
+                <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(rgba(111,221,214,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(111,221,214,0.04) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+                <div style={{ position: "absolute", top: "-20%", right: "-10%", width: "60%", height: "60%", borderRadius: "50%", background: "radial-gradient(circle, rgba(111,221,214,0.2) 0%, transparent 70%)" }} />
                 <div className="text-center relative z-10 px-8">
                   <div className="text-6xl font-black mb-2" style={{ fontFamily: "var(--font-heading)", color: "var(--gold)" }}>2025</div>
                   <div className="text-white font-semibold">{t("news.year_label")}</div>
@@ -54,7 +54,7 @@ export default function NewsSection() {
                 <div className="flex items-center gap-2 mb-4">
                   <span className="badge-red">{t("news.featured")}</span>
                 </div>
-                <h3 className="text-xl font-bold" style={{ fontFamily: "var(--font-heading)", color: "var(--forest)", marginBottom: "1.25rem" }}>
+                <h3 className="text-xl font-bold" style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)", marginBottom: "1.25rem" }}>
                   {t("news.featured_title")}
                 </h3>
                 <p className="text-sm leading-relaxed flex-1" style={{ color: "var(--gray-600)" }}>
@@ -76,7 +76,7 @@ export default function NewsSection() {
 
           {/* ── 3 küçük kart (otomatik çeviri) ── */}
           {homeItems.map((item) => {
-            const catColor = catColors[item.category] ?? "var(--forest)";
+            const catColor = catColors[item.category] ?? "var(--teal-dark)";
             const idx = allNews.findIndex(a => a.slug === item.slug);
             const title   = (idx >= 0 ? out[idx * 2]     : undefined) ?? item.title;
             const summary = (idx >= 0 ? out[idx * 2 + 1] : undefined) ?? item.summary;
@@ -91,7 +91,7 @@ export default function NewsSection() {
                     {item.date}
                   </span>
                 </div>
-                <h3 className="font-bold mb-2 text-base group-hover:text-opacity-80 transition-colors" style={{ fontFamily: "var(--font-heading)", color: "var(--forest)" }}>
+                <h3 className="font-bold mb-2 text-base group-hover:text-opacity-80 transition-colors" style={{ fontFamily: "var(--font-heading)", color: "var(--teal-dark)" }}>
                   {title}
                 </h3>
                 <p className="text-sm leading-relaxed" style={{ color: "var(--gray-600)" }}>
