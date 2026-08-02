@@ -479,7 +479,7 @@ function JourneyModal({ result, onClose }: { result: JourneyResult; onClose: () 
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontSize: "0.82rem", fontWeight: 700, color: "var(--teal-dark)" }}>{t(s.transfer!)}</div>
-                    <div style={{ fontSize: "0.68rem", color: "var(--gray-400)" }}>{s.name} {t("yolculuk.at_stop")}</div>
+                    <div style={{ fontSize: "0.68rem", color: "var(--gray-400)" }}>{t("yolculuk.stop_no")} {s.id} · {s.name}</div>
                   </div>
                 </div>
               ))}
