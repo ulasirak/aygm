@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   FaBars, FaTimes, FaTrain, FaChevronDown, FaLeaf,
   FaInfoCircle, FaRoute, FaHome, FaNewspaper, FaQuestionCircle,
-  FaEnvelope, FaChevronRight, FaSearch, FaGlobe, FaTextHeight,
+  FaEnvelope, FaChevronRight, FaSearch, FaGlobe, FaTextHeight, FaLocationArrow,
 } from "react-icons/fa";
 import { useLang } from "@/context/LangContext";
 import { useMobileView } from "@/context/MobileViewContext";
@@ -133,6 +133,16 @@ export default function Navbar() {
       ],
     },
     {
+      href: "/yolculuk", label: t("nav.si_journey_label"), icon: FaLocationArrow, desc: t("nav.si_journey_desc"),
+      keywords: [
+        "yolculuk","yolculuk planla","nasıl giderim","hizmet durumu","sefer","süre","kaç dakika",
+        "çıkış","varış","istasyon seç","aktarma","planla","güzergâh planla","seyahat","durak durumu",
+        "yapımda","planlanan","açılış durumu","service status","how to get there","plan journey",
+        "trip planner","travel time","route planner","from","to","transfer","estimated time",
+        "reiseplanung","planificateur","маршрут","planificador","行程",
+      ],
+    },
+    {
       href: "/guzergah#istasyonlar", label: t("nav.si_stations_label"), icon: FaRoute, desc: t("nav.si_stations_desc"),
       keywords: [
         "istasyon","durak","tüm istasyonlar","istasyon listesi",
@@ -211,8 +221,9 @@ export default function Navbar() {
     {
       label: t("nav.project"),
       children: [
-        { href: "/proje",    label: t("nav.about"),  desc: t("nav.about_desc"), icon: FaInfoCircle },
-        { href: "/guzergah", label: t("nav.route"),  desc: t("nav.route_desc"), icon: FaRoute },
+        { href: "/proje",    label: t("nav.about"),   desc: t("nav.about_desc"),   icon: FaInfoCircle },
+        { href: "/guzergah", label: t("nav.route"),   desc: t("nav.route_desc"),   icon: FaRoute },
+        { href: "/yolculuk", label: t("nav.journey"), desc: t("nav.journey_desc"), icon: FaLocationArrow },
       ],
     },
     { href: "/haberler", label: t("nav.news") },
@@ -612,8 +623,9 @@ export default function Navbar() {
               {projExpanded && (
                 <div style={{ paddingLeft: "0.75rem", paddingBottom: "0.25rem", display: "flex", flexDirection: "column", gap: "0.25rem" }}>
                   {[
-                    { href: "/proje",    label: t("nav.about"), icon: FaInfoCircle },
-                    { href: "/guzergah", label: t("nav.route"), icon: FaRoute },
+                    { href: "/proje",    label: t("nav.about"),   icon: FaInfoCircle },
+                    { href: "/guzergah", label: t("nav.route"),   icon: FaRoute },
+                    { href: "/yolculuk", label: t("nav.journey"), icon: FaLocationArrow },
                   ].map(({ href, label, icon: Icon }) => {
                     const active = pathname === href;
                     return (
